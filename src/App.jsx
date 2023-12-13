@@ -4,6 +4,7 @@ import "./App.css";
 import CRUDFloorInput from "./geographical/crud_floor/crud_floor_input";
 import CRUDLocationInput from "./geographical/crud_location/crud_location_input";
 import CRUDBeaconInput from "./geographical/crud_beacon/crud_beacon_input";
+import CRUDFloorPlanInput from "./representation/crud_floor_plan/crud_floor_plan_input";
 
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
         {CRUDLocationInput()}
         {CRUDBeaconInput()}
         Representation
+        {CRUDFloorPlanInput()}
         
       </div>
       <div id="main-config-page-map">MAP</div>
@@ -23,6 +25,14 @@ function App() {
 }
 
 export default App;
+
+// Run codespace on Ipad
+// npm run dev -- --host 0.0.0.0
+// then go to PORTS and looks for Vite Default port (5173) or the one specify in the terminal
+// and click the website or globe icon in the Forwareded Address column
+
+// To Open A terminal CTRL+SHIFT+P then search for Create new terminal
+// ShortCut CTRL+SHIFT+` 
 
 /*
 #GEOGRAPHICAL#
