@@ -1,0 +1,14 @@
+
+.input-container{
+    display: flex;
+    position: relative;
+    left: 4%;
+    margin-left: 0.5em;
+    padding-left: 0.2em;
+    padding-top: 0.5em;
+}
+
+.input-name{
+    width: 16em;
+    font-weight: 700;
+}

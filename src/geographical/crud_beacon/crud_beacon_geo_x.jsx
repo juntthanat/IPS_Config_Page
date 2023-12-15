@@ -1,10 +1,14 @@
-
+import "../../component/input_style.css";
 
 export default function CRUDBeaconGeoX(){
     return (
-        <div style={{display: "flex"}}>
-            CRUDBeaconGeoX
-            <input></input>
-        </div>
+        <div className="input-container">
+      <div className="input-name">
+        CRUDBeaconGeoX
+      </div>
+      <div>
+        <input></input>
+      </div>
+    </div>
     )
 }

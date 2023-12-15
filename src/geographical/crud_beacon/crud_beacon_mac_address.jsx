@@ -1,10 +1,14 @@
-
+import "../../component/input_style.css";
 
 export default function CRUDBeaconMacAddress(){
     return (
-        <div style={{display: "flex"}}>
-            CRUDBeaconMacAddress
-            <input></input>
-        </div>
+        <div className="input-container">
+      <div className="input-name">
+        CRUDBeaconMacAddress
+      </div>
+      <div>
+        <input></input>
+      </div>
+    </div>
     )
 }

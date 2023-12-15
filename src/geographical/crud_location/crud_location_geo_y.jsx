@@ -1,10 +1,12 @@
+import "../../component/input_style.css";
 
-
-export default function CRUDLocationGeoY(){
-    return (
-        <div style={{display: "flex"}}>
-            CRUDLocationGeoY
-            <input></input>
-        </div>
-    )
+export default function CRUDLocationGeoY() {
+  return (
+    <div className="input-container">
+      <div className="input-name">CRUDLocationGeoY</div>
+      <div>
+        <input></input>
+      </div>
+    </div>
+  );
 }

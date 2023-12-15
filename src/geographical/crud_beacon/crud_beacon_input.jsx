@@ -9,7 +9,7 @@ import CRUDBeaconGeoFloorId from "./crud_beacon_geo_floor_id";
 
 export default function CRUDBeaconInput(){
     return (
-        <div id="crud-beacon-input" style={{display: "flex", flexDirection: "column",}}>
+        <div id="crud-beacon-input" style={{display: "flex", flexDirection: "column"}}>
             {TopicHeader("CRUD Beacon")}
             {CRUDBeaconId()}
             {CRUDBeaconMacAddress()}
@@ -17,7 +17,7 @@ export default function CRUDBeaconInput(){
             {CRUDBeaconGeoX()}
             {CRUDBeaconGeoY()}
             {CRUDBeaconGeoFloorId()}
-        </div>
+        </div>  
     )
 }
 

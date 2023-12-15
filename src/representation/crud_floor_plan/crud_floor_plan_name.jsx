@@ -1,10 +1,12 @@
+import "../../component/input_style.css";
 
-
-export default function CRUDFloorPlanName(){
-    return(
-        <div style={{display: "flex"}}>
-            CRUDFloorPlanName
-            <input></input>
-        </div>
-    )
+export default function CRUDFloorPlanName() {
+  return (
+    <div className="input-container">
+      <div className="input-name">CRUDFloorPlanName</div>
+      <div>
+        <input></input>
+      </div>
+    </div>
+  );
 }
