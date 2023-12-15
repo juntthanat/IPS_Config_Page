@@ -9,13 +9,21 @@
   left: 50%;
   transform: translate(-50%, -50%);
 }
-#main-config-page-input{
+#main-config-page-geographical-input{
   height: 100%;
   width: 50%;
-  border-right: 1px solid black;
+  border-right: 4px solid black;
 }
-#main-config-page-map{
+#main-config-page-representation-map-input{
   height: 100%;
   width: 50%;
-  border-left: 1px solid black;
+  border-left: 4px solid black;
+}
+#main-config-page-representation-input{
+  height: 45%;
+  width: 100%;
+}
+#main-config-page-map-input{
+  height: 55%;
+  width: 100%;
 }
