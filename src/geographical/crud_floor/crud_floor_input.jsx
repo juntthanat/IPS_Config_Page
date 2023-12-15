@@ -1,4 +1,6 @@
 
+import TopicHeader from "../../component/topic_header"
+
 import CRUDFloorId from "./crud_floor_id"
 import CRUDFloorName from "./crud_floor_name"
 import CRUDFloorGeoLength from "./crud_floor_geo_length"
@@ -7,7 +9,7 @@ import CRUDFloorGeoWidth from "./crud_floor_geo_width"
 export default function CRUDFloorInput(){
     return (
         <div id="crud-beacon-input" style={{display: "flex", flexDirection: "column",}}>
-            CRUDFloorInput
+            {TopicHeader("CRUDFloorInput")}
             {CRUDFloorId()}
             {CRUDFloorName()}
             {CRUDFloorGeoLength()}

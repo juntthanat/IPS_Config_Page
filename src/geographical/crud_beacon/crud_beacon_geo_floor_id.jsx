@@ -1,5 +1,4 @@
 
-
 export default function CRUDBeaconGeoFloorId(){
     return (
         <div style={{display: "flex"}}>

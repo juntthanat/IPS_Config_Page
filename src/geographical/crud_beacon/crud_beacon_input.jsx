@@ -1,3 +1,5 @@
+import TopicHeader from "../../component/topic_header";
+
 import CRUDBeaconId from "./crud_beacon_id";
 import CRUDBeaconMacAddress from "./crud_beacon_mac_address";
 import CRUDBeaconName from "./crud_beacon_name";
@@ -8,7 +10,7 @@ import CRUDBeaconGeoFloorId from "./crud_beacon_geo_floor_id";
 export default function CRUDBeaconInput(){
     return (
         <div id="crud-beacon-input" style={{display: "flex", flexDirection: "column",}}>
-            CRUD Beacon
+            {TopicHeader("CRUD Beacon")}
             {CRUDBeaconId()}
             {CRUDBeaconMacAddress()}
             {CRUDBeaconName()}

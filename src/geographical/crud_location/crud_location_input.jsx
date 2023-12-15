@@ -1,3 +1,6 @@
+
+import TopicHeader from "../../component/topic_header"
+
 import CRUDLocationId from "./crud_location_id"
 import CRUDLocationName from "./crud_location_name"
 import CRUDLocationGeoX from "./crud_location_geo_x"
@@ -7,7 +10,7 @@ import CRUDLocationFloorId from "./crud_location_floor_id"
 export default function CRUDLocationInput(){
     return (
         <div id="crud-beacon-input" style={{display: "flex", flexDirection: "column",}}>
-            CRUDLocationInput
+            {TopicHeader("CRUDLocationInput")}
             {CRUDLocationId()}
             {CRUDLocationName()}
             {CRUDLocationGeoX()}

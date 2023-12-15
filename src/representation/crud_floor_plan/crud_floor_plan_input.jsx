@@ -1,3 +1,6 @@
+
+import TopicHeader from "../../component/topic_header"
+
 import CRUDFloorPlanFloorId from "./crud_floor_plan_floor_id"
 import CRUDFloorPlanName from "./crud_floor_plan_name"
 import CRUDFloorPlanLength from "./crud_floor_plan_length"
@@ -8,7 +11,7 @@ import CRUDFloorPlanId from "./crud_floor_plan_id"
 export default function CRUDFloorPlanInput(){
     return (
         <div id="crud-floor-plan-input" style={{display: "flex", flexDirection: "column",}}>
-            CRUDFloorPlan
+            {TopicHeader("CRUDFloorPlan")}
             {CRUDFloorPlanFloorId()}
             {CRUDFloorPlanName()}
             {CRUDFloorPlanLength()}
