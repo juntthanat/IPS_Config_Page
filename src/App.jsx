@@ -23,8 +23,8 @@ function App() {
           {CRUDFloorPlanInput()}
         </div>
         <div id="main-config-page-map-input">
-          {TitleHeader("Map")}
-          {MapInput()}
+          <div id="main-config-page-map-input-title">{TitleHeader("Map")}</div>
+          <div id="main-config-page-map-input-container">{MapInput()}</div>
         </div>
       </div>
     </div>

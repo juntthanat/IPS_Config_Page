@@ -9,6 +9,10 @@
 }
 
 .input-name{
-    width: 16em;
+    width: 24em;
     font-weight: 700;
+}
+
+input{
+    width: 22em;
 }
