@@ -1,6 +1,7 @@
 import "./App.css";
 
 import TitleHeader from "./component/title_header";
+import InputNavigation from "./navigation/input_navigation";
 
 import CRUDFloorInput from "./geographical/crud_floor/crud_floor_input";
 import CRUDLocationInput from "./geographical/crud_location/crud_location_input";
@@ -11,11 +12,16 @@ import MapInput from "./representation/map/map_input";
 function App() {
   return (
     <div id="main-config-page">
-      <div id="main-config-page-geographical-input">
-        {TitleHeader("Geographical Input")}
-        {CRUDFloorInput()}
-        {CRUDLocationInput()}
-        {CRUDBeaconInput()}
+      <div id="main-config-page-geographical-representation-input">
+        <div id="main-config-page-input-navigation">
+          {InputNavigation()}
+        </div>
+        <div id="main-config-page-geographical-input">
+          {TitleHeader("Geographical Input")}
+          {CRUDFloorInput()}
+          {CRUDLocationInput()}
+          {CRUDBeaconInput()}
+        </div>
       </div>
       <div id="main-config-page-representation-map-input">
         <div id="main-config-page-representation-input">

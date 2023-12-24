@@ -1,0 +1,40 @@
+#navigator{
+    height: 100%;
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: end;
+
+    flex-direction: column;
+}
+#geographical-navigator{
+    height: 44%;
+    width: 100%;
+
+    transform: skewY(20deg);
+    background-color: white;
+    border-radius: 4px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#geographical-navigator-text{
+    transform: rotate(270deg);
+}
+#representation-navigator{
+    height: 44%;
+    width: 100%;
+
+    transform: skewY(20deg);
+    background-color: white;
+    border-radius: 4px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#representation-navigator-text{
+    transform: rotate(270deg);
+}
