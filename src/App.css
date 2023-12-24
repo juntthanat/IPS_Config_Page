@@ -27,6 +27,8 @@
   height: 100%;
   width: 96%;
 
+
+  /* display: none; */
   background-color: white;
 }
 #main-config-page-representation-map-input{
@@ -36,9 +38,10 @@
   background-color: white;
 }
 #main-config-page-representation-input{
-  height: 45%;
+  height: 100%;
   width: 100%;
 
+  display: none;
   background-color: white;
 }
 #main-config-page-map-input{
