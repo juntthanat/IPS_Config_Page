@@ -1,5 +1,4 @@
 import "./input_navigation.css";
-import { useState } from "react";
 
 export default function InputNavigation() {
   const geographicalInput = () => {

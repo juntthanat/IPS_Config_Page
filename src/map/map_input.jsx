@@ -1,5 +1,5 @@
 import "./map_input.css";
-import map1 from "../../assets/map_1.png";
+import map1 from "../assets/map_1.png";
 
 export default function MapInput() {
   return (

@@ -7,7 +7,7 @@ import CRUDFloorInput from "./geographical/crud_floor/crud_floor_input";
 import CRUDLocationInput from "./geographical/crud_location/crud_location_input";
 import CRUDBeaconInput from "./geographical/crud_beacon/crud_beacon_input";
 import CRUDFloorPlanInput from "./representation/crud_floor_plan/crud_floor_plan_input";
-import MapInput from "./representation/map/map_input";
+import MapInput from "./map/map_input";
 
 function App() {
 
@@ -28,11 +28,9 @@ function App() {
           {CRUDFloorPlanInput()}
         </div>
       </div>
-      <div id="main-config-page-representation-map-input">
-        <div id="main-config-page-map-input">
+      <div id="main-config-page-map-input">
           <div id="main-config-page-map-input-title">{TitleHeader("Map")}</div>
           <div id="main-config-page-map-input-container">{MapInput()}</div>
-        </div>
       </div>
     </div>
   );
