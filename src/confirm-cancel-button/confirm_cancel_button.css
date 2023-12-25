@@ -1,0 +1,16 @@
+#confirm-cancel-container{
+    width: 94%;
+    /* margin: 1em; */
+
+
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    
+}
+#cancel-button{
+    margin: 1em;
+}
+#confirm-button{
+    margin: 1em;
+}

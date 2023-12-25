@@ -3,11 +3,12 @@
     width: 100%;
 
     display: flex;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
+    flex-direction: column;
 }
 #map-input-container{
-    height: 94%;
+    height: 84%;
     width: 94%;
     
     border: 1px black solid;

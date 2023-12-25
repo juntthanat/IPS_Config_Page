@@ -10,13 +10,10 @@ import CRUDFloorPlanInput from "./representation/crud_floor_plan/crud_floor_plan
 import MapInput from "./map/map_input";
 
 function App() {
-
   return (
     <div id="main-config-page">
       <div id="main-config-page-geographical-representation-input">
-        <div id="main-config-page-input-navigation">
-          {InputNavigation()}
-        </div>
+        <div id="main-config-page-input-navigation">{InputNavigation()}</div>
         <div id="main-config-page-geographical-input">
           {TitleHeader("Geographical Input")}
           {CRUDFloorInput()}
@@ -29,8 +26,8 @@ function App() {
         </div>
       </div>
       <div id="main-config-page-map-input">
-          <div id="main-config-page-map-input-title">{TitleHeader("Map")}</div>
-          <div id="main-config-page-map-input-container">{MapInput()}</div>
+        <div id="main-config-page-map-input-title">{TitleHeader("Map")}</div>
+        <div id="main-config-page-map-input-container">{MapInput()}</div>
       </div>
     </div>
   );
