@@ -4,6 +4,14 @@ import map1 from "../assets/map_1.png";
 
 import ConfirmCancelButton from "../confirm-cancel-button/confirm_cancel_button";
 
+function canvasCallback(reactOnClick) {
+  const canvas = reactOnClick.target;
+  const rect = canvas.getBoundingClientRect();
+  const x    = reactOnClick.clientX - rect.left;
+  const y    = reactOnClick.clientY - rect.top;
+  console.log("x: " + x + " y: " + y);
+}
+
 export default function MapInput() {
   
   const canvasRef = useRef(null);
@@ -34,7 +42,7 @@ export default function MapInput() {
   return (
     <div id="map-input-background">
       <div id="map-input-container">
-	<canvas ref={canvasRef}></canvas>
+	<canvas ref={canvasRef} onClick={canvasCallback}></canvas>
       </div>
       {ConfirmCancelButton()}
     </div>
