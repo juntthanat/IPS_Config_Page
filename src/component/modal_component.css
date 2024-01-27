@@ -1,0 +1,21 @@
+#modal-component-main{
+    height: 100%;
+    width: 47.8%;
+    background-color: rgba(0, 0, 0, 0.80);
+
+    position: fixed;
+    z-index: 5;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+#modal-page{
+    height: 80%;
+    width: 80%;
+    border: black 1px solid;
+    border-radius: 20px;
+    background-color: white;
+}

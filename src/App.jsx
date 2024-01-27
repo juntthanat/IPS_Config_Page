@@ -9,12 +9,16 @@ import CRUDBeaconInput from "./geographical/crud_beacon/crud_beacon_input";
 import CRUDFloorPlanInput from "./representation/crud_floor_plan/crud_floor_plan_input";
 import MapInput from "./map/map_input";
 
+// Test Modal
+import ModalComponent from "./component/modal_component";
+
 function App() {
   return (
     <div id="main-config-page">
       <div id="main-config-page-geographical-representation-input">
         <div id="main-config-page-input-navigation">{InputNavigation()}</div>
         <div id="main-config-page-geographical-input">
+          {ModalComponent()}
           {TitleHeader("Geographical Input")}
           {CRUDFloorInput()}
           {CRUDLocationInput()}
