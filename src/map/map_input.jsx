@@ -21,6 +21,10 @@ export default function MapInput() {
     setMapX(x);
     setMapY(y);
 
+    // Draws an orange square where the user clicked
+    context.fillStyle = "orange";
+    context.fillRect(x - 5, y - 5, 10, 10);
+
     console.log("x: " + x + " y: " + y);
   }
 
