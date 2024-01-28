@@ -1,22 +1,29 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./map_input.css";
 import map1 from "../assets/map_1.png";
 
 import ConfirmCancelButton from "../confirm-cancel-button/confirm_cancel_button";
 
-/// Called when the Canvas gets clicked
-function canvasCallback(reactOnClick) {
-  const canvas = reactOnClick.target;
-  const context = canvas.getContext("2d");
-  const rect = canvas.getBoundingClientRect();
-  const x    = reactOnClick.clientX - rect.left;
-  const y    = reactOnClick.clientY - rect.top;
-  console.log("x: " + x + " y: " + y);
-}
-
 export default function MapInput() {
   
   const canvasRef = useRef(null);
+  const [mapX, setMapX] = useState(0);
+  const [mapY, setMapY] = useState(0);
+
+  /// Called when the Canvas gets clicked
+  function canvasCallback(reactOnClick) {
+    const canvas = reactOnClick.target;
+    const context = canvas.getContext("2d");
+    const rect = canvas.getBoundingClientRect();
+
+    const x    = reactOnClick.clientX - rect.left;
+    const y    = reactOnClick.clientY - rect.top;
+    setMapX(x);
+    setMapY(y);
+
+    console.log("x: " + x + " y: " + y);
+  }
+
 
   // useEffect with [] as param to execute only at mount time
   useEffect(() => {
@@ -56,6 +63,7 @@ export default function MapInput() {
       <div id="map-input-container">
 	<canvas ref={canvasRef} onClick={canvasCallback}></canvas>
       </div>
+      <p>X: {mapX} Y: {mapY}</p>
       {ConfirmCancelButton()}
     </div>
   );
