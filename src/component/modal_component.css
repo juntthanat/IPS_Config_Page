@@ -6,7 +6,6 @@
     position: fixed;
     z-index: 5;
 
-    display: flex;
     justify-content: center;
     align-items: center;
 
@@ -18,4 +17,30 @@
     border: black 1px solid;
     border-radius: 20px;
     background-color: white;
+}
+
+#modal-header{
+    height: 10%;
+    width: 100%;
+    border: black 1px solid;
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
+
+    background-color: #242424;
+    color: white;
+    font-size: 2em;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#close-button{
+    position: absolute;
+    height: 8%;
+    width: 8%;
+
+    background-color: blue;
+    right: 10%;
+    border-top-right-radius: 20px;
 }

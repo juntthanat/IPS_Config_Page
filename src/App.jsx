@@ -1,4 +1,5 @@
 import "./App.css";
+import { useCallback, useState } from "react";
 
 import TitleHeader from "./component/title_header";
 import InputNavigation from "./navigation/input_navigation";
@@ -11,18 +12,30 @@ import MapInput from "./map/map_input";
 
 // Test Modal
 import ModalComponent from "./component/modal_component";
+import CreateEditButton from "./create-edit-button/create_edit_button";
 
 function App() {
+  const [showModal, setShowModal] = useState(true);
+
+  const switchShowModal = useCallback(() => {
+    if(showModal == true){
+      setShowModal(false);
+    } else {
+      setShowModal(true);
+    }
+  }, [showModal])
+
   return (
     <div id="main-config-page">
       <div id="main-config-page-geographical-representation-input">
         <div id="main-config-page-input-navigation">{InputNavigation()}</div>
         <div id="main-config-page-geographical-input">
-          {ModalComponent()}
+          {ModalComponent(showModal, switchShowModal)}
           {TitleHeader("Geographical Input")}
           {CRUDFloorInput()}
           {CRUDLocationInput()}
           {CRUDBeaconInput()}
+          {CreateEditButton(switchShowModal)}
         </div>
         <div id="main-config-page-representation-input">
           {TitleHeader("Representation Input")}

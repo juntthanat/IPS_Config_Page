@@ -1,18 +1,20 @@
-#confirm-cancel-container{
+#create-edit-container{
     width: 94%;
     /* margin: 1em; */
 
 
     display: flex;
-    justify-content: end;
+    justify-content: start;
     align-items: center;
     
 }
-#cancel-button{
+#edit-button{
     width: 8em;
     margin: 1em;
+    
 }
-#confirm-button{
+#create-button{
     width: 8em;
     margin: 1em;
+    margin-left: 4em;
 }
