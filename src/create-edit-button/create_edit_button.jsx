@@ -3,11 +3,9 @@ import "./create_edit_button.css";
 export default function CreateEditButton(switchShowModal) {
   const createClickHandler = () => {
     switchShowModal()
-    console.log("Create Was Clicked");
   };
 
   const editClickHandler = () => {
-    console.log("Edit Was Clicked");
   };
 
   return (
