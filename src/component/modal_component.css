@@ -22,11 +22,11 @@
 #modal-header{
     height: 10%;
     width: 100%;
-    border: black 1px solid;
+    /* border: black 1px solid; */
     border-top-right-radius: 20px;
     border-top-left-radius: 20px;
 
-    background-color: #242424;
+    /* background-color: #242424; */
     color: white;
     font-size: 2em;
 
@@ -40,7 +40,15 @@
     height: 8%;
     width: 8%;
 
-    background-color: blue;
+    /* background-color: blue; */
     right: 10%;
     border-top-right-radius: 20px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.feather-icon-32{
+    height: 32px;
+    width: 32px;
 }

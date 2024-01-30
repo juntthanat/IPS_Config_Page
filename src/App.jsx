@@ -15,7 +15,7 @@ import ModalComponent from "./component/modal_component";
 import CreateEditButton from "./create-edit-button/create_edit_button";
 
 function App() {
-  const [showModal, setShowModal] = useState(true);
+  const [showModal, setShowModal] = useState(false);
 
   const switchShowModal = useCallback(() => {
     if(showModal == true){
