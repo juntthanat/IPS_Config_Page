@@ -6,7 +6,8 @@ import ConfirmCancelButton from "../confirm-cancel-button/confirm_cancel_button"
 
 export default function MapInput() {
   
-  const canvasRef = useRef(null);
+  const bgCanvasRef = useRef(null);
+  const fgCanvasRef = useRef(null);
   const [mapX, setMapX] = useState(0);
   const [mapY, setMapY] = useState(0);
 
@@ -15,6 +16,8 @@ export default function MapInput() {
     const canvas = reactOnClick.target;
     const context = canvas.getContext("2d");
     const rect = canvas.getBoundingClientRect();
+
+    context.reset();
 
     const x    = reactOnClick.clientX - rect.left;
     const y    = reactOnClick.clientY - rect.top;
@@ -31,13 +34,16 @@ export default function MapInput() {
 
   // useEffect with [] as param to execute only at mount time
   useEffect(() => {
-    const canvas = canvasRef.current;
+    const canvas = bgCanvasRef.current;
+    const fgCanvas = fgCanvasRef.current;
     const context = canvas.getContext("2d");
 
     // Making the canvas expand to fill the parent container
     const parentBoundingBox = canvas.parentNode.getBoundingClientRect();
     canvas.width = parentBoundingBox.width;
     canvas.height = parentBoundingBox.height;
+    fgCanvas.width = parentBoundingBox.width;
+    fgCanvas.height = parentBoundingBox.height;
 
     // Loading the Image
     const image = new Image();
@@ -65,7 +71,8 @@ export default function MapInput() {
   return (
     <div id="map-input-background">
       <div id="map-input-container">
-	<canvas ref={canvasRef} onClick={canvasCallback}></canvas>
+	<canvas ref={bgCanvasRef} onClick={canvasCallback} style={{ position: "absolute", zIndex: 0 }}></canvas>
+	<canvas ref={fgCanvasRef} onClick={canvasCallback} style={{ position: "absolute", zIndex: 1 }}></canvas>
       </div>
       <p>X: {mapX} Y: {mapY}</p>
       {ConfirmCancelButton()}
