@@ -1,6 +1,8 @@
 import "./modal_component.css"
 import { X } from 'react-feather';
 
+import modalPageFloor from "../modal-page/modal_page_floor";
+
 export default function ModalComponent(showModal, switchShowModal){
     const closeButtonHandler = () => {
         switchShowModal()
@@ -14,7 +16,9 @@ export default function ModalComponent(showModal, switchShowModal){
                     <X className="feather-icon-32"/>
                 </div>
                 <div id="modal-header">
-                    Title
+                </div>
+                <div id="modal-body">
+                    {modalPageFloor()}
                 </div>
             </div>
         </div>
