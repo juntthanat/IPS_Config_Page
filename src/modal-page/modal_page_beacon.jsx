@@ -1,4 +1,5 @@
 import "./modal_page_beacon.css"
+import modalPageBeaconFloor from "./beacon/beacon_floor/modal_page_beacon_floor"
 
 export default function modalPageBeacon(){
 
@@ -6,7 +7,7 @@ export default function modalPageBeacon(){
         <div id="modal-page-beacon-main">
             <input></input>
             <div id="modal-page-beacon-component">
-                {/* {modalPageBeaconFloor()} */}
+                {modalPageBeaconFloor()}
                 <div id="modal-page-beacon-beacon"></div>
                 <div id="modal-page-beacon-file"></div>
             </div>
