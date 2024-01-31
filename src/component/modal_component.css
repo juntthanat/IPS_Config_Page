@@ -39,12 +39,12 @@
 #modal-header{
     height: 10%;
     width: 100%;
-    /* border: black 1px solid; */
+    border: black 1px solid;
     border-top-right-radius: 20px;
     border-top-left-radius: 20px;
 
-    /* background-color: #242424; */
-    /* color: white; */
+    background-color: #242424;
+    color: white;
     font-size: 2em;
 
     display: flex;

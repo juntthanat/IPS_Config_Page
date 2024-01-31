@@ -1,5 +1,5 @@
 import "./modal_page_floor.css"
-import modalPageFloorLocation from "./floor_location/modal_page_floor_location"
+import modalPageFloorLocation from "./floor/floor_location/modal_page_floor_location"
 
 export default function modalPageFloor(){
     
