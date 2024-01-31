@@ -1,0 +1,12 @@
+#modal-page-beacon-main{
+    height: 100%;
+    width: 100%;
+    border-bottom-left-radius: 20px;
+}
+#modal-page-beacon-component{
+    height: 100%;
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+}

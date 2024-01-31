@@ -3,6 +3,7 @@ import { X } from 'react-feather';
 
 import modalPageFloor from "../modal-page/modal_page_floor";
 import modalPageLocation from "../modal-page/modal_page_location";
+import modalPageBeacon from "../modal-page/modal_page_beacon";
 
 export default function ModalComponent(showModal, switchShowModal){
     const closeButtonHandler = () => {
@@ -21,7 +22,8 @@ export default function ModalComponent(showModal, switchShowModal){
                 </div>
                 <div id="modal-body">
                     {/* {modalPageFloor()} */}
-                    {modalPageLocation()}
+                    {/* {modalPageLocation()} */}
+                    {modalPageBeacon()}
                 </div>
             </div>
         </div>
