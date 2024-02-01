@@ -121,6 +121,12 @@
   width: 100%;
   background-color: yellow;
 }
+.location-configuration-list{
+  height: 68%;
+  width: 100%;
+
+  background-color: orange;
+}
 .beacon-configuration-container{
   height: 100%;
   width: 50%;

@@ -39,6 +39,7 @@ function App() {
             </div>
             <div className="floor-configuration-listbox-container">
               <div className="floor-configuration-listbox">
+                {/* Fetch Floor From API */}
                 <ui>
                   <li>1</li>
                   <li>2</li>
@@ -66,7 +67,11 @@ function App() {
                     location
                   </div>
                   <input></input>
-                  <div className="location-configuration-list"></div>
+                  <div className="location-configuration-list">
+                    location-list
+                    <div></div>
+                  </div>
+                  {CreateEditButton(switchShowModal)}
                 </div>
               </div>
               <div className="beacon-configuration-container">
@@ -75,7 +80,10 @@ function App() {
                     beacon
                   </div>
                   <input></input>
-                  <div className="location-configuration-list"></div>
+                  <div className="location-configuration-list" style={{backgroundColor: "purple"}}>
+                    beacon-list
+                  </div>
+                  {CreateEditButton(switchShowModal)}
                 </div>
               </div>
           </div>
