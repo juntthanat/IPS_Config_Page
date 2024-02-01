@@ -52,11 +52,32 @@ function App() {
               </div>
             </div>
             <div className="floor-configuration-button-container">
-              <button className="button-class">
+              {/* <button className="button-class">
                 Add
-              </button>
+              </button> */}
+              {CreateEditButton(switchShowModal)}
               <div className="floor-configuration-button-container-padding"></div>
             </div>
+          </div>
+          <div className="location-beacon-configuration-container">
+              <div className="location-configuration-container">
+                <div className="location-configuration-listbox">
+                  <div className="location-configuration-header">
+                    location
+                  </div>
+                  <input></input>
+                  <div className="location-configuration-list"></div>
+                </div>
+              </div>
+              <div className="beacon-configuration-container">
+                <div className="location-configuration-listbox">
+                <div className="location-configuration-header" style={{backgroundColor: "green"}}>
+                    beacon
+                  </div>
+                  <input></input>
+                  <div className="location-configuration-list"></div>
+                </div>
+              </div>
           </div>
           {/* End of Redesigning */}
           {/* {CRUDFloorInput()}
