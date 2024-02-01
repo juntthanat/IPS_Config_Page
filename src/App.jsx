@@ -31,11 +31,38 @@ function App() {
         <div id="main-config-page-input-navigation">{InputNavigation()}</div>
         <div id="main-config-page-geographical-input">
           {ModalComponent(showModal, switchShowModal)}
-          {TitleHeader("Geographical Input")}
-          {CRUDFloorInput()}
+          {TitleHeader("Configuration")}
+          {/* Starting of Redesigning */}
+          <div className="floor-configuration-container">
+            <div className="floor-configuration-header">
+              Floor Configuration
+            </div>
+            <div className="floor-configuration-listbox-container">
+              <div className="floor-configuration-listbox">
+                <ui>
+                  <li>1</li>
+                  <li>2</li>
+                  <li>3</li>
+                  <li>4</li>
+                  <li>5</li>
+                  <li>6</li>
+                  <li>7</li>
+                  <li>8</li>
+                </ui>
+              </div>
+            </div>
+            <div className="floor-configuration-button-container">
+              <button className="button-class">
+                Add
+              </button>
+              <div className="floor-configuration-button-container-padding"></div>
+            </div>
+          </div>
+          {/* End of Redesigning */}
+          {/* {CRUDFloorInput()}
           {CRUDLocationInput()}
           {CRUDBeaconInput()}
-          {CreateEditButton(switchShowModal)}
+          {CreateEditButton(switchShowModal)} */}
         </div>
         <div id="main-config-page-representation-input">
           {TitleHeader("Representation Input")}
@@ -91,4 +118,30 @@ CRUD floor plan
 - plan_width
 - file_content (this will be file upload)
 - floor_id
+
+
+
+
+import React, { useState } from "react";
+import { ListBox } from 'primereact/listbox';
+
+export default function BasicDemo() {
+    const [selectedCity, setSelectedCity] = useState(null);
+    const cities = [
+        { name: 'New York', code: 'NY' },
+        { name: 'Rome', code: 'RM' },
+        { name: 'London', code: 'LDN' },
+        { name: 'Istanbul', code: 'IST' },
+        { name: 'Paris', code: 'PRS' }
+    ];
+
+    return (
+        <div className="card flex justify-content-center">  
+            <ListBox value={selectedCity} onChange={(e) => setSelectedCity(e.value)} options={cities} optionLabel="name" className="w-full md:w-14rem" />
+        </div>
+    )
+}
+        
+
+
 */
