@@ -9,6 +9,7 @@ export default function MapInput() {
   const fgCanvasRef = useRef(null);
   const [mapX, setMapX] = useState(0);
   const [mapY, setMapY] = useState(0);
+  const [pins, setPins] = useState([]);
 
   /// Called when the Canvas gets clicked
   function canvasCallback(reactOnClick) {
@@ -16,10 +17,22 @@ export default function MapInput() {
     const context = canvas.getContext("2d");
     const rect = canvas.getBoundingClientRect();
 
-    context.reset();
-
     const x    = reactOnClick.clientX - rect.left;
     const y    = reactOnClick.clientY - rect.top;
+
+    // Checks if the user is clicking on a pin
+    pins.forEach(pin => {
+	if (x >= pin.x && x <= pin.x + 10 &&
+	    y >= pin.y && y <= pin.y + 10) {
+	    alert("You clicked a pin!");
+	    return;
+	}
+    });
+
+    // Erases Everthing from the Canvas
+    context.reset();
+
+    // Sets the internal map position
     setMapX(x);
     setMapY(y);
 
@@ -28,6 +41,10 @@ export default function MapInput() {
     context.fillRect(x - 5, y - 5, 10, 10);
 
     console.log("x: " + x + " y: " + y);
+
+    // Stores the location of the Pin
+    setPins([{x: x - 5, y: y - 5}]);
+    console.log("Saved as => x: " + (x - 5) + " y: " + (y - 5));
   }
 
 
