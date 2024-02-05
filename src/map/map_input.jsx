@@ -7,6 +7,7 @@ import ConfirmCancelButton from "../confirm-cancel-button/confirm_cancel_button"
 export default function MapInput() {
   
   const fgCanvasRef = useRef(null);
+  const mapRef = useRef(null);
   const [mapX, setMapX] = useState(0);
   const [mapY, setMapY] = useState(0);
   const [pins, setPins] = useState([]);
@@ -53,18 +54,34 @@ export default function MapInput() {
     });
 
     relocatePin(x, y);
- }
+  }
+
+  /// Gets called when the map image gets loaded
+  function initMap() {
+    const img = mapRef.current;
+    const imgWidth  = img.clientWidth;
+    const imgHeight = img.clientHeight;
+
+    console.log(img);
+    console.log("Width: " + imgWidth + " Height: " + imgHeight);
+
+    const canvas = fgCanvasRef.current;
+    const context = canvas.getContext("2d");
+
+    canvas.width  = imgWidth;
+    canvas.height = imgHeight;
+  }
 
 
   // useEffect with [] as param to execute only at mount time
   useEffect(() => {
-    const canvas = fgCanvasRef.current;
-    const context = canvas.getContext("2d");
+//    const canvas = fgCanvasRef.current;
+//    const context = canvas.getContext("2d");
 
     // Making the canvas expand to fill the parent container
-    const parentBoundingBox = canvas.parentNode.getBoundingClientRect();
-    canvas.width = parentBoundingBox.width;
-    canvas.height = parentBoundingBox.height;
+//    const parentBoundingBox = canvas.parentNode.getBoundingClientRect();
+//    canvas.width = parentBoundingBox.width;
+//    canvas.height = parentBoundingBox.height;
 
     // Plotting The Center Point of the Canvas
 //    const canvasBoundingBox = canvas.getBoundingClientRect();
@@ -79,7 +96,13 @@ export default function MapInput() {
   return (
     <div id="map-input-background">
       <div id="map-input-container">
-        <img src={map1} alt="Map" draggable="false"></img>
+        <img
+	  ref={mapRef}
+	  src={map1}
+	  onLoad={initMap}
+	  alt="Map"
+	  draggable="false"
+	/>
 	<canvas ref={fgCanvasRef} onClick={canvasCallback} style={{ position: "absolute", zIndex: 1 }}></canvas>
       </div>
       <label>
