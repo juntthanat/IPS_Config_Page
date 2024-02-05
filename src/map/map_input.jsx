@@ -10,7 +10,48 @@ export default function MapInput() {
   const mapRef = useRef(null);
   const [mapX, setMapX] = useState(0);
   const [mapY, setMapY] = useState(0);
+
+  const [pinUnifiedX, setPinUnifiedX] = useState(0);
+  const [pinUnifiedY, setPinUnifiedY] = useState(0);
+
   const [pins, setPins] = useState([]);
+
+
+  function canvasCoordsToUnifiedCoords(x, y) {
+    const canvas = fgCanvasRef.current;
+    const context = canvas.getContext("2d");
+
+    const centerX = (canvas.width/2);
+    const centerY = (canvas.height/2);
+    console.log("CALCULATED CENTER X: " + centerX + " Y: " + centerY);
+
+    return {x: (x - centerX), y: -1 * (y - centerY)};
+  }
+
+  function unifiedCoordsToCanvasCoords(x, y) {
+    const canvas = fgCanvasRef.current;
+    const context = canvas.getContext("2d");
+
+    const centerX = (canvas.width/2);
+    const centerY = (canvas.height/2);
+
+    return {x: (x + centerX), y: -1 * (y + centerY)};
+   }
+
+  /// Draws the center of the map
+  /// DO NOT USE IN PRODUCTION
+  function DEBUG_ONLY_drawCenter() {
+    const canvas = fgCanvasRef.current;
+    const context = canvas.getContext("2d");
+
+    const x = (canvas.width/2) - 5;
+    const y = (canvas.height/2) - 5;
+
+    context.fillStyle = "black";
+    context.fillRect(x, y, 10, 10);
+
+    console.log("Center X: " + (x + 5) + " Y: " + (y + 5));
+  }
 
   /// Called when the pin changes location
   function relocatePin(x, y) {
@@ -30,9 +71,18 @@ export default function MapInput() {
 
     console.log("x: " + x + " y: " + y);
 
-    // Stores the location of the Pin
-    setPins([{x: x - 5, y: y - 5}]);
-    console.log("Saved as => x: " + (x - 5) + " y: " + (y - 5));
+    // Draws the center of the map
+    // DEBUG ONLY
+    // TODO: REMOVE THIS LINE
+    DEBUG_ONLY_drawCenter();
+
+    const unifiedCoords = canvasCoordsToUnifiedCoords(x, y);
+    setPinUnifiedX(unifiedCoords.x);
+    setPinUnifiedY(unifiedCoords.y);
+
+    // Stores the location of the Pin in an array
+    // setPins([{x: x - 5, y: y - 5}]);
+    // console.log("Saved as => x: " + (x - 5) + " y: " + (y - 5));
  }
 
   /// Called when the Canvas gets clicked
@@ -119,6 +169,7 @@ export default function MapInput() {
 	    onChange={e => relocatePin(mapX, e.target.value)}
           />
       </label>
+      <p>Pin Unified X: {pinUnifiedX} Y: {pinUnifiedY}</p>
       {ConfirmCancelButton()}
     </div>
   );
