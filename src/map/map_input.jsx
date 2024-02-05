@@ -11,6 +11,29 @@ export default function MapInput() {
   const [mapY, setMapY] = useState(0);
   const [pins, setPins] = useState([]);
 
+  /// Called when the pin changes location
+  function relocatePin(x, y) {
+    const canvas = fgCanvasRef.current;
+    const context = canvas.getContext("2d");
+
+    // Erases Everything from the Canvas
+    context.reset();
+
+    // Sets the internal map position
+    setMapX(x);
+    setMapY(y);
+
+    // Draws an orange square where the user clicked
+    context.fillStyle = "orange";
+    context.fillRect(x - 5, y - 5, 10, 10);
+
+    console.log("x: " + x + " y: " + y);
+
+    // Stores the location of the Pin
+    setPins([{x: x - 5, y: y - 5}]);
+    console.log("Saved as => x: " + (x - 5) + " y: " + (y - 5));
+ }
+
   /// Called when the Canvas gets clicked
   function canvasCallback(reactOnClick) {
     const canvas = reactOnClick.target;
@@ -29,23 +52,8 @@ export default function MapInput() {
 	}
     });
 
-    // Erases Everthing from the Canvas
-    context.reset();
-
-    // Sets the internal map position
-    setMapX(x);
-    setMapY(y);
-
-    // Draws an orange square where the user clicked
-    context.fillStyle = "orange";
-    context.fillRect(x - 5, y - 5, 10, 10);
-
-    console.log("x: " + x + " y: " + y);
-
-    // Stores the location of the Pin
-    setPins([{x: x - 5, y: y - 5}]);
-    console.log("Saved as => x: " + (x - 5) + " y: " + (y - 5));
-  }
+    relocatePin(x, y);
+ }
 
 
   // useEffect with [] as param to execute only at mount time
@@ -74,7 +82,20 @@ export default function MapInput() {
         <img src={map1} alt="Map" draggable="false"></img>
 	<canvas ref={fgCanvasRef} onClick={canvasCallback} style={{ position: "absolute", zIndex: 1 }}></canvas>
       </div>
-      <p>X: {mapX} Y: {mapY}</p>
+      <label>
+        X: <input 
+             value={mapX}
+	     type="number"
+             onChange={e => relocatePin(e.target.value, mapY)}
+           />
+      </label>
+      <label>
+       Y: <input
+            value={mapY}
+	    type="number"
+	    onChange={e => relocatePin(mapX, e.target.value)}
+          />
+      </label>
       {ConfirmCancelButton()}
     </div>
   );
