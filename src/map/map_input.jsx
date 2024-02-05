@@ -35,7 +35,7 @@ export default function MapInput() {
     const centerX = (canvas.width/2);
     const centerY = (canvas.height/2);
 
-    return {x: (x + centerX), y: -1 * (y + centerY)};
+    return {x: (Math.floor(x) + centerX), y: (-1 * Math.floor(y)) + centerY};
    }
 
   /// Draws the center of the map
@@ -76,14 +76,17 @@ export default function MapInput() {
     // TODO: REMOVE THIS LINE
     DEBUG_ONLY_drawCenter();
 
-    const unifiedCoords = canvasCoordsToUnifiedCoords(x, y);
-    setPinUnifiedX(unifiedCoords.x);
-    setPinUnifiedY(unifiedCoords.y);
-
     // Stores the location of the Pin in an array
     // setPins([{x: x - 5, y: y - 5}]);
     // console.log("Saved as => x: " + (x - 5) + " y: " + (y - 5));
- }
+  }
+
+  function relocatePinFromUnifiedCoords(x, y) {
+    setPinUnifiedX(x);
+    setPinUnifiedY(y);
+    const canvasCoords = unifiedCoordsToCanvasCoords(x, y);
+    relocatePin(canvasCoords.x, canvasCoords.y);
+  }
 
   /// Called when the Canvas gets clicked
   function canvasCallback(reactOnClick) {
@@ -104,6 +107,9 @@ export default function MapInput() {
     });
 
     relocatePin(x, y);
+    const unifiedCoords = canvasCoordsToUnifiedCoords(x, y);
+    setPinUnifiedX(unifiedCoords.x);
+    setPinUnifiedY(unifiedCoords.y);
   }
 
   /// Gets called when the map image gets loaded
@@ -157,19 +163,19 @@ export default function MapInput() {
       </div>
       <label>
         X: <input 
-             value={mapX}
+             value={pinUnifiedX}
 	     type="number"
-             onChange={e => relocatePin(e.target.value, mapY)}
+             onChange={e => relocatePinFromUnifiedCoords(e.target.value, pinUnifiedY)}
            />
       </label>
       <label>
        Y: <input
-            value={mapY}
+            value={pinUnifiedY}
 	    type="number"
-	    onChange={e => relocatePin(mapX, e.target.value)}
+	    onChange={e => relocatePinFromUnifiedCoords(pinUnifiedX, e.target.value)}
           />
       </label>
-      <p>Pin Unified X: {pinUnifiedX} Y: {pinUnifiedY}</p>
+      <p>Canvas X: {mapX} Y: {mapY}</p>
       {ConfirmCancelButton()}
     </div>
   );
