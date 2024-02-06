@@ -33,32 +33,31 @@ function App() {
           {ModalComponent(showModal, switchShowModal)}
           {TitleHeader("Configuration")}
           {/* Starting of Redesigning */}
-          {ConfigInputFloor()}
+          {ConfigInputFloor(switchShowModal)}
           <div className="location-beacon-configuration-container">
               <div className="location-configuration-container">
-                <div className="location-configuration-listbox">
                   <div className="location-configuration-header">
-                    location
+                    Location
                   </div>
-                  <input></input>
-                  <div className="location-configuration-list">
-                    location-list
-                    <div></div>
+                  <input placeholder="Enter Location ID"></input>
+                  <div className="location-configuration-listbox-container">
+                    <div className="location-configuration-listbox">
+                      location list
+                    </div>
                   </div>
                   {CreateEditButton(switchShowModal)}
-                </div>
               </div>
               <div className="beacon-configuration-container">
-                <div className="location-configuration-listbox">
-                <div className="location-configuration-header" style={{backgroundColor: "green"}}>
-                    beacon
+                <div className="location-configuration-header">
+                    Beacon
                   </div>
-                  <input></input>
-                  <div className="location-configuration-list" style={{backgroundColor: "purple"}}>
-                    beacon-list
+                  <input placeholder="Enter Beacon ID"></input>
+                  <div className="location-configuration-listbox-container">
+                    <div className="location-configuration-listbox">
+                      beacon list
+                    </div>
                   </div>
                   {CreateEditButton(switchShowModal)}
-                </div>
               </div>
           </div>
           {/* End of Redesigning */}
@@ -89,62 +88,3 @@ export default App;
 
 // To Open A terminal CTRL+SHIFT+P then search for Create new terminal
 // ShortCut CTRL+SHIFT+`
-
-/*
-#GEOGRAPHICAL#
-CRUD floor
-- floor_id (auto generated)
-- name
-- geo_length
-- geo_width
-
-CRUD location
-- location_id (auto gen)
-- name
-- geo_x
-- geo_y
-- floor_id
-
-CRUD beacon
-- beacon_id (auto gen)
-- mac_address
-- name
-- geo_x
-- geo_y
-- floor_id
-
-#REPRESENTATION#
-CRUD floor plan
-- floor_plan_id
-- name
-- plan_length
-- plan_width
-- file_content (this will be file upload)
-- floor_id
-
-
-
-
-import React, { useState } from "react";
-import { ListBox } from 'primereact/listbox';
-
-export default function BasicDemo() {
-    const [selectedCity, setSelectedCity] = useState(null);
-    const cities = [
-        { name: 'New York', code: 'NY' },
-        { name: 'Rome', code: 'RM' },
-        { name: 'London', code: 'LDN' },
-        { name: 'Istanbul', code: 'IST' },
-        { name: 'Paris', code: 'PRS' }
-    ];
-
-    return (
-        <div className="card flex justify-content-center">  
-            <ListBox value={selectedCity} onChange={(e) => setSelectedCity(e.value)} options={cities} optionLabel="name" className="w-full md:w-14rem" />
-        </div>
-    )
-}
-        
-
-
-*/
