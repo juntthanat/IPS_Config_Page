@@ -132,6 +132,13 @@ export default function MapInput() {
 
   // useEffect with [] as param to execute only at mount time
   useEffect(() => {
+    // Recommended usage:
+    // Make Request to server here
+    // Then store the pins in the "pins" useState array
+    // Then call a function to draw the pins here as well
+    //   - Should such a function be made, call it in relocatePin as well
+    //     if you wish to do so. This is just a guideline. Hell, I ain't
+    //     the one implementing this so... Go nuts lol
   }, []);
 
   return (
