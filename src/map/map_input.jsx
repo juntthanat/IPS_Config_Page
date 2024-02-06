@@ -77,6 +77,7 @@ export default function MapInput() {
     DEBUG_ONLY_drawCenter();
 
     // Stores the location of the Pin in an array
+    // Only for testing
     // setPins([{x: x - 5, y: y - 5}]);
     // console.log("Saved as => x: " + (x - 5) + " y: " + (y - 5));
   }
@@ -131,24 +132,8 @@ export default function MapInput() {
 
   // useEffect with [] as param to execute only at mount time
   useEffect(() => {
-//    const canvas = fgCanvasRef.current;
-//    const context = canvas.getContext("2d");
-
-    // Making the canvas expand to fill the parent container
-//    const parentBoundingBox = canvas.parentNode.getBoundingClientRect();
-//    canvas.width = parentBoundingBox.width;
-//    canvas.height = parentBoundingBox.height;
-
-    // Plotting The Center Point of the Canvas
-//    const canvasBoundingBox = canvas.getBoundingClientRect();
-//    const canvasCenterX = (canvasBoundingBox.right - canvasBoundingBox.left)/2;
-//    const canvasCenterY = (canvasBoundingBox.bottom - canvasBoundingBox.top)/2;
-//    console.log("Center X: " + canvasCenterX + " Center Y: " + canvasCenterY);
-
-//    context.fillRect(canvasCenterX - 5, canvasCenterY - 5, 10, 10);
   }, []);
 
-  // <canvas ref={bgCanvasRef} onClick={canvasCallback} style={{ position: "absolute", zIndex: 0 }}></canvas>
   return (
     <div id="map-input-background">
       <div id="map-input-container">
