@@ -4,15 +4,15 @@ import { useCallback, useState } from "react";
 import TitleHeader from "./component/title_header";
 import InputNavigation from "./navigation/input_navigation";
 
-import CRUDFloorInput from "./geographical/crud_floor/crud_floor_input";
-import CRUDLocationInput from "./geographical/crud_location/crud_location_input";
-import CRUDBeaconInput from "./geographical/crud_beacon/crud_beacon_input";
 import CRUDFloorPlanInput from "./representation/crud_floor_plan/crud_floor_plan_input";
 import MapInput from "./map/map_input";
+
+import ConfigInputFloor from "./component/config_input/config_input_floor/config_input_floor";
 
 // Test Modal
 import ModalComponent from "./component/modal_component";
 import CreateEditButton from "./create-edit-button/create_edit_button";
+
 
 function App() {
   const [showModal, setShowModal] = useState(false);
@@ -33,33 +33,7 @@ function App() {
           {ModalComponent(showModal, switchShowModal)}
           {TitleHeader("Configuration")}
           {/* Starting of Redesigning */}
-          <div className="floor-configuration-container">
-            <div className="floor-configuration-header">
-              Floor Configuration
-            </div>
-            <div className="floor-configuration-listbox-container">
-              <div className="floor-configuration-listbox">
-                {/* Fetch Floor From API */}
-                <ui>
-                  <li>1</li>
-                  <li>2</li>
-                  <li>3</li>
-                  <li>4</li>
-                  <li>5</li>
-                  <li>6</li>
-                  <li>7</li>
-                  <li>8</li>
-                </ui>
-              </div>
-            </div>
-            <div className="floor-configuration-button-container">
-              {/* <button className="button-class">
-                Add
-              </button> */}
-              {CreateEditButton(switchShowModal)}
-              <div className="floor-configuration-button-container-padding"></div>
-            </div>
-          </div>
+          {ConfigInputFloor()}
           <div className="location-beacon-configuration-container">
               <div className="location-configuration-container">
                 <div className="location-configuration-listbox">

@@ -1,0 +1,49 @@
+.floor-configuration-container{
+    height: 30%;
+    width: 100%;
+    border: solid 1px black;
+  }
+  .floor-configuration-header{
+    height: 24%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: xx-large;
+  
+    background-color: #242424;
+    color: white;
+  
+  }
+  .floor-configuration-listbox-container{
+    height: 56%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .floor-configuration-listbox{
+    height: 100%;
+    width: 92%;
+    overflow-y: scroll;
+    /* border: black 1px solid; */
+  }
+  
+  .floor-configuration-button-container{
+    height: 20%;
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+  }
+  .floor-configuration-button-container-padding{
+    height: 100%;
+    width: 8%;
+  }
+  .button-class{
+    height: 80%;
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
