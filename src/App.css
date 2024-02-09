@@ -44,6 +44,7 @@
   box-sizing: border-box;
   border-left: 4px solid #242424;
   background-color: white;
+  overflow: hidden;
 }
 #main-config-page-map-input-title{
   height: 14%;
