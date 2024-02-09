@@ -16,7 +16,5 @@ export default function FloorAPI() {
     fetchInfo();
   }, []);
 
-  console.log(data);
-
-  return <div></div>;
+  return <div>{data}</div>;
 }
