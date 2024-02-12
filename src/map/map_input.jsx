@@ -119,8 +119,18 @@ export default function MapInput() {
     const imgWidth  = img.clientWidth;
     const imgHeight = img.clientHeight;
 
-    console.log(img);
+    let tempMap = new Image();
+    tempMap.src = map1;
+
+    console.log("==============================");
+    console.log("--------IMG Properties--------");
+    console.log("==============================");
+    console.log("True Dimension:");
+    console.log(tempMap);
+    console.log("Width: " + tempMap.width + " Height: " + tempMap.height);
+    console.log("Rendered Dimension:");
     console.log("Width: " + imgWidth + " Height: " + imgHeight);
+    console.log("==============================");
 
     const canvas = fgCanvasRef.current;
     const context = canvas.getContext("2d");
