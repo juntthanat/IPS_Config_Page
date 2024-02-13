@@ -18,8 +18,30 @@ export default function MapInput() {
   const [pinUnifiedY, setPinUnifiedY] = useState(0);
   const [scaledUnifiedX, setScaledUnifiedX] = useState(0);
   const [scaledUnifiedY, setScaledUnifiedY] = useState(0);
+  const [geoX, setGeoX] = useState(0);
+  const [geoY, setGeoY] = useState(0);
 
   const [pins, setPins] = useState([]);
+  const [floors, setFloors] = useState([]);
+
+  function scaleCanvasCoordsToGeoCoords(x, y) {
+    // ASSUMTION: FLOOR = 8
+    const floor = floors[1];
+    const geoWidth  = floor.geoLength;
+    const geoHeight = floor.geoWidth;
+
+    const canvas = fgCanvasRef.current;
+    const canvasWidth  = canvas.width;
+    const canvasHeight = canvas.height;
+
+    const widthScale  = canvasWidth / geoWidth;
+    const heightScale = canvasHeight / geoHeight;
+
+    return {
+      x: x / widthScale,
+      y: y / heightScale
+    }
+  }
 
   function scaleCoordsToTrueCoords(x, y) {
     const img = mapRef.current;
@@ -113,6 +135,10 @@ export default function MapInput() {
 
     const canvasCoords = unifiedCoordsToCanvasCoords(x, y);
     relocatePin(canvasCoords.x, canvasCoords.y);
+
+    const geoCoords = scaleCanvasCoordsToGeoCoords(canvasCoords.x, canvasCoords.y);
+    setGeoX(geoCoords.x);
+    setGeoY(geoCoords.y);
   }
 
   /// Called when the Canvas gets clicked
@@ -132,6 +158,10 @@ export default function MapInput() {
 	    return;
 	}
     });
+
+    const geoCoords = scaleCanvasCoordsToGeoCoords(x, y);
+    setGeoX(geoCoords.x);
+    setGeoY(geoCoords.y);
 
     relocatePin(x, y);
     const unifiedCoords = canvasCoordsToUnifiedCoords(x, y);
@@ -172,6 +202,12 @@ export default function MapInput() {
 
   // useEffect with [] as param to execute only at mount time
   useEffect(() => {
+    fetch("http://marco.cooldev.win:8080/api/v1/floors")
+	.then(res => res.json())
+	.then(data => {
+	    console.log(data);
+	    setFloors(data);
+	});
     // Recommended usage:
     // Make Request to server here
     // Then store the pins in the "pins" useState array
@@ -209,6 +245,7 @@ export default function MapInput() {
       </label>
       <p>Canvas X: {mapX} Y: {mapY}</p>
       <p>Scaled Unified X: {scaledUnifiedX} Y: {scaledUnifiedY}</p>
+      <p>Geo X: {geoX} Y: {geoY}</p>
       {ConfirmCancelButton()}
     </div>
   );
