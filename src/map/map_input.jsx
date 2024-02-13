@@ -5,17 +5,38 @@ import map1 from "../assets/map_1.png";
 import ConfirmCancelButton from "../confirm-cancel-button/confirm_cancel_button";
 
 export default function MapInput() {
-  
+  const trueMapImage = new Image();
+  trueMapImage.src = map1;  
+
   const fgCanvasRef = useRef(null);
   const mapRef = useRef(null);
+
   const [mapX, setMapX] = useState(0);
   const [mapY, setMapY] = useState(0);
 
   const [pinUnifiedX, setPinUnifiedX] = useState(0);
   const [pinUnifiedY, setPinUnifiedY] = useState(0);
+  const [scaledUnifiedX, setScaledUnifiedX] = useState(0);
+  const [scaledUnifiedY, setScaledUnifiedY] = useState(0);
 
   const [pins, setPins] = useState([]);
 
+  function scaleCoordsToTrueCoords(x, y) {
+    const img = mapRef.current;
+    const renderedWidth  = img.clientWidth;
+    const renderedHeight = img.clientHeight;
+
+    const trueWidth  = trueMapImage.width;
+    const trueHeight = trueMapImage.height;
+
+    const widthScale  = trueWidth / renderedWidth;
+    const heightScale = trueHeight / renderedHeight;
+
+    return {
+      x: x * widthScale,
+      y: y * heightScale,
+    };
+   }
 
   function canvasCoordsToUnifiedCoords(x, y) {
     const canvas = fgCanvasRef.current;
@@ -85,6 +106,11 @@ export default function MapInput() {
   function relocatePinFromUnifiedCoords(x, y) {
     setPinUnifiedX(x);
     setPinUnifiedY(y);
+    
+    const scaledUnifiedCoords = scaleCoordsToTrueCoords(x, y);
+    setScaledUnifiedX(scaledUnifiedCoords.x);
+    setScaledUnifiedY(scaledUnifiedCoords.y);
+
     const canvasCoords = unifiedCoordsToCanvasCoords(x, y);
     relocatePin(canvasCoords.x, canvasCoords.y);
   }
@@ -111,6 +137,10 @@ export default function MapInput() {
     const unifiedCoords = canvasCoordsToUnifiedCoords(x, y);
     setPinUnifiedX(unifiedCoords.x);
     setPinUnifiedY(unifiedCoords.y);
+
+    const scaledUnifiedCoords = scaleCoordsToTrueCoords(unifiedCoords.x, unifiedCoords.y);
+    setScaledUnifiedX(scaledUnifiedCoords.x);
+    setScaledUnifiedY(scaledUnifiedCoords.y);
   }
 
   /// Gets called when the map image gets loaded
@@ -178,6 +208,7 @@ export default function MapInput() {
           />
       </label>
       <p>Canvas X: {mapX} Y: {mapY}</p>
+      <p>Scaled Unified X: {scaledUnifiedX} Y: {scaledUnifiedY}</p>
       {ConfirmCancelButton()}
     </div>
   );
