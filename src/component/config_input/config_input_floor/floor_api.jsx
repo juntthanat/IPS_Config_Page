@@ -1,10 +1,8 @@
 import { useState, useEffect } from "react";
 
-export default function FloorAPI() {
+export default function FloorAPI(selectedFloor, setSelectedFloor) {
   const baseURL = `http://marco.cooldev.win:8080/api/v1`;
   const [data, setData] = useState([]);
-
-  const [selectedFloor, setSelectedFloor] = useState(null);
 
   const fetchInfo = async () => {
     return await fetch(baseURL + `/floors`)

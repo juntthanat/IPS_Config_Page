@@ -8,22 +8,27 @@ import CRUDFloorPlanInput from "./representation/crud_floor_plan/crud_floor_plan
 import MapInput from "./map/map_input";
 
 import ConfigInputFloor from "./component/config_input/config_input_floor/config_input_floor";
+import ConfigInputLocation from "./component/config_input/config_input_location/config_input_location";
 
 // Test Modal
 import ModalComponent from "./component/modal_component";
 import CreateEditButton from "./create-edit-button/create_edit_button";
 
-
 function App() {
   const [showModal, setShowModal] = useState(false);
 
+  // Selected Data From API
+  const [selectedFloor, setSelectedFloor] = useState(null);
+  const [selectedLocation, setSelectedLocation] = useState(null);
+  const [selectedBeacon, setSelectedBeacon] = useState(null);
+
   const switchShowModal = useCallback(() => {
-    if(showModal == true){
+    if (showModal == true) {
       setShowModal(false);
     } else {
       setShowModal(true);
     }
-  }, [showModal])
+  }, [showModal]);
 
   return (
     <div id="main-config-page">
@@ -33,32 +38,19 @@ function App() {
           {ModalComponent(showModal, switchShowModal)}
           {TitleHeader("Configuration")}
           {/* Starting of Redesigning */}
-          {ConfigInputFloor(switchShowModal)}
+          {ConfigInputFloor(switchShowModal, selectedFloor, setSelectedFloor)}
           <div className="location-beacon-configuration-container">
-              <div className="location-configuration-container">
-                  <div className="location-configuration-header">
-                    Location
-                  </div>
-                  <input placeholder="Enter Location ID"></input>
-                  <div className="location-configuration-listbox-container">
-                    <div className="location-configuration-listbox">
-                      location list
-                    </div>
-                  </div>
-                  {CreateEditButton(switchShowModal)}
+            {ConfigInputLocation(switchShowModal, selectedLocation, setSelectedLocation, selectedFloor)}
+            <div className="beacon-configuration-container">
+              <div className="location-configuration-header">Beacon</div>
+              <input placeholder="Enter Beacon ID"></input>
+              <div className="location-configuration-listbox-container">
+                <div className="location-configuration-listbox">
+                  beacon list
+                </div>
               </div>
-              <div className="beacon-configuration-container">
-                <div className="location-configuration-header">
-                    Beacon
-                  </div>
-                  <input placeholder="Enter Beacon ID"></input>
-                  <div className="location-configuration-listbox-container">
-                    <div className="location-configuration-listbox">
-                      beacon list
-                    </div>
-                  </div>
-                  {CreateEditButton(switchShowModal)}
-              </div>
+              {CreateEditButton(switchShowModal)}
+            </div>
           </div>
           {/* End of Redesigning */}
           {/* {CRUDFloorInput()}

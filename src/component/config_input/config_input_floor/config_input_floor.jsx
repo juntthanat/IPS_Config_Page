@@ -3,7 +3,7 @@ import FloorAPI from "./floor_api";
 
 import CreateEditButton from "../../../create-edit-button/create_edit_button";
 
-export default function ConfigInputFloor(switchShowModal) {
+export default function ConfigInputFloor(switchShowModal, selectedFloor, setSelectedFloor) {
 
   return (
     <div className="floor-configuration-container">
@@ -14,7 +14,7 @@ export default function ConfigInputFloor(switchShowModal) {
         {/* <input placeholder="Enter Floor ID"></input> */}
           Floor List
           {/* Fetch Floor From API */}
-          {FloorAPI()}
+          {FloorAPI(selectedFloor, setSelectedFloor)}
         </div>
       </div>
       <div className="floor-configuration-button-container">
