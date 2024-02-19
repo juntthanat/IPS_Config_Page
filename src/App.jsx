@@ -9,10 +9,11 @@ import MapInput from "./map/map_input";
 
 import ConfigInputFloor from "./component/config_input/config_input_floor/config_input_floor";
 import ConfigInputLocation from "./component/config_input/config_input_location/config_input_location";
+import ConfigInputBeacon from "./component/config_input/config_input_beacon/config_input_beacon";
 
 // Test Modal
 import ModalComponent from "./component/modal_component";
-import CreateEditButton from "./create-edit-button/create_edit_button";
+// import CreateEditButton from "./create-edit-button/create_edit_button";
 
 function App() {
   const [showModal, setShowModal] = useState(false);
@@ -41,16 +42,7 @@ function App() {
           {ConfigInputFloor(switchShowModal, selectedFloor, setSelectedFloor)}
           <div className="location-beacon-configuration-container">
             {ConfigInputLocation(switchShowModal, selectedLocation, setSelectedLocation, selectedFloor)}
-            <div className="beacon-configuration-container">
-              <div className="location-configuration-header">Beacon</div>
-              <input placeholder="Enter Beacon ID"></input>
-              <div className="location-configuration-listbox-container">
-                <div className="location-configuration-listbox">
-                  beacon list
-                </div>
-              </div>
-              {CreateEditButton(switchShowModal)}
-            </div>
+            {ConfigInputBeacon(switchShowModal, selectedBeacon, setSelectedBeacon, selectedFloor)}
           </div>
           {/* End of Redesigning */}
           {/* {CRUDFloorInput()}

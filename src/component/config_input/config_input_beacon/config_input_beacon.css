@@ -1,0 +1,44 @@
+.location-configuration-container{
+    height: 100%;
+    width: 50%;
+    background-color: white;
+    box-sizing: border-box;
+    border-right: solid 1px #242424;
+  }
+  .location-configuration-header{
+    height: 12%;
+    width: 100%;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: xx-large;
+  
+    background: #242424;
+    color: white;
+  }
+  .location-configuration-listbox-container{
+    height: 64%;
+    width: 100%;
+  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+    /* background-color: orange; */
+  }
+  .location-configuration-listbox{
+    height: 100%;
+    width: 90%;
+  
+    border: solid 1px #242424;
+    overflow-y: scroll;
+  }
+  .beacon-configuration-container{
+    height: 100%;
+    width: 50%;
+    background-color: white;
+    box-sizing: border-box;
+    border-left: solid 1px #242424;
+  }
+  /* End of Redesigning */

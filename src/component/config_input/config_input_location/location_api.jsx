@@ -15,7 +15,6 @@ export default function LocationAPI(
       .then((e) => e.json())
       .then((d) => JSON.parse(JSON.stringify(d)))
       .then((f) => setData(f));
-    // .then((f) => console.log(f));
   };
 
   const locationIdList = (floorLocationJSON) => {
