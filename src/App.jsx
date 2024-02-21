@@ -30,8 +30,8 @@ function App() {
 
   return (
     <div id="main-config-page">
-      <div id="main-config-page-geographical-representation-input">
-        <div id="main-config-page-geographical-input">
+      <div id="main-config-page-input">
+        <div id="main-config-page-input-container">
           {ModalComponent(showModal, switchShowModal)}
           {TitleHeader("Configuration")}
           {ConfigInputFloor(switchShowModal, selectedFloor, setSelectedFloor)}
