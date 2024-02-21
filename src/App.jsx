@@ -35,7 +35,7 @@ function App() {
     <div id="main-config-page">
       <div id="main-config-page-input">
         <div id="main-config-page-input-container">
-          {ModalComponent(showModal, switchShowModal, selectedModalPage)}
+          {ModalComponent(showModal, switchShowModal, selectedModalPage, selectedFloor, selectedLocation, selectedBeacon)}
           {TitleHeader("Configuration")}
           {ConfigInputFloor(switchShowModal, selectedFloor, setSelectedFloor)}
           <div className="location-beacon-configuration-container">
