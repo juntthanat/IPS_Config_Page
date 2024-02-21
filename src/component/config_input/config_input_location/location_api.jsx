@@ -55,7 +55,7 @@ export default function LocationAPI(
     }
   };
 
-  const floorList = locationName.map((index) => (
+  const locationNameList = locationName.map((index) => (
     <div
       key={index.locationId}
       onClick={() => {
@@ -71,7 +71,7 @@ export default function LocationAPI(
     </div>
   ));
 
-  return <div>{floorList}</div>;
+  return <div>{locationNameList}</div>;
 }
 
 // http://marco.cooldev.win:8080/api/v1/floor-locations/floorId/1

@@ -19,7 +19,7 @@ export default function ConfigInputLocation(
           {LocationAPI(selectedLocation, setSelectedLocation, selectedFloor)}
         </div>
       </div>
-      {CreateEditButton(switchShowModal)}
+      {CreateEditButton(switchShowModal, "Location")}
     </div>
   );
 }

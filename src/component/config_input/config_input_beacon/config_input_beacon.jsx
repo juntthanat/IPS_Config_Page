@@ -18,7 +18,7 @@ export default function ConfigInputBeacon(
           {BeaconAPI(selectedBeacon, setSelectedBeacon, selectedFloor)}
         </div>
       </div>
-      {CreateEditButton(switchShowModal)}
+      {CreateEditButton(switchShowModal, "Beacon")}
     </div>
   );
 }

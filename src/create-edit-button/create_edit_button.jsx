@@ -1,8 +1,8 @@
 import "./create_edit_button.css";
 
-export default function CreateEditButton(switchShowModal) {
+export default function CreateEditButton(switchShowModal, selectModalPage) {
   const createClickHandler = () => {
-    switchShowModal()
+    switchShowModal(selectModalPage)
   };
 
   const editClickHandler = () => {

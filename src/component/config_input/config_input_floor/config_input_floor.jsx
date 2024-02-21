@@ -18,7 +18,7 @@ export default function ConfigInputFloor(switchShowModal, selectedFloor, setSele
         </div>
       </div>
       <div className="floor-configuration-button-container">
-        {CreateEditButton(switchShowModal)}
+        {CreateEditButton(switchShowModal, "Floor")}
         <div className="floor-configuration-button-container-padding"></div>
       </div>
     </div>

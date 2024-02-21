@@ -8,7 +8,7 @@ import modalPageBeacon from "../modal-page/modal_page_beacon";
 import modalPageFloorLocation from "../modal-page/floor/floor_location/modal_page_floor_location";
 import modalPageLocationFloor from "../modal-page/location/location_floor/modal_page_location_floor";
 
-export default function ModalComponent(showModal, switchShowModal, selectModalPage){
+export default function ModalComponent(showModal, switchShowModal, selectedModalPage){
     const [currentModalPage, setCurrentModalPage] = useState(null);
 
     const closeButtonHandler = () => {
@@ -16,9 +16,9 @@ export default function ModalComponent(showModal, switchShowModal, selectModalPa
     }
 
     const changeModalPage = () => {
-        if(selectModalPage == "floor"){
+        if(selectedModalPage == "floor"){
             setCurrentModalPage(modalPageFloor)
-        } else if(selectModalPage == "location"){
+        } else if(selectedModalPage == "location"){
             setCurrentModalPage(modalPageLocation)
         } else {
             setCurrentModalPage(modalPageBeacon)
@@ -33,12 +33,20 @@ export default function ModalComponent(showModal, switchShowModal, selectModalPa
                     <X className="feather-icon-32"/>
                 </div>
                 <div id="modal-header">
-                    Floor   Location    Beacon  File
+                    {selectedModalPage}
                 </div>
-                <div id="modal-body">
-                    {/* {modalPageFloor()} */}
-                    {/* {modalPageLocation()} */}
-                    {modalPageBeacon()}
+                <div class="modal-body">
+                    {/* Test Modal Page */}
+                    <div style={{display: selectedModalPage === "Floor"? "block" : "none"}}>
+                        {modalPageFloor()}
+                    </div>
+                    <div style={{display: selectedModalPage === "Location"? "block" : "none"}}>
+                        {modalPageLocation()}
+                    </div>
+                    <div style={{display: selectedModalPage === "Beacon"? "block" : "none"}}>
+                        {modalPageBeacon()}
+                    </div>
+                    {/* End of Test Modal Page */}
                 </div>
             </div>
         </div>

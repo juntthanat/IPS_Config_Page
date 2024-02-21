@@ -54,7 +54,7 @@ export default function BeaconAPI(
     }
   };
 
-  const floorList = beaconName.map((index) => (
+  const beaconNameList = beaconName.map((index) => (
     <div
       key={index.beaconId}
       onClick={() => {
@@ -68,5 +68,5 @@ export default function BeaconAPI(
     </div>
   ));
 
-  return <div>{floorList}</div>;
+  return <div>{beaconNameList}</div>;
 }

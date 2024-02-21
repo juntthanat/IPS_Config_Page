@@ -5,6 +5,7 @@ export default function modalPageFloor(){
     
     return (
         <div id="modal-page-floor-main">
+            FLOOR PAGE
             <input></input>
             <div id="modal-page-floor-component">
                 {modalPageFloorLocation()}

@@ -5,6 +5,7 @@ export default function modalPageLocation(){
 
     return (
         <div id="modal-page-location-main">
+            LOCATION PAGE
             <input></input>
             <div id="modal-page-location-component">
                 {modalPageLocationFloor()}

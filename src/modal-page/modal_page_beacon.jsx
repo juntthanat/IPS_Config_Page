@@ -5,6 +5,7 @@ export default function modalPageBeacon(){
 
     return (
         <div id="modal-page-beacon-main">
+            BEACON PAGE
             <input></input>
             <div id="modal-page-beacon-component">
                 {modalPageBeaconFloor()}
