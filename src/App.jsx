@@ -2,9 +2,7 @@ import "./App.css";
 import { useCallback, useState } from "react";
 
 import TitleHeader from "./component/title_header";
-import InputNavigation from "./navigation/input_navigation";
 
-import CRUDFloorPlanInput from "./representation/crud_floor_plan/crud_floor_plan_input";
 import MapInput from "./map/map_input";
 
 import ConfigInputFloor from "./component/config_input/config_input_floor/config_input_floor";
@@ -13,7 +11,6 @@ import ConfigInputBeacon from "./component/config_input/config_input_beacon/conf
 
 // Test Modal
 import ModalComponent from "./component/modal_component";
-// import CreateEditButton from "./create-edit-button/create_edit_button";
 
 function App() {
   const [showModal, setShowModal] = useState(false);
@@ -34,25 +31,14 @@ function App() {
   return (
     <div id="main-config-page">
       <div id="main-config-page-geographical-representation-input">
-        <div id="main-config-page-input-navigation">{InputNavigation()}</div>
         <div id="main-config-page-geographical-input">
           {ModalComponent(showModal, switchShowModal)}
           {TitleHeader("Configuration")}
-          {/* Starting of Redesigning */}
           {ConfigInputFloor(switchShowModal, selectedFloor, setSelectedFloor)}
           <div className="location-beacon-configuration-container">
             {ConfigInputLocation(switchShowModal, selectedLocation, setSelectedLocation, selectedFloor)}
             {ConfigInputBeacon(switchShowModal, selectedBeacon, setSelectedBeacon, selectedFloor)}
           </div>
-          {/* End of Redesigning */}
-          {/* {CRUDFloorInput()}
-          {CRUDLocationInput()}
-          {CRUDBeaconInput()}
-          {CreateEditButton(switchShowModal)} */}
-        </div>
-        <div id="main-config-page-representation-input">
-          {TitleHeader("Representation Input")}
-          {CRUDFloorPlanInput()}
         </div>
       </div>
       <div id="main-config-page-map-input">
