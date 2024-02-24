@@ -2,13 +2,22 @@
     height: 100%;
     width: 100%;
     border-bottom-left-radius: 20px;
+    padding-top: 20px;
 }
-#modal-page-floor-component{
+.modal-page-container{
     height: 100%;
-    width: 100%;
+    width: 88%;
 
-    display: flex;
-    justify-content: center;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 0);
+    
+    padding-bottom: 20px;
+}
+.floor-id-header{
+    font-weight: bold;
+    padding-bottom: 0.5em;
 }
 .floor-input-configuration{
     width: 100%;
@@ -19,3 +28,11 @@
     justify-content: space-between;
     align-items: center;
 }
+#modal-page-floor-component{
+    height: 100%;
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+}
+
