@@ -12,7 +12,8 @@ export default function ModalComponent(
   selectedModalPage,
   selectedFloor,
   selectedLocation,
-  selectedBeacon
+  selectedBeacon,
+  buttonType
 ) {
   const [currentModalPage, setCurrentModalPage] = useState(null);
 
@@ -21,18 +22,24 @@ export default function ModalComponent(
   };
 
   const changeModalPage = () => {
-    if (selectedModalPage == "floor") {
-      setCurrentModalPage(modalPageFloor);
-    } else if (selectedModalPage == "location") {
-      setCurrentModalPage(modalPageLocation);
+    if (selectedModalPage === "Floor") {
+      if (buttonType === "edit" && selectedFloor === null) {
+        setCurrentModalPage(<div>Please Select Floor to Edit</div>);
+      } else {
+        setCurrentModalPage(modalPageFloor(selectedFloor, buttonType));
+      }
+    } else if (selectedModalPage === "Location") {
+      setCurrentModalPage(modalPageLocation(selectedLocation, buttonType));
+    } else if (selectedModalPage === "Beacon") {
+      setCurrentModalPage(modalPageBeacon(selectedBeacon, buttonType));
     } else {
-      setCurrentModalPage(modalPageBeacon);
+      setCurrentModalPage(<div>Something Went Wrong</div>);
     }
   };
 
-  //   useEffect(() => {
-  //       changeModalPage();
-  //   }, [])
+  useEffect(() => {
+    changeModalPage();
+  }, [selectedModalPage]);
 
   return (
     <div
@@ -46,27 +53,7 @@ export default function ModalComponent(
         <div id="modal-header">{selectedModalPage}</div>
         <div className="modal-body">
           {/* Test Modal Page */}
-          <div
-            style={{
-              display: selectedModalPage === "Floor" ? "block" : "none",
-            }}
-          >
-            {modalPageFloor(selectedFloor)}
-          </div>
-          <div
-            style={{
-              display: selectedModalPage === "Location" ? "block" : "none",
-            }}
-          >
-            {modalPageLocation(selectedLocation)}
-          </div>
-          <div
-            style={{
-              display: selectedModalPage === "Beacon" ? "block" : "none",
-            }}
-          >
-            {modalPageBeacon(selectedBeacon)}
-          </div>
+          {currentModalPage}
           {/* End of Test Modal Page */}
         </div>
       </div>

@@ -12,9 +12,11 @@ import ConfigInputBeacon from "./component/config_input/config_input_beacon/conf
 // Test Modal
 import ModalComponent from "./component/modal_component";
 
+
 function App() {
   // Modal
   const [showModal, setShowModal] = useState(false);
+  const [buttonType, setButtonType] = useState();
   const [selectedModalPage, setSelectedModalPage] = useState(null);
 
   // Selected Data From API
@@ -22,8 +24,9 @@ function App() {
   const [selectedLocation, setSelectedLocation] = useState(null);
   const [selectedBeacon, setSelectedBeacon] = useState(null);
 
-  const switchShowModal = useCallback((selectModalPage) => {
+  const switchShowModal = useCallback((selectModalPage, selectButtonType) => {
     setSelectedModalPage(selectModalPage);
+    setButtonType(selectButtonType)
     if (showModal == true) {
       setShowModal(false);
     } else {
@@ -35,7 +38,7 @@ function App() {
     <div id="main-config-page">
       <div id="main-config-page-input">
         <div id="main-config-page-input-container">
-          {ModalComponent(showModal, switchShowModal, selectedModalPage, selectedFloor, selectedLocation, selectedBeacon)}
+          {ModalComponent(showModal, switchShowModal, selectedModalPage, selectedFloor, selectedLocation, selectedBeacon, buttonType)}
           {TitleHeader("Configuration")}
           {ConfigInputFloor(switchShowModal, selectedFloor, setSelectedFloor)}
           <div className="location-beacon-configuration-container">

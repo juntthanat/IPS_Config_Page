@@ -2,11 +2,14 @@ import "./create_edit_button.css";
 
 export default function CreateEditButton(switchShowModal, selectModalPage) {
   const createClickHandler = () => {
-    switchShowModal(selectModalPage);
+    switchShowModal(selectModalPage, "create");
   };
 
   const editClickHandler = () => {
-    switchShowModal(selectModalPage);
+    switchShowModal(selectModalPage, "edit");
+  };
+  const deleteClickHandler = () => {
+    switchShowModal(selectModalPage, "delete");
   };
 
   return (
@@ -16,6 +19,9 @@ export default function CreateEditButton(switchShowModal, selectModalPage) {
       </button>
       <button id="edit-button" onClick={editClickHandler}>
         Edit
+      </button>
+      <button id="delete-button" onClick={deleteClickHandler}>
+        Delete
       </button>
     </div>
   );
