@@ -2,9 +2,9 @@ import "./modal_component.css";
 import { X } from "react-feather";
 import { useEffect, useState } from "react";
 
-import modalPageFloor from "../modal-page/modal_page_floor";
-import modalPageLocation from "../modal-page/modal_page_location";
-import modalPageBeacon from "../modal-page/modal_page_beacon";
+import ModalPageFloor from "../modal-page/modal_page_floor";
+import ModalPageLocation from "../modal-page/modal_page_location";
+import ModalPageBeacon from "../modal-page/modal_page_beacon";
 
 export default function ModalComponent(
   showModal,
@@ -26,12 +26,35 @@ export default function ModalComponent(
       if (buttonType === "edit" && selectedFloor === null) {
         setCurrentModalPage(<div>Please Select Floor to Edit</div>);
       } else {
-        setCurrentModalPage(modalPageFloor(selectedFloor, buttonType));
+        setCurrentModalPage(
+          <ModalPageFloor
+            selectedFloor={selectedFloor}
+            buttonType={buttonType}
+          />
+        );
       }
     } else if (selectedModalPage === "Location") {
-      setCurrentModalPage(modalPageLocation(selectedLocation, buttonType));
+      if (buttonType === "edit" && selectedLocation === null) {
+        setCurrentModalPage(<div>Please Select Location to Edit</div>);
+      } else {
+        setCurrentModalPage(
+          <ModalPageLocation
+            selectedLocation={selectedLocation}
+            buttonType={buttonType}
+          />
+        );
+      }
     } else if (selectedModalPage === "Beacon") {
-      setCurrentModalPage(modalPageBeacon(selectedBeacon, buttonType));
+      if (buttonType === "edit" && selectedBeacon === null) {
+        setCurrentModalPage(<div>Please Select Beacon to Edit</div>);
+      } else {
+        setCurrentModalPage(
+          <ModalPageBeacon
+            selectedBeacon={selectedBeacon}
+            buttonType={buttonType}
+          />
+        );
+      }
     } else {
       setCurrentModalPage(<div>Something Went Wrong</div>);
     }
