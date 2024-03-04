@@ -1,5 +1,5 @@
 import "./modal_page_floor.css";
-import { useState, useEffect } from "react";
+// import { useState, useEffect } from "react";
 import modalPageFloorLocation from "./floor/floor_location/modal_page_floor_location";
 import FetchFloorInformation from "./floor/fetch_floor_information";
 
