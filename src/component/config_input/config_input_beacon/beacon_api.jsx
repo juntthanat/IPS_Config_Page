@@ -47,7 +47,7 @@ export default function BeaconAPI(props) {
 
   const checkSelectedBeacon = (value) => {
     if (value === true) {
-      return "red";
+      return "lightgrey";
     }
   };
 

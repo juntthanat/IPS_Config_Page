@@ -48,7 +48,7 @@ export default function LocationAPI(props) {
 
   const checkSelectedLocation = (value) => {
     if (value === true) {
-      return "red";
+      return "lightgrey";
     }
   };
 
