@@ -1,33 +1,83 @@
 import "./App.css";
+import { useCallback, useState } from "react";
 
 import TitleHeader from "./component/title_header";
-import InputNavigation from "./navigation/input_navigation";
 
-import CRUDFloorInput from "./geographical/crud_floor/crud_floor_input";
-import CRUDLocationInput from "./geographical/crud_location/crud_location_input";
-import CRUDBeaconInput from "./geographical/crud_beacon/crud_beacon_input";
-import CRUDFloorPlanInput from "./representation/crud_floor_plan/crud_floor_plan_input";
 import MapInput from "./map/map_input";
 
+import ConfigInputFloor from "./component/config_input/config_input_floor/config_input_floor";
+import ConfigInputLocation from "./component/config_input/config_input_location/config_input_location";
+import ConfigInputBeacon from "./component/config_input/config_input_beacon/config_input_beacon";
+
+// Test Modal
+import ModalComponent from "./component/modal_component";
+
 function App() {
+  // Modal
+  const [showModal, setShowModal] = useState(false);
+  const [buttonType, setButtonType] = useState();
+  const [selectedModalPage, setSelectedModalPage] = useState(null);
+
+  // Selected Data From API
+  const [selectedFloor, setSelectedFloor] = useState(null);
+  const [selectedLocation, setSelectedLocation] = useState(null);
+  const [selectedBeacon, setSelectedBeacon] = useState(null);
+
+  const switchShowModal = useCallback(
+    (selectModalPage, selectButtonType) => {
+      setSelectedModalPage(selectModalPage);
+      setButtonType(selectButtonType);
+      if (showModal == true) {
+        setShowModal(false);
+      } else {
+        setShowModal(true);
+      }
+    },
+    [showModal]
+  );
+
   return (
     <div id="main-config-page">
-      <div id="main-config-page-geographical-representation-input">
-        <div id="main-config-page-input-navigation">{InputNavigation()}</div>
-        <div id="main-config-page-geographical-input">
-          {TitleHeader("Geographical Input")}
-          {CRUDFloorInput()}
-          {CRUDLocationInput()}
-          {CRUDBeaconInput()}
-        </div>
-        <div id="main-config-page-representation-input">
-          {TitleHeader("Representation Input")}
-          {CRUDFloorPlanInput()}
+      <div id="main-config-page-input">
+        <div id="main-config-page-input-container">
+          <ModalComponent
+            showModal={showModal}
+            switchShowModal={switchShowModal}
+            selectedModalPage={selectedModalPage}
+            selectedFloor={selectedFloor}
+            selectedLocation={selectedLocation}
+            selectedBeacon={selectedBeacon}
+            buttonType={buttonType}
+          />
+          <TitleHeader title={"Configuration"} />
+          <ConfigInputFloor
+            switchShowModal={switchShowModal}
+            selectedFloor={selectedFloor}
+            setSelectedFloor={setSelectedFloor}
+          />
+          <div className="location-beacon-configuration-container">
+            <ConfigInputLocation
+              switchShowModal={switchShowModal}
+              selectedLocation={selectedLocation}
+              setSelectedLocation={setSelectedLocation}
+              selectedFloor={selectedFloor}
+            />
+            <ConfigInputBeacon
+              switchShowModal={switchShowModal}
+              selectedBeacon={selectedBeacon}
+              setSelectedBeacon={setSelectedBeacon}
+              selectedFloor={selectedFloor}
+            />
+          </div>
         </div>
       </div>
       <div id="main-config-page-map-input">
-        <div id="main-config-page-map-input-title">{TitleHeader("Map")}</div>
-        <div id="main-config-page-map-input-container">{MapInput()}</div>
+        <div id="main-config-page-map-input-title">
+          <TitleHeader title={"Map"} />
+        </div>
+        <div id="main-config-page-map-input-container">
+          <MapInput />
+        </div>
       </div>
     </div>
   );
@@ -35,43 +85,7 @@ function App() {
 
 export default App;
 
-// Run codespace on Ipad
-// npm run dev -- --host 0.0.0.0
-// then go to PORTS and looks for Vite Default port (5173) or the one specify in the terminal
-// and click the website or globe icon in the Forwareded Address column
-
 // To Open A terminal CTRL+SHIFT+P then search for Create new terminal
 // ShortCut CTRL+SHIFT+`
 
-/*
-#GEOGRAPHICAL#
-CRUD floor
-- floor_id (auto generated)
-- name
-- geo_length
-- geo_width
-
-CRUD location
-- location_id (auto gen)
-- name
-- geo_x
-- geo_y
-- floor_id
-
-CRUD beacon
-- beacon_id (auto gen)
-- mac_address
-- name
-- geo_x
-- geo_y
-- floor_id
-
-#REPRESENTATION#
-CRUD floor plan
-- floor_plan_id
-- name
-- plan_length
-- plan_width
-- file_content (this will be file upload)
-- floor_id
-*/
+// http://marco.cooldev.win:8080/swagger-ui/index.html#/

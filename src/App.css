@@ -9,12 +9,13 @@
   left: 50%;
   transform: translate(-50%, -50%);
 }
-#main-config-page-geographical-representation-input{
+#main-config-page-input{
   height: 100%;
   width: 50%;
 
   display: flex;
   background-color: #242424;
+  box-sizing: border-box;
   border-right: 4px solid #242424;
 }
 #main-config-page-input-navigation{
@@ -23,25 +24,20 @@
 
   background-color: #242424;
 }
-#main-config-page-geographical-input{
+#main-config-page-input-container{
   height: 100%;
   width: 96%;
 
-  background-color: white;
-}
-#main-config-page-representation-input{
-  height: 100%;
-  width: 100%;
-
-  display: none;
   background-color: white;
 }
 
 #main-config-page-map-input{
   height: 100%;
   width: 50%;
+  box-sizing: border-box;
   border-left: 4px solid #242424;
   background-color: white;
+  overflow: hidden;
 }
 #main-config-page-map-input-title{
   height: 14%;
@@ -50,4 +46,10 @@
 #main-config-page-map-input-container{
   height: 90%;
   width: 100%;
+}
+
+.location-beacon-configuration-container{
+  height: 44%;
+  width: 100%;
+ display: flex;
 }

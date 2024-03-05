@@ -12,7 +12,7 @@ export default function ConfirmCancelButton() {
   return (
     <div id="confirm-cancel-container">
       <button id="cancel-button" onClick={cancelClickHandler}>
-        Cacncel
+        Cancel
       </button>
       <button id="confirm-button" onClick={confirmClickHandler}>
         Confirm

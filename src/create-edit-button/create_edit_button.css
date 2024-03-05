@@ -1,0 +1,21 @@
+#create-edit-container{
+    width: 100%;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+}
+#edit-button{
+    width: 8em;
+    margin: 1em;
+    
+}
+#create-button{
+    width: 8em;
+    margin: 1em;
+}
+#delete-button{
+    width: 8em;
+    margin: 1em;
+}

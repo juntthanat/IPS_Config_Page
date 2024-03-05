@@ -1,12 +1,10 @@
-import "./title_header.css"
+import "./title_header.css";
 
-
-export default function TitleHeader(title){
-    return (
-        <div id="title-header-background">
-            <div id="title-header-container">
-                {title}
-            </div>
-        </div>
-    )
+export default function TitleHeader(props) {
+  const { title } = props ?? {};
+  return (
+    <div id="title-header-background">
+      <div id="title-header-container">{title}</div>
+    </div>
+  );
 }
