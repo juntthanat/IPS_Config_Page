@@ -9,7 +9,7 @@ export default function MapInput() {
       <div id="map-input-container">
         <img src={map1} alt="Map" draggable="false"></img>
       </div>
-      {ConfirmCancelButton()}
+      <ConfirmCancelButton/>
     </div>
   );
 }

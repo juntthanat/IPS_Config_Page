@@ -6,15 +6,16 @@ import ModalPageFloor from "../modal-page/modal_page_floor";
 import ModalPageLocation from "../modal-page/modal_page_location";
 import ModalPageBeacon from "../modal-page/modal_page_beacon";
 
-export default function ModalComponent(
-  showModal,
-  switchShowModal,
-  selectedModalPage,
-  selectedFloor,
-  selectedLocation,
-  selectedBeacon,
-  buttonType
-) {
+export default function ModalComponent(props) {
+  const {
+    showModal,
+    switchShowModal,
+    selectedModalPage,
+    selectedFloor,
+    selectedLocation,
+    selectedBeacon,
+    buttonType,
+  } = props ?? {};
   const [currentModalPage, setCurrentModalPage] = useState(null);
 
   const closeButtonHandler = () => {
@@ -75,9 +76,7 @@ export default function ModalComponent(
         </div>
         <div id="modal-header">{selectedModalPage}</div>
         <div className="modal-body">
-          {/* Test Modal Page */}
           {currentModalPage}
-          {/* End of Test Modal Page */}
         </div>
       </div>
     </div>

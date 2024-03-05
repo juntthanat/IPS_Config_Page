@@ -1,6 +1,7 @@
 import "./create_edit_button.css";
 
-export default function CreateEditButton(switchShowModal, selectModalPage) {
+export default function CreateEditButton(props) {
+  const {switchShowModal, selectModalPage} = props ?? {};
   const createClickHandler = () => {
     switchShowModal(selectModalPage, "create");
   };

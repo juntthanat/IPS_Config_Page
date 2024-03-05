@@ -3,12 +3,13 @@ import LocationAPI from "./location_api";
 
 import CreateEditButton from "../../../create-edit-button/create_edit_button";
 
-export default function ConfigInputLocation(
-  switchShowModal,
-  selectedLocation,
-  setSelectedLocation,
-  selectedFloor
-) {
+export default function ConfigInputLocation(props) {
+  const {
+    switchShowModal,
+    selectedLocation,
+    setSelectedLocation,
+    selectedFloor,
+  } = props ?? {};
   return (
     <div className="location-configuration-container">
       <div className="location-configuration-header">Location</div>
@@ -16,10 +17,17 @@ export default function ConfigInputLocation(
       <div className="location-configuration-listbox-container">
         <div className="location-configuration-listbox">
           location list
-          {LocationAPI(selectedLocation, setSelectedLocation, selectedFloor)}
+          <LocationAPI
+            selectedLocation={selectedLocation}
+            setSelectedLocation={setSelectedLocation}
+            selectedFloor={selectedFloor}
+          />
         </div>
       </div>
-      {CreateEditButton(switchShowModal, "Location")}
+      <CreateEditButton
+        switchShowModal={switchShowModal}
+        selectModalPage={"Location"}
+      />
     </div>
   );
 }

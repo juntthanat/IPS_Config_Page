@@ -1,6 +1,5 @@
 import "./modal_page_floor.css";
-// import { useState, useEffect } from "react";
-import modalPageFloorLocation from "./floor/floor_location/modal_page_floor_location";
+import ModalPageFloorLocation from "./floor/floor_location/modal_page_floor_location";
 import FetchFloorInformation from "./floor/fetch_floor_information";
 
 export default function ModalPageFloor(props) {
@@ -15,7 +14,7 @@ export default function ModalPageFloor(props) {
         />
       </div>
       <div id="modal-page-floor-component">
-        {modalPageFloorLocation()}
+        <ModalPageFloorLocation/>
         <div id="modal-page-floor-beacon"></div>
         <div id="modal-page-floor-file"></div>
       </div>

@@ -12,7 +12,6 @@ import ConfigInputBeacon from "./component/config_input/config_input_beacon/conf
 // Test Modal
 import ModalComponent from "./component/modal_component";
 
-
 function App() {
   // Modal
   const [showModal, setShowModal] = useState(false);
@@ -24,32 +23,61 @@ function App() {
   const [selectedLocation, setSelectedLocation] = useState(null);
   const [selectedBeacon, setSelectedBeacon] = useState(null);
 
-  const switchShowModal = useCallback((selectModalPage, selectButtonType) => {
-    setSelectedModalPage(selectModalPage);
-    setButtonType(selectButtonType)
-    if (showModal == true) {
-      setShowModal(false);
-    } else {
-      setShowModal(true);
-    }
-  }, [showModal]);
+  const switchShowModal = useCallback(
+    (selectModalPage, selectButtonType) => {
+      setSelectedModalPage(selectModalPage);
+      setButtonType(selectButtonType);
+      if (showModal == true) {
+        setShowModal(false);
+      } else {
+        setShowModal(true);
+      }
+    },
+    [showModal]
+  );
 
   return (
     <div id="main-config-page">
       <div id="main-config-page-input">
         <div id="main-config-page-input-container">
-          {ModalComponent(showModal, switchShowModal, selectedModalPage, selectedFloor, selectedLocation, selectedBeacon, buttonType)}
-          {TitleHeader("Configuration")}
-          {ConfigInputFloor(switchShowModal, selectedFloor, setSelectedFloor)}
+          <ModalComponent
+            showModal={showModal}
+            switchShowModal={switchShowModal}
+            selectedModalPage={selectedModalPage}
+            selectedFloor={selectedFloor}
+            selectedLocation={selectedLocation}
+            selectedBeacon={selectedBeacon}
+            buttonType={buttonType}
+          />
+          <TitleHeader title={"Configuration"} />
+          <ConfigInputFloor
+            switchShowModal={switchShowModal}
+            selectedFloor={selectedFloor}
+            setSelectedFloor={setSelectedFloor}
+          />
           <div className="location-beacon-configuration-container">
-            {ConfigInputLocation(switchShowModal, selectedLocation, setSelectedLocation, selectedFloor)}
-            {ConfigInputBeacon(switchShowModal, selectedBeacon, setSelectedBeacon, selectedFloor)}
+            <ConfigInputLocation
+              switchShowModal={switchShowModal}
+              selectedLocation={selectedLocation}
+              setSelectedLocation={setSelectedLocation}
+              selectedFloor={selectedFloor}
+            />
+            <ConfigInputBeacon
+              switchShowModal={switchShowModal}
+              selectedBeacon={selectedBeacon}
+              setSelectedBeacon={setSelectedBeacon}
+              selectedFloor={selectedFloor}
+            />
           </div>
         </div>
       </div>
       <div id="main-config-page-map-input">
-        <div id="main-config-page-map-input-title">{TitleHeader("Map")}</div>
-        <div id="main-config-page-map-input-container">{MapInput()}</div>
+        <div id="main-config-page-map-input-title">
+          <TitleHeader title={"Map"} />
+        </div>
+        <div id="main-config-page-map-input-container">
+          <MapInput />
+        </div>
       </div>
     </div>
   );

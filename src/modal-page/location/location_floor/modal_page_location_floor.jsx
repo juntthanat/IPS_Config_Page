@@ -1,6 +1,6 @@
 import "./modal_page_location_floor.css"
 
-export default function modalPageLocationFloor(){
+export default function ModalPageLocationFloor(){
 
     return(
         <div id="modal-page-location-floor">

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 
-export default function FloorAPI(selectedFloor, setSelectedFloor) {
+export default function FloorAPI(props) {
+  const {selectedFloor, setSelectedFloor} = props ?? {}
   const baseURL = `http://marco.cooldev.win:8080/api/v1`;
   const [data, setData] = useState([]);
 

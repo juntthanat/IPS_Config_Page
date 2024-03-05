@@ -1,10 +1,7 @@
 import { useState, useEffect } from "react";
 
-export default function LocationAPI(
-  selectedLocation,
-  setSelectedLocation,
-  selectedFloor
-) {
+export default function LocationAPI(props) {
+  const { selectedLocation, setSelectedLocation, selectedFloor } = props ?? {};
   const baseURL = `http://marco.cooldev.win:8080/api/v1`;
   const [data, setData] = useState([]);
   const [locationList, setLocationList] = useState([]);

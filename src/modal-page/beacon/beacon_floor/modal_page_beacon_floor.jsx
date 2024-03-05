@@ -1,6 +1,6 @@
 import "./modal_page_beacon_floor.css"
 
-export default function modalPageBeaconFloor(){
+export default function ModalPageBeaconFloor(){
 
     return(
         <div id="modal-page-beacon-floor">

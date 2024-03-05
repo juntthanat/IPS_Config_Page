@@ -1,10 +1,7 @@
 import { useState, useEffect } from "react";
 
-export default function BeaconAPI(
-  selectedBeacon,
-  setSelectedBeacon,
-  selectedFloor
-) {
+export default function BeaconAPI(props) {
+  const { selectedBeacon, setSelectedBeacon, selectedFloor } = props ?? {};
   const baseURL = `http://marco.cooldev.win:8080/api/v1`;
   const [data, setData] = useState([]);
   const [beaconList, setBeaconList] = useState([]);

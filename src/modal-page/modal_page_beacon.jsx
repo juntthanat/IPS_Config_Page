@@ -1,6 +1,5 @@
 import "./modal_page_beacon.css";
-import { useState } from "react";
-import modalPageBeaconFloor from "./beacon/beacon_floor/modal_page_beacon_floor";
+import ModalPageBeaconFloor from "./beacon/beacon_floor/modal_page_beacon_floor";
 import FetchBeaconInformation from "./beacon/fetch_beacon_information";
 
 export default function modalPageBeacon(props) {
@@ -12,7 +11,7 @@ export default function modalPageBeacon(props) {
         <FetchBeaconInformation selectedBeacon={selectedBeacon} buttonType={buttonType}/>
       </div>
       <div id="modal-page-beacon-component">
-        {modalPageBeaconFloor()}
+        <ModalPageBeaconFloor/>
         <div id="modal-page-beacon-beacon"></div>
         <div id="modal-page-beacon-file"></div>
       </div>

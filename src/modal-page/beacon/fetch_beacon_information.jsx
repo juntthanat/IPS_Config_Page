@@ -10,7 +10,7 @@ export default function FetchBeaconInformation(props) {
   const [getMacAddress, setGetMacAddress] = useState("");
 
   const fetchInfo = async () => {
-    return await fetch(baseURL + `/floors` + "/" + selectedFloor)
+    return await fetch(baseURL + `/beacons` + "/" + selectedBeacon)
       .then((e) => e.json())
       .then((d) => JSON.parse(JSON.stringify(d)))
       .then((f) => {
