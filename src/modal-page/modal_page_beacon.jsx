@@ -3,7 +3,7 @@ import ModalPageBeaconFloor from "./beacon/beacon_floor/modal_page_beacon_floor"
 import FetchBeaconInformation from "./beacon/fetch_beacon_information";
 
 export default function modalPageBeacon(props) {
-  const { selectedBeacon, buttonType } = props ?? {};
+  const { selectedBeacon, buttonType , switchShowModal} = props ?? {};
 
   return (
     <div id="modal-page-beacon-main">

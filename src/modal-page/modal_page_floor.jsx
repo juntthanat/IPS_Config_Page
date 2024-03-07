@@ -3,7 +3,7 @@ import ModalPageFloorLocation from "./floor/floor_location/modal_page_floor_loca
 import FetchFloorInformation from "./floor/fetch_floor_information";
 
 export default function ModalPageFloor(props) {
-  const { selectedFloor, buttonType } = props ?? {};
+  const { selectedFloor, buttonType , switchShowModal} = props ?? {};
 
   return (
     <div id="modal-page-floor-main">
@@ -11,12 +11,14 @@ export default function ModalPageFloor(props) {
         <FetchFloorInformation
           selectedFloor={selectedFloor}
           buttonType={buttonType}
+          switchShowModal={switchShowModal}
         />
       </div>
       <div id="modal-page-floor-component">
-        <ModalPageFloorLocation/>
+        
+        {/* <ModalPageFloorLocation />
         <div id="modal-page-floor-beacon"></div>
-        <div id="modal-page-floor-file"></div>
+        <div id="modal-page-floor-file"></div> */}
       </div>
     </div>
   );

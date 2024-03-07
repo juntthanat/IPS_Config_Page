@@ -3,7 +3,7 @@ import ModalPageLocationFloor from "./location/location_floor/modal_page_locatio
 import FetchLocationInformation from "./location/fetch_location_information";
 
 export default function modalPageLocation(props) {
-  const { selectedLocation, buttonType } = props ?? {};
+  const { selectedLocation, buttonType , switchShowModal} = props ?? {};
 
   return (
     <div id="modal-page-location-main">

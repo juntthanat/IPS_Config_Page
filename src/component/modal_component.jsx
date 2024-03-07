@@ -31,6 +31,7 @@ export default function ModalComponent(props) {
           <ModalPageFloor
             selectedFloor={selectedFloor}
             buttonType={buttonType}
+            switchShowModal={switchShowModal}
           />
         );
       }
@@ -42,6 +43,7 @@ export default function ModalComponent(props) {
           <ModalPageLocation
             selectedLocation={selectedLocation}
             buttonType={buttonType}
+            switchShowModal={switchShowModal}
           />
         );
       }
@@ -53,6 +55,7 @@ export default function ModalComponent(props) {
           <ModalPageBeacon
             selectedBeacon={selectedBeacon}
             buttonType={buttonType}
+            switchShowModal={switchShowModal}
           />
         );
       }
