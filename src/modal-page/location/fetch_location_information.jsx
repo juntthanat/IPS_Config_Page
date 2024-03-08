@@ -1,12 +1,16 @@
 import { useState, useEffect } from "react";
+import ConfirmCancelButton from "../../confirm-cancel-button/confirm_cancel_button";
+import EditLocationInformation from "./edit_location_information";
 
 export default function FetchLocationInformation(props) {
-  const { selectedLocation, buttonType } = props ?? {};
+  const {selectedLocation, buttonType, switchShowModal } = props ?? {};
   const baseURL = `http://marco.cooldev.win:8080/api/v1`;
 
   const [getLocationName, setGetLocationName] = useState("");
   const [getLocationGeoX, setGetLocationGeoX] = useState("");
   const [getLocationGeoY, setGetLocationGeoY] = useState("");
+
+  const [userConfirm, setUserConfirm] = useState(false);
 
   const fetchInfo = async () => {
     return await fetch(baseURL + `/locations` + "/" + selectedLocation)
@@ -18,6 +22,29 @@ export default function FetchLocationInformation(props) {
         setGetLocationGeoY(f.geoY);
       });
   };
+
+  const handleNameChange = (event) => {
+    setGetLocationName(event.target.value);
+  };
+  const handleGeoXChange = (event) => {
+    setGetLocationGeoX(event.target.value);
+  };
+  const handleGeoYChange = (event) => {
+    setGetLocationGeoY(event.target.value);
+  };
+
+  useEffect(() => {
+    if (userConfirm === true) {
+      EditLocationInformation(
+        selectedLocation,
+        getLocationName,
+        getLocationGeoX,
+        getLocationGeoY
+      );
+      switchShowModal();
+    }
+    setUserConfirm(false);
+  }, [userConfirm]);
 
   useEffect(() => {
     if (buttonType === "edit") {
@@ -36,20 +63,27 @@ export default function FetchLocationInformation(props) {
         LOCATION NAME{" "}
         <input
           defaultValue={buttonType === "create" ? null : getLocationName}
+          onChange={handleNameChange}
         ></input>
       </div>
       <div className="location-input-configuration">
         GEO X
         <input
           defaultValue={buttonType === "create" ? null : getLocationGeoX}
+          onChange={handleGeoXChange}
         ></input>
       </div>
       <div className="location-input-configuration">
         GEO Y
         <input
           defaultValue={buttonType === "create" ? null : getLocationGeoY}
+          onChange={handleGeoYChange}
         ></input>
       </div>
+      <ConfirmCancelButton
+        setUserConfirm={setUserConfirm}
+        switchShowModal={switchShowModal}
+      />
     </div>
   );
 }

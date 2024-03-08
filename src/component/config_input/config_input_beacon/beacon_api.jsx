@@ -16,9 +16,9 @@ export default function BeaconAPI(props) {
   const beaconIdList = (floorBeaconJSON) => {
     setBeaconList([]);
     for (let i = 0; i < floorBeaconJSON.length; i++) {
-      setBeaconList((locationList) => [
-        ...locationList,
-        floorBeaconJSON[i].locationId,
+      setBeaconList((beaconList) => [
+        ...beaconList,
+        floorBeaconJSON[i].beaconId,
       ]);
     }
   };

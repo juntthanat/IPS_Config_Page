@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
+import ConfirmCancelButton from "../../confirm-cancel-button/confirm_cancel_button";
+import EditBeaconInformation from "./edit_beacon_information";
 
 export default function FetchBeaconInformation(props) {
-  const { selectedBeacon, buttonType } = props ?? {};
+  const {selectedBeacon, buttonType, switchShowModal } = props ?? {};
   const baseURL = `http://marco.cooldev.win:8080/api/v1`;
 
   const [getBeaconName, setGetBeaconName] = useState("");
@@ -9,8 +11,10 @@ export default function FetchBeaconInformation(props) {
   const [getBeaconGeoY, setGetBeaconGeoY] = useState("");
   const [getMacAddress, setGetMacAddress] = useState("");
 
+  const [userConfirm, setUserConfirm] = useState(false);
+
   const fetchInfo = async () => {
-    return await fetch(baseURL + `/beacons` + "/" + selectedBeacon)
+    return await fetch(baseURL + `/beacons/` + selectedBeacon)
       .then((e) => e.json())
       .then((d) => JSON.parse(JSON.stringify(d)))
       .then((f) => {
@@ -20,6 +24,33 @@ export default function FetchBeaconInformation(props) {
         setGetMacAddress(f.macAddress);
       });
   };
+
+  const handleNameChange = (event) => {
+    setGetBeaconName(event.target.value);
+  }
+  const handleGeoXChange = (event) => {
+    setGetBeaconGeoX(event.target.value);
+  }
+  const handleGeoYChange = (event) => {
+    setGetBeaconGeoY(event.target.value);
+  }
+  const handleMacAddressChange = (event) => {
+    setGetMacAddress(event.target.value);
+  }
+
+  useEffect(()=> {
+    if(userConfirm === true){
+      EditBeaconInformation(
+        selectedBeacon,
+        getBeaconName,
+        getBeaconGeoX,
+        getBeaconGeoY,
+        getMacAddress
+      );
+      switchShowModal();
+    }
+    setUserConfirm(false);
+  }, [userConfirm])
 
   useEffect(() => {
     if (buttonType === "edit") {
@@ -36,26 +67,34 @@ export default function FetchBeaconInformation(props) {
         BEACON NAME
         <input
           defaultValue={buttonType === "create" ? null : getBeaconName}
+          onChange={handleNameChange}
         ></input>
       </div>
       <div className="beacon-input-configuration">
         GEO X
         <input
           defaultValue={buttonType === "create" ? null : getBeaconGeoX}
+          onChange={handleGeoXChange}
         ></input>
       </div>
       <div className="beacon-input-configuration">
         GEO Y
         <input
           defaultValue={buttonType === "create" ? null : getBeaconGeoY}
+          onChange={handleGeoYChange}
         ></input>
       </div>
       <div className="beacon-input-configuration">
         BEACON MAC-ADDRESS
         <input
           defaultValue={buttonType === "create" ? null : getMacAddress}
+          onChange={handleMacAddressChange}
         ></input>
       </div>
+      <ConfirmCancelButton
+        setUserConfirm={setUserConfirm}
+        switchShowModal={switchShowModal}
+      />
     </div>
   );
 }

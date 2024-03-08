@@ -27,9 +27,8 @@ export default function EditFloorInformation(
   };
 
   const editInfo = async () => {
-    return await fetch(baseURL + `floors` + "/" + selectedFloor, requestOptions)
+    return await fetch(baseURL + `/floors/` + selectedFloor, requestOptions)
       .then((res) => res.json())
-      .then((data) => console.log(data))
       .catch((error) => {
         console.log(error);
       });

@@ -38,19 +38,8 @@ export default function FetchFloorInformation(props) {
     setGetAzimuth(event.target.value);
   };
 
-  // const switchUserConfirm = useCallback(()=>{
-  //   setUserConfirm(true);
-  // })
-
   useEffect(() => {
     if (userConfirm === true) {
-      // <EditFloorInformation
-      //   selectedFloor={selectedFloor}
-      //   getFloorName={getFloorName}
-      //   getGeoLength={getGeoLength}
-      //   getGeoWidth={getGeoWidth}
-      //   getAzimuth={getAzimuth}
-      // />;
       EditFloorInformation(
         selectedFloor,
         getFloorName,

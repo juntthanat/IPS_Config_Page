@@ -11,6 +11,7 @@ export default function modalPageLocation(props) {
         <FetchLocationInformation
           selectedLocation={selectedLocation}
           buttonType={buttonType}
+          switchShowModal={switchShowModal}
         />
       </div>
       <div id="modal-page-location-component">
