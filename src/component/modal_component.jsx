@@ -44,6 +44,7 @@ export default function ModalComponent(props) {
             selectedLocation={selectedLocation}
             buttonType={buttonType}
             switchShowModal={switchShowModal}
+            selectedFloor={selectedFloor}
           />
         );
       }
@@ -56,6 +57,7 @@ export default function ModalComponent(props) {
             selectedBeacon={selectedBeacon}
             buttonType={buttonType}
             switchShowModal={switchShowModal}
+            selectedFloor={selectedFloor}
           />
         );
       }

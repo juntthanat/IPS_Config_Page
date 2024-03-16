@@ -3,7 +3,7 @@ import ConfirmCancelButton from "../../confirm-cancel-button/confirm_cancel_butt
 import EditBeaconInformation from "./edit_beacon_information";
 
 export default function FetchBeaconInformation(props) {
-  const {selectedBeacon, buttonType, switchShowModal } = props ?? {};
+  const {selectedBeacon, buttonType, switchShowModal, selectedFloor } = props ?? {};
   const baseURL = `http://marco.cooldev.win:8080/api/v1`;
 
   const [getBeaconName, setGetBeaconName] = useState("");

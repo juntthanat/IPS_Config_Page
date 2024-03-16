@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import ConfirmCancelButton from "../../confirm-cancel-button/confirm_cancel_button";
 import EditFloorInformation from "./edit_floor_information";
+import CreateFloorInformation from "./create_floor_information";
 
 export default function FetchFloorInformation(props) {
   const { selectedFloor, buttonType, switchShowModal } = props ?? {};
@@ -38,15 +39,36 @@ export default function FetchFloorInformation(props) {
     setGetAzimuth(event.target.value);
   };
 
+  const checkUserInput = () => {
+    if (
+      getFloorName != "" &&
+      getGeoLength != "" &&
+      getGeoWidth != "" &&
+      getAzimuth != ""
+    ) {
+      return true;
+    }
+    return false;
+  };
   useEffect(() => {
-    if (userConfirm === true) {
-      EditFloorInformation(
-        selectedFloor,
-        getFloorName,
-        getGeoLength,
-        getGeoWidth,
-        getAzimuth
-      );
+    if (userConfirm === true && checkUserInput() == true) {
+      if (buttonType === "create") {
+        CreateFloorInformation(
+          selectedFloor,
+          getFloorName,
+          getGeoLength,
+          getGeoWidth,
+          getAzimuth
+        );
+      } else if (buttonType === "edit") {
+        EditFloorInformation(
+          selectedFloor,
+          getFloorName,
+          getGeoLength,
+          getGeoWidth,
+          getAzimuth
+        );
+      }
       switchShowModal();
     }
     setUserConfirm(false);
@@ -55,6 +77,10 @@ export default function FetchFloorInformation(props) {
   useEffect(() => {
     if (buttonType === "edit") {
       fetchInfo();
+    } else if (buttonType === "create") {
+      console.log("Create Section");
+    } else {
+      console.log("Delete Section");
     }
   }, []);
 
@@ -70,6 +96,10 @@ export default function FetchFloorInformation(props) {
         <input
           defaultValue={buttonType === "create" ? null : getFloorName}
           onChange={handleNameChange}
+          style={{
+            border: getFloorName === "" ? "solid red 2px" : "solid black 2px",
+          }}
+          placeholder={getFloorName === "" ? "Please Enter Floor Name" : ""}
         ></input>
       </div>
       <div className="floor-input-configuration">

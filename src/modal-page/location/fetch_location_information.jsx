@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 import ConfirmCancelButton from "../../confirm-cancel-button/confirm_cancel_button";
 import EditLocationInformation from "./edit_location_information";
+import CreateLocationInformation from "./create_location_information";
 
 export default function FetchLocationInformation(props) {
-  const {selectedLocation, buttonType, switchShowModal } = props ?? {};
+  const { selectedLocation, buttonType, switchShowModal, selectedFloor } =
+    props ?? {};
   const baseURL = `http://marco.cooldev.win:8080/api/v1`;
 
   const [getLocationName, setGetLocationName] = useState("");
@@ -33,14 +35,34 @@ export default function FetchLocationInformation(props) {
     setGetLocationGeoY(event.target.value);
   };
 
+  const checkUserInput = () => {
+    if (
+      getLocationName != "" &&
+      getLocationGeoX != "" &&
+      getLocationGeoY != ""
+    ) {
+      return true;
+    }
+    return false;
+  };
+
   useEffect(() => {
-    if (userConfirm === true) {
-      EditLocationInformation(
-        selectedLocation,
-        getLocationName,
-        getLocationGeoX,
-        getLocationGeoY
-      );
+    if (userConfirm === true && checkUserInput() == true) {
+      if (buttonType === "create") {
+        CreateLocationInformation(
+          getLocationName,
+          getLocationGeoX,
+          getLocationGeoY,
+          selectedFloor
+        );
+      } else if (buttonType === "edit") {
+        EditLocationInformation(
+          selectedLocation,
+          getLocationName,
+          getLocationGeoX,
+          getLocationGeoY
+        );
+      }
       switchShowModal();
     }
     setUserConfirm(false);
@@ -49,6 +71,10 @@ export default function FetchLocationInformation(props) {
   useEffect(() => {
     if (buttonType === "edit") {
       fetchInfo();
+    } else if (buttonType === "create") {
+      console.log("Create Section");
+    } else {
+      console.log("Delete Section");
     }
   }, []);
 
