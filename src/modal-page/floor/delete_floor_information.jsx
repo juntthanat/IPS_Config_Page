@@ -1,8 +1,5 @@
 export default function DeleteFloorInformation(selectedFloor) {
   const baseURL = `http://marco.cooldev.win:8080/api/v1`;
-//   const data = {
-//     floorId: selectedFloor,
-//   };
   const requestOptions = {
     method: "DELETE",
     mode: "cors",
@@ -10,14 +7,46 @@ export default function DeleteFloorInformation(selectedFloor) {
       "Content-Type": "application/json",
       "Access-Control-Allow-Origin": "*",
     },
-    // body: JSON.stringify(data),
+  };
+
+  const deleteLocation = async (index) => {
+    return await fetch(baseURL + `/locations/` + index, requestOptions)
+      .then((res) => res.json())
+      .then((res) => JSON.parse(JSON.stringify(res)));
+  };
+  const deleteBeacon = async (index) => {
+    return await fetch(baseURL + `/beacons/` + index, requestOptions)
+      .then((res) => res.json())
+      .then((res) => JSON.parse(JSON.stringify(res)));
+  };
+  const deleteFloor = async (index) => {
+    return await fetch(baseURL + `/floors/` + index, requestOptions)
+      .then((res) => res.json())
+      .then((res) => JSON.parse(JSON.stringify(res)));
   };
 
   const deleteInfo = async () => {
-    return await fetch(baseURL + `/floors/` + selectedFloor, requestOptions)
-        .then((res) => res.json())
-        // .then((res) => JSON.parse(JSON.stringify(res)))
-        .catch((error) => console.log(error))
+    return await fetch(baseURL + `/floor-locations/floorId/` + selectedFloor)
+      .then((res) => res.json())
+      .then((res) => {
+        for (
+          let locationIndex = 0;
+          locationIndex < res.length;
+          locationIndex++
+        ) {
+          deleteLocation(res[locationIndex].locationId);
+        }
+      })
+      .then(
+        fetch(baseURL + `/floor-beacons/floorId/` + selectedFloor)
+          .then((res) => res.json())
+          .then((res) => {
+            for (let beaconIndex = 0; beaconIndex < res.length; beaconIndex++) {
+              deleteBeacon(res[beaconIndex].beaconId);
+            }
+          })
+      )
+      .then(deleteFloor(selectedFloor));
   };
 
   deleteInfo();
