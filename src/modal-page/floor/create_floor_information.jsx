@@ -1,9 +1,9 @@
 export default function CreateFloorInformation(
-  selectedFloor,
   getFloorName,
   getGeoLength,
   getGeoWidth,
-  getAzimuth
+  getAzimuth,
+  onComplete
 ) {
   const baseURL = `http://marco.cooldev.win:8080/api/v1`;
 
@@ -25,11 +25,14 @@ export default function CreateFloorInformation(
   };
 
   const createInfo = async () => {
-    return await fetch(baseURL + `/floors`, requestOptions)
-    .then((res) => res.json())
-    .catch((error)=> {
-        console.log(error)
-    })
+    const result = await fetch(baseURL + `/floors`, requestOptions)
+      .then((res) => res.json())
+      .catch((error) => {
+        console.log(error);
+      });
+
+    onComplete?.();
+    return result;
   };
 
   createInfo();

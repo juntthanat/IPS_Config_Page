@@ -1,5 +1,5 @@
 import "./App.css";
-import { useCallback, useState } from "react";
+import { useCallback, useState, createContext } from "react";
 
 import TitleHeader from "./component/title_header";
 
@@ -12,7 +12,16 @@ import ConfigInputBeacon from "./component/config_input/config_input_beacon/conf
 // Test Modal
 import ModalComponent from "./component/modal_component";
 
+export const RerenderContext = createContext({
+  rerender: () => undefined,
+});
+
 function App() {
+  const [, setRendererContextValue] = useState(false);
+
+  const rerender = () => {
+    setRendererContextValue((prev) => !prev);
+  };
   // Modal
   const [showModal, setShowModal] = useState(false);
   const [buttonType, setButtonType] = useState();
@@ -37,49 +46,56 @@ function App() {
   );
 
   return (
-    <div id="main-config-page">
-      <div id="main-config-page-input">
-        <div id="main-config-page-input-container">
-          <ModalComponent
-            showModal={showModal}
-            switchShowModal={switchShowModal}
-            selectedModalPage={selectedModalPage}
-            selectedFloor={selectedFloor}
-            selectedLocation={selectedLocation}
-            selectedBeacon={selectedBeacon}
-            buttonType={buttonType}
-          />
-          <TitleHeader title={"Configuration"} />
-          <ConfigInputFloor
-            switchShowModal={switchShowModal}
-            selectedFloor={selectedFloor}
-            setSelectedFloor={setSelectedFloor}
-          />
-          <div className="location-beacon-configuration-container">
-            <ConfigInputLocation
+    <RerenderContext.Provider
+      value={{
+        rerender,
+      }}
+    >
+      <button onClick={() => {rerender()}}>rere</button>
+      <div id="main-config-page">
+        <div id="main-config-page-input">
+          <div id="main-config-page-input-container">
+            <ModalComponent
+              showModal={showModal}
               switchShowModal={switchShowModal}
+              selectedModalPage={selectedModalPage}
+              selectedFloor={selectedFloor}
               selectedLocation={selectedLocation}
-              setSelectedLocation={setSelectedLocation}
-              selectedFloor={selectedFloor}
-            />
-            <ConfigInputBeacon
-              switchShowModal={switchShowModal}
               selectedBeacon={selectedBeacon}
-              setSelectedBeacon={setSelectedBeacon}
-              selectedFloor={selectedFloor}
+              buttonType={buttonType}
             />
+            <TitleHeader title={"Configuration"} />
+            <ConfigInputFloor
+              switchShowModal={switchShowModal}
+              selectedFloor={selectedFloor}
+              setSelectedFloor={setSelectedFloor}
+            />
+            <div className="location-beacon-configuration-container">
+              <ConfigInputLocation
+                switchShowModal={switchShowModal}
+                selectedLocation={selectedLocation}
+                setSelectedLocation={setSelectedLocation}
+                selectedFloor={selectedFloor}
+              />
+              <ConfigInputBeacon
+                switchShowModal={switchShowModal}
+                selectedBeacon={selectedBeacon}
+                setSelectedBeacon={setSelectedBeacon}
+                selectedFloor={selectedFloor}
+              />
+            </div>
+          </div>
+        </div>
+        <div id="main-config-page-map-input">
+          <div id="main-config-page-map-input-title">
+            <TitleHeader title={"Map"} />
+          </div>
+          <div id="main-config-page-map-input-container">
+            <MapInput />
           </div>
         </div>
       </div>
-      <div id="main-config-page-map-input">
-        <div id="main-config-page-map-input-title">
-          <TitleHeader title={"Map"} />
-        </div>
-        <div id="main-config-page-map-input-container">
-          <MapInput />
-        </div>
-      </div>
-    </div>
+    </RerenderContext.Provider>
   );
 }
 

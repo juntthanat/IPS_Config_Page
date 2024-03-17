@@ -3,7 +3,8 @@ export default function EditFloorInformation(
   getFloorName,
   getGeoLength,
   getGeoWidth,
-  getAzimuth
+  getAzimuth,
+  onComplete
 ) {
   //   const { selectedFloor, getFloorName, getGeoLength, getGeoWidth, getAzimuth } =
   //     props ?? {};
@@ -27,11 +28,14 @@ export default function EditFloorInformation(
   };
 
   const editInfo = async () => {
-    return await fetch(baseURL + `/floors/` + selectedFloor, requestOptions)
+    const result =  await fetch(baseURL + `/floors/` + selectedFloor, requestOptions)
       .then((res) => res.json())
       .catch((error) => {
         console.log(error);
       });
+
+      onComplete?.();
+      return result;
   };
 
   editInfo();

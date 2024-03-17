@@ -1,12 +1,16 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import ConfirmCancelButton from "../../confirm-cancel-button/confirm_cancel_button";
 import EditFloorInformation from "./edit_floor_information";
 import CreateFloorInformation from "./create_floor_information";
 import DeleteFloorInformation from "./delete_floor_information";
+import { RerenderContext } from "../../App";
 
 export default function FetchFloorInformation(props) {
   const { selectedFloor, buttonType, switchShowModal } = props ?? {};
   const baseURL = `http://marco.cooldev.win:8080/api/v1`;
+
+  //test
+  const { rerender } = useContext(RerenderContext);
 
   const [getFloorName, setGetFloorName] = useState("");
   const [getGeoLength, setGetGeoLength] = useState("");
@@ -55,11 +59,13 @@ export default function FetchFloorInformation(props) {
     if (userConfirm === true && checkUserInput() == true) {
       if (buttonType === "create") {
         CreateFloorInformation(
-          selectedFloor,
           getFloorName,
           getGeoLength,
           getGeoWidth,
-          getAzimuth
+          getAzimuth,
+          () => {
+            rerender();
+          }
         );
       } else if (buttonType === "edit") {
         EditFloorInformation(
@@ -67,10 +73,15 @@ export default function FetchFloorInformation(props) {
           getFloorName,
           getGeoLength,
           getGeoWidth,
-          getAzimuth
+          getAzimuth,
+          () => {
+            rerender();
+          }
         );
       } else {
-        DeleteFloorInformation(selectedFloor);
+        DeleteFloorInformation(selectedFloor, () => {
+          rerender();
+        });
       }
       switchShowModal();
     }

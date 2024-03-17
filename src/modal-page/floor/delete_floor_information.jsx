@@ -1,4 +1,4 @@
-export default function DeleteFloorInformation(selectedFloor) {
+export default function DeleteFloorInformation(selectedFloor, onComplete) {
   const baseURL = `http://marco.cooldev.win:8080/api/v1`;
   const requestOptions = {
     method: "DELETE",
@@ -26,7 +26,9 @@ export default function DeleteFloorInformation(selectedFloor) {
   };
 
   const deleteInfo = async () => {
-    return await fetch(baseURL + `/floor-locations/floorId/` + selectedFloor)
+    const result = await fetch(
+      baseURL + `/floor-locations/floorId/` + selectedFloor
+    )
       .then((res) => res.json())
       .then((res) => {
         for (
@@ -37,7 +39,7 @@ export default function DeleteFloorInformation(selectedFloor) {
           deleteLocation(res[locationIndex].locationId);
         }
       })
-      .then(
+      .then(() =>
         fetch(baseURL + `/floor-beacons/floorId/` + selectedFloor)
           .then((res) => res.json())
           .then((res) => {
@@ -47,6 +49,9 @@ export default function DeleteFloorInformation(selectedFloor) {
           })
       )
       .then(deleteFloor(selectedFloor));
+
+    onComplete?.();
+    return result;
   };
 
   deleteInfo();
