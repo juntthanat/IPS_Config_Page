@@ -1,4 +1,4 @@
-export default function DeleteBeaconInformation(selectedBeacon) {
+export default function DeleteBeaconInformation(selectedBeacon, onComplete) {
   const baseURL = `http://marco.cooldev.win:8080/api/v1`;
   const requestOptions = {
     method: "DELETE",
@@ -10,10 +10,13 @@ export default function DeleteBeaconInformation(selectedBeacon) {
   };
 
   const deleteInfo = async () => {
-    return await fetch(baseURL + `/beacons/` + selectedBeacon, requestOptions)
+    const result = await fetch(baseURL + `/beacons/` + selectedBeacon, requestOptions)
         .then((res) => res.json())
         .then((res) => JSON.parse(JSON.stringify(res)))
         .catch((error) => console.log(error))
+
+        onComplete?.();
+        return result;
   };
 
   deleteInfo();

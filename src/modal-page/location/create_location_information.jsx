@@ -2,7 +2,8 @@ export default function CreateLocationInformation(
   getLocationName,
   getLocationGeoX,
   getLocationGeoY,
-  selectedFloor
+  selectedFloor,
+  onComplete
 ) {
   const baseURL = `http://marco.cooldev.win:8080/api/v1`;
 
@@ -22,7 +23,7 @@ export default function CreateLocationInformation(
   };
 
   const createInfo = async () => {
-    return await fetch(baseURL + `/locations`, requestOptions)
+    const result = await fetch(baseURL + `/locations`, requestOptions)
       .then((res) => res.json())
       .then((res) => JSON.parse(JSON.stringify(res)))
       .then((res) => fetch(baseURL + `/floor-locations`, {
@@ -39,6 +40,9 @@ export default function CreateLocationInformation(
       }))
       .then((res) => res.json())
       .catch((error) => console.log(error));
+
+      onComplete?.();
+      return result;
   };
 
   createInfo();

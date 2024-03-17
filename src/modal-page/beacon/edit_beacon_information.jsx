@@ -3,7 +3,8 @@ export default function EditBeaconInformation(
   getBeaconName,
   getBeaconGeoX,
   getBeaconGeoY,
-  getMacAddress
+  getMacAddress,
+  onComplete
 ) {
   const baseURL = `http://marco.cooldev.win:8080/api/v1`;
 
@@ -24,11 +25,14 @@ export default function EditBeaconInformation(
   };
 
   const editInfo = async () => {
-    return await fetch(baseURL + `/beacons/` + selectedBeacon, requestOptions)
+    const result = await fetch(baseURL + `/beacons/` + selectedBeacon, requestOptions)
       .then((res) => res.json())
       .catch((error) => {
         console.log(error);
       });
+
+      onComplete?.();
+      return result;
   };
 
   editInfo();

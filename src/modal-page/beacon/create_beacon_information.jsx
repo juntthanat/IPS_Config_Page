@@ -3,7 +3,8 @@ export default function CreateBeaconInformation(
   getBeaconGeoX,
   getBeaconGeoY,
   getMacAddress,
-  selectedFloor
+  selectedFloor,
+  onComplete
 ) {
   const baseURL = `http://marco.cooldev.win:8080/api/v1`;
 
@@ -24,7 +25,7 @@ export default function CreateBeaconInformation(
   };
 
   const createInfo = async () => {
-    return await fetch(baseURL + `/beacons`, requestOptions)
+    const result = await fetch(baseURL + `/beacons`, requestOptions)
         .then((res) => res.json())
         .then((res) => JSON.parse(JSON.stringify(res)))
         .then((res) => fetch(baseURL + `/floor-beacons`, {
@@ -41,6 +42,9 @@ export default function CreateBeaconInformation(
           }))
           .then((res) => res.json())
           .catch((error) => console.log(error));
+
+          onComplete?.();
+          return result;
   };
 
   createInfo();

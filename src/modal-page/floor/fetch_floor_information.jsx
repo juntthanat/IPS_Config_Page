@@ -7,10 +7,8 @@ import { RerenderContext } from "../../App";
 
 export default function FetchFloorInformation(props) {
   const { selectedFloor, buttonType, switchShowModal } = props ?? {};
-  const baseURL = `http://marco.cooldev.win:8080/api/v1`;
-
-  //test
   const { rerender } = useContext(RerenderContext);
+  const baseURL = `http://marco.cooldev.win:8080/api/v1`;
 
   const [getFloorName, setGetFloorName] = useState("");
   const [getGeoLength, setGetGeoLength] = useState("");

@@ -1,12 +1,14 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import ConfirmCancelButton from "../../confirm-cancel-button/confirm_cancel_button";
 import EditLocationInformation from "./edit_location_information";
 import CreateLocationInformation from "./create_location_information";
 import DeleteLocationInformation from "./delete_location_information";
+import { RerenderContext } from "../../App";
 
 export default function FetchLocationInformation(props) {
   const { selectedLocation, buttonType, switchShowModal, selectedFloor } =
     props ?? {};
+  const { rerender } = useContext(RerenderContext);
   const baseURL = `http://marco.cooldev.win:8080/api/v1`;
 
   const [getLocationName, setGetLocationName] = useState("");
@@ -54,17 +56,25 @@ export default function FetchLocationInformation(props) {
           getLocationName,
           getLocationGeoX,
           getLocationGeoY,
-          selectedFloor
+          selectedFloor,
+          () => {
+            rerender();
+          }
         );
       } else if (buttonType === "edit") {
         EditLocationInformation(
           selectedLocation,
           getLocationName,
           getLocationGeoX,
-          getLocationGeoY
+          getLocationGeoY,
+          () => {
+            rerender();
+          }
         );
       } else {
-        DeleteLocationInformation(selectedLocation);
+        DeleteLocationInformation(selectedLocation, () => {
+          rerender();
+        });
       }
       switchShowModal();
     }
@@ -105,9 +115,12 @@ export default function FetchLocationInformation(props) {
           defaultValue={buttonType === "create" ? null : getLocationName}
           onChange={handleNameChange}
           style={{
-            border: getLocationName === "" ? "solid red 2px" : "solid black 2px",
+            border:
+              getLocationName === "" ? "solid red 2px" : "solid black 2px",
           }}
-          placeholder={getLocationName === "" ? "Please Enter Location Name" : ""}
+          placeholder={
+            getLocationName === "" ? "Please Enter Location Name" : ""
+          }
           disabled={buttonType === "delete" ? true : false}
         ></input>
       </div>
@@ -117,9 +130,12 @@ export default function FetchLocationInformation(props) {
           defaultValue={buttonType === "create" ? null : getLocationGeoX}
           onChange={handleGeoXChange}
           style={{
-            border: getLocationGeoX === "" ? "solid red 2px" : "solid black 2px",
+            border:
+              getLocationGeoX === "" ? "solid red 2px" : "solid black 2px",
           }}
-          placeholder={getLocationGeoX === "" ? "Please Enter Location Geo X" : ""}
+          placeholder={
+            getLocationGeoX === "" ? "Please Enter Location Geo X" : ""
+          }
           disabled={buttonType === "delete" ? true : false}
         ></input>
       </div>
@@ -129,9 +145,12 @@ export default function FetchLocationInformation(props) {
           defaultValue={buttonType === "create" ? null : getLocationGeoY}
           onChange={handleGeoYChange}
           style={{
-            border: getLocationGeoY === "" ? "solid red 2px" : "solid black 2px",
+            border:
+              getLocationGeoY === "" ? "solid red 2px" : "solid black 2px",
           }}
-          placeholder={getLocationGeoY === "" ? "Please Enter Location Geo Y" : ""}
+          placeholder={
+            getLocationGeoY === "" ? "Please Enter Location Geo Y" : ""
+          }
           disabled={buttonType === "delete" ? true : false}
         ></input>
       </div>

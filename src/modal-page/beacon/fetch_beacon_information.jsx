@@ -1,12 +1,14 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import ConfirmCancelButton from "../../confirm-cancel-button/confirm_cancel_button";
 import CreateBeaconInformation from "./create_beacon_information";
 import EditBeaconInformation from "./edit_beacon_information";
 import DeleteBeaconInformation from "./delete_beacon_information";
+import { RerenderContext } from "../../App";
 
 export default function FetchBeaconInformation(props) {
   const { selectedBeacon, buttonType, switchShowModal, selectedFloor } =
     props ?? {};
+  const { rerender } = useContext(RerenderContext);
   const baseURL = `http://marco.cooldev.win:8080/api/v1`;
 
   const [getBeaconName, setGetBeaconName] = useState("");
@@ -61,18 +63,26 @@ export default function FetchBeaconInformation(props) {
           getBeaconGeoX,
           getBeaconGeoY,
           getMacAddress,
-          selectedFloor
-        )
+          selectedFloor,
+          () => {
+            rerender();
+          }
+        );
       } else if (buttonType === "edit") {
         EditBeaconInformation(
           selectedBeacon,
           getBeaconName,
           getBeaconGeoX,
           getBeaconGeoY,
-          getMacAddress
+          getMacAddress,
+          () => {
+            rerender();
+          }
         );
       } else {
-        DeleteBeaconInformation(selectedBeacon)
+        DeleteBeaconInformation(selectedBeacon, () => {
+          rerender();
+        });
       }
       switchShowModal();
     }

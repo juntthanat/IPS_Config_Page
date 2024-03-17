@@ -2,7 +2,8 @@ export default function EditLocationInformation(
   selectedLocation,
   getLocationName,
   getLocationGeoX,
-  getLocationGeoY
+  getLocationGeoY,
+  onComplete
 ) {
   const baseURL = `http://marco.cooldev.win:8080/api/v1`;
 
@@ -22,7 +23,7 @@ export default function EditLocationInformation(
   };
 
   const editInfo = async () => {
-    return await fetch(
+    const result = await fetch(
       baseURL + `/locations/` + selectedLocation,
       requestOptions
     )
@@ -30,6 +31,9 @@ export default function EditLocationInformation(
       .catch((error) => {
         console.log(error);
       });
+
+      onComplete?.();
+      return result;
   };
 
   editInfo();
