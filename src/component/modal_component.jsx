@@ -26,33 +26,44 @@ export default function ModalComponent(props) {
     if (selectedModalPage === "Floor") {
       if (buttonType === "edit" && selectedFloor === null) {
         setCurrentModalPage(<div>Please Select Floor to Edit</div>);
+      } else if (buttonType === "delete" && selectedFloor === null) {
+        setCurrentModalPage(<div>Please Select Floor to Delete</div>);
       } else {
         setCurrentModalPage(
           <ModalPageFloor
             selectedFloor={selectedFloor}
             buttonType={buttonType}
+            switchShowModal={switchShowModal}
           />
         );
       }
     } else if (selectedModalPage === "Location") {
       if (buttonType === "edit" && selectedLocation === null) {
         setCurrentModalPage(<div>Please Select Location to Edit</div>);
-      } else {
+      } else if (buttonType === "delete" && selectedLocation === null) {
+        setCurrentModalPage(<div>Please Select Location to Delete</div>);
+      }else {
         setCurrentModalPage(
           <ModalPageLocation
             selectedLocation={selectedLocation}
             buttonType={buttonType}
+            switchShowModal={switchShowModal}
+            selectedFloor={selectedFloor}
           />
         );
       }
     } else if (selectedModalPage === "Beacon") {
       if (buttonType === "edit" && selectedBeacon === null) {
         setCurrentModalPage(<div>Please Select Beacon to Edit</div>);
-      } else {
+      } else if (buttonType === "delete" && selectedBeacon === null) {
+        setCurrentModalPage(<div>Please Select Beacon to Delete</div>);
+      }else {
         setCurrentModalPage(
           <ModalPageBeacon
             selectedBeacon={selectedBeacon}
             buttonType={buttonType}
+            switchShowModal={switchShowModal}
+            selectedFloor={selectedFloor}
           />
         );
       }
@@ -75,9 +86,7 @@ export default function ModalComponent(props) {
           <X className="feather-icon-32" />
         </div>
         <div id="modal-header">{selectedModalPage}</div>
-        <div className="modal-body">
-          {currentModalPage}
-        </div>
+        <div className="modal-body">{currentModalPage}</div>
       </div>
     </div>
   );

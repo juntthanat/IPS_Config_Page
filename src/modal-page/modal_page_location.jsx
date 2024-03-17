@@ -1,9 +1,10 @@
 import "./modal_page_location.css";
-import ModalPageLocationFloor from "./location/location_floor/modal_page_location_floor";
+// import ModalPageLocationFloor from "./location/location_floor/modal_page_location_floor";
 import FetchLocationInformation from "./location/fetch_location_information";
 
 export default function modalPageLocation(props) {
-  const { selectedLocation, buttonType } = props ?? {};
+  const { selectedLocation, buttonType, switchShowModal, selectedFloor } =
+    props ?? {};
 
   return (
     <div id="modal-page-location-main">
@@ -11,12 +12,14 @@ export default function modalPageLocation(props) {
         <FetchLocationInformation
           selectedLocation={selectedLocation}
           buttonType={buttonType}
+          switchShowModal={switchShowModal}
+          selectedFloor={selectedFloor}
         />
       </div>
       <div id="modal-page-location-component">
-        <ModalPageLocationFloor/>
+        {/* <ModalPageLocationFloor/>
         <div id="modal-page-location-beacon"></div>
-        <div id="modal-page-location-file"></div>
+        <div id="modal-page-location-file"></div> */}
       </div>
     </div>
   );

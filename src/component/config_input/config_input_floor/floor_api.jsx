@@ -1,9 +1,12 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { RerenderContext } from "../../../App";
 
 export default function FloorAPI(props) {
   const { selectedFloor, setSelectedFloor } = props ?? {};
   const baseURL = `http://marco.cooldev.win:8080/api/v1`;
   const [data, setData] = useState([]);
+
+  const { rerender } = useContext(RerenderContext);
 
   const fetchInfo = async () => {
     return await fetch(baseURL + `/floors`)
@@ -14,7 +17,7 @@ export default function FloorAPI(props) {
 
   useEffect(() => {
     fetchInfo();
-  }, []);
+  }, [rerender]);
 
   const checkSelectedFloor = (value) => {
     if (value === true) {

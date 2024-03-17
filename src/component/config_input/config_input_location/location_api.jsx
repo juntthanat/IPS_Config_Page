@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { RerenderContext } from "../../../App";
 
 export default function LocationAPI(props) {
   const { selectedLocation, setSelectedLocation, selectedFloor } = props ?? {};
@@ -6,6 +7,8 @@ export default function LocationAPI(props) {
   const [data, setData] = useState([]);
   const [locationList, setLocationList] = useState([]);
   const [locationName, setLocationName] = useState([]);
+
+  const {rerender} = useContext(RerenderContext)
 
   const fetchLocationId = async () => {
     return await fetch(baseURL + `/floor-locations/floorId/` + selectedFloor)
@@ -36,7 +39,7 @@ export default function LocationAPI(props) {
 
   useEffect(() => {
     fetchLocationId();
-  }, [selectedFloor]);
+  }, [selectedFloor, rerender]);
 
   useEffect(() => {
     locationIdList(data);

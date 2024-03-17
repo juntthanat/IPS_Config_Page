@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { RerenderContext } from "../../../App";
 
 export default function BeaconAPI(props) {
   const { selectedBeacon, setSelectedBeacon, selectedFloor } = props ?? {};
@@ -6,6 +7,8 @@ export default function BeaconAPI(props) {
   const [data, setData] = useState([]);
   const [beaconList, setBeaconList] = useState([]);
   const [beaconName, setBeaconName] = useState([]);
+
+  const {rerender} = useContext(RerenderContext); 
 
   const fetchBeaconId = async () => {
     return await fetch(baseURL + `/floor-beacons/floorId/` + selectedFloor)
@@ -16,9 +19,9 @@ export default function BeaconAPI(props) {
   const beaconIdList = (floorBeaconJSON) => {
     setBeaconList([]);
     for (let i = 0; i < floorBeaconJSON.length; i++) {
-      setBeaconList((locationList) => [
-        ...locationList,
-        floorBeaconJSON[i].locationId,
+      setBeaconList((beaconList) => [
+        ...beaconList,
+        floorBeaconJSON[i].beaconId,
       ]);
     }
   };
@@ -35,7 +38,7 @@ export default function BeaconAPI(props) {
 
   useEffect(() => {
     fetchBeaconId();
-  }, [selectedFloor]);
+  }, [selectedFloor, rerender]);
 
   useEffect(() => {
     beaconIdList(data);
