@@ -91,7 +91,7 @@ function App() {
             <TitleHeader title={"Map"} />
           </div>
           <div id="main-config-page-map-input-container">
-            <MapInput />
+            <MapInput selectedFloor={selectedFloor}/>
           </div>
         </div>
       </div>
