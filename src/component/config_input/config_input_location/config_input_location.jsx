@@ -8,6 +8,7 @@ export default function ConfigInputLocation(props) {
     switchShowModal,
     selectedLocation,
     setSelectedLocation,
+    setSelectedLocationData,
     selectedFloor,
   } = props ?? {};
   return (
@@ -20,6 +21,7 @@ export default function ConfigInputLocation(props) {
           <LocationAPI
             selectedLocation={selectedLocation}
             setSelectedLocation={setSelectedLocation}
+            setSelectedLocationData={setSelectedLocationData}
             selectedFloor={selectedFloor}
           />
         </div>

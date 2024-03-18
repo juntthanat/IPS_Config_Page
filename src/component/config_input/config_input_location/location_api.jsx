@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from "react";
 import { RerenderContext } from "../../../App";
 
 export default function LocationAPI(props) {
-  const { selectedLocation, setSelectedLocation, selectedFloor } = props ?? {};
+  const { selectedLocation, setSelectedLocation, setSelectedLocationData, selectedFloor } = props ?? {};
   const baseURL = `http://marco.cooldev.win:8080/api/v1`;
   const [data, setData] = useState([]);
   const [locationList, setLocationList] = useState([]);
@@ -60,6 +60,7 @@ export default function LocationAPI(props) {
       key={index.locationId}
       onClick={() => {
         setSelectedLocation(index.locationId);
+        setSelectedLocationData(index);
       }}
       style={{
         backgroundColor: checkSelectedLocation(

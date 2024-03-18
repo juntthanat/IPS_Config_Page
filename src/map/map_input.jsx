@@ -5,7 +5,7 @@ import FetchFloorPlanInformation from "./fetch_floor_plan_information";
 import ConfirmCancelButton from "../confirm-cancel-button/confirm_cancel_button";
 
 export default function MapInput(props) {
-  const { selectedFloor } = props ?? {};
+  const { selectedFloor, selectedLocationData } = props ?? {};
   const [floorPlan, setFloorPlan] = useState(null);
   const [currentFloorData, setCurrentFloorData] = useState(null);
 
@@ -29,7 +29,6 @@ export default function MapInput(props) {
   const [pins, setPins] = useState([]);
 
   function scaleCanvasCoordsToGeoCoords(x, y) {
-    // ASSUMTION: FLOOR = 8
     const floor = currentFloorData;
     const geoWidth  = floor.geoLength;
     const geoHeight = floor.geoWidth;
@@ -44,6 +43,24 @@ export default function MapInput(props) {
     return {
       x: x / widthScale,
       y: y / heightScale
+    }
+  }
+
+  function scaleGeoCoordsToCanvasCoords(x, y) {
+    const floor = currentFloorData;
+    const geoWidth  = floor.geoLength;
+    const geoHeight = floor.geoWidth;
+
+    const canvas = fgCanvasRef.current;
+    const canvasWidth  = canvas.width;
+    const canvasHeight = canvas.height;
+
+    const widthScale  = canvasWidth / geoWidth;
+    const heightScale = canvasHeight / geoHeight;
+
+    return {
+      x: x * widthScale,
+      y: y * heightScale
     }
   }
 
@@ -101,6 +118,18 @@ export default function MapInput(props) {
     context.fillRect(x, y, 10, 10);
 
     console.log("Center X: " + (x + 5) + " Y: " + (y + 5));
+  }
+  
+  /// Draw pins onto the map
+  function drawPins() {
+    const canvas = fgCanvasRef.current;
+    const context = canvas.getContext("2d");
+
+    pins.forEach((pin) => {
+      context.fillStyle = "red";
+      context.fillRect(pin.x - 5, pin.y - 5, 10, 10);  
+      console.log("Drew: " + pin.name + " at X: " + (pin.x + 5) + " Y: " + (pin.y + 5));
+    })
   }
 
   /// Called when the pin changes location
@@ -207,6 +236,18 @@ export default function MapInput(props) {
     canvas.width = imgWidth;
     canvas.height = imgHeight;
   }
+  
+  useEffect(() => {
+    if (selectedLocationData === null) {
+      return;
+    }
+    const canvasCoords = scaleGeoCoordsToCanvasCoords(selectedLocationData.geoX, selectedLocationData.geoY);
+    setPins([...pins, { name: selectedLocationData.name, x: canvasCoords.x, y: canvasCoords.y}]);
+  },[selectedLocationData]);
+  
+  useEffect(() => {
+    drawPins();
+  }, [pins]);
 
   // useEffect with [] as param to execute only at mount time
   useEffect(() => {
