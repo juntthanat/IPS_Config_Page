@@ -2,11 +2,10 @@ import { useState, useEffect, useContext } from "react";
 import { RerenderContext } from "../../../App";
 
 export default function LocationAPI(props) {
-  const { selectedLocation, setSelectedLocation, setSelectedLocationData, selectedFloor } = props ?? {};
+  const { selectedLocation, setSelectedLocation, setSelectedLocationData, locationData, setLocationData, selectedFloor } = props ?? {};
   const baseURL = `http://marco.cooldev.win:8080/api/v1`;
   const [data, setData] = useState([]);
   const [locationList, setLocationList] = useState([]);
-  const [locationName, setLocationName] = useState([]);
 
   const {rerender} = useContext(RerenderContext)
 
@@ -28,12 +27,12 @@ export default function LocationAPI(props) {
   };
 
   const fetchLocationName = async (idList) => {
-    setLocationName([]);
+    setLocationData([]);
     for (let i = 0; i < idList.length; i++) {
       await fetch(baseURL + `/locations/` + idList[i])
         .then((e) => e.json())
         .then((d) => JSON.parse(JSON.stringify(d)))
-        .then((f) => setLocationName((locationName) => [...locationName, f]));
+        .then((f) => setLocationData((locationData) => [...locationData, f]));
     }
   };
 
@@ -55,7 +54,7 @@ export default function LocationAPI(props) {
     }
   };
 
-  const locationNameList = locationName.map((index) => (
+  const locationNameList = locationData.map((index) => (
     <div
       key={index.locationId}
       onClick={() => {

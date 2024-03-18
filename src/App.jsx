@@ -32,6 +32,7 @@ function App() {
   const [selectedLocation, setSelectedLocation] = useState(null);
   const [selectedLocationData, setSelectedLocationData] = useState(null);
   const [selectedBeacon, setSelectedBeacon] = useState(null);
+  const [locationData, setLocationData] = useState([]);
 
   const switchShowModal = useCallback(
     (selectModalPage, selectButtonType) => {
@@ -77,6 +78,8 @@ function App() {
                 selectedLocation={selectedLocation}
                 setSelectedLocation={setSelectedLocation}
                 setSelectedLocationData={setSelectedLocationData}
+                locationData={locationData}
+                setLocationData={setLocationData}
                 selectedFloor={selectedFloor}
               />
               <ConfigInputBeacon
@@ -93,7 +96,7 @@ function App() {
             <TitleHeader title={"Map"} />
           </div>
           <div id="main-config-page-map-input-container">
-            <MapInput selectedFloor={selectedFloor} selectedLocationData={selectedLocationData}/>
+            <MapInput selectedFloor={selectedFloor} selectedLocationData={selectedLocationData} locationData={locationData}/>
           </div>
         </div>
       </div>

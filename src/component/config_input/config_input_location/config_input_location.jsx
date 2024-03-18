@@ -9,6 +9,8 @@ export default function ConfigInputLocation(props) {
     selectedLocation,
     setSelectedLocation,
     setSelectedLocationData,
+    locationData,
+    setLocationData,
     selectedFloor,
   } = props ?? {};
   return (
@@ -22,6 +24,8 @@ export default function ConfigInputLocation(props) {
             selectedLocation={selectedLocation}
             setSelectedLocation={setSelectedLocation}
             setSelectedLocationData={setSelectedLocationData}
+            locationData={locationData}
+            setLocationData={setLocationData}
             selectedFloor={selectedFloor}
           />
         </div>
