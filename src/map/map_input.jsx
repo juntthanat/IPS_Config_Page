@@ -7,9 +7,10 @@ import ConfirmCancelButton from "../confirm-cancel-button/confirm_cancel_button"
 export default function MapInput(props) {
   const { selectedFloor } = props ?? {};
   const [floorPlan, setFloorPlan] = useState(null);
+  const [currentFloorData, setCurrentFloorData] = useState(null);
 
   useEffect(() => {
-    FetchFloorPlanInformation(setFloorPlan, selectedFloor);
+    FetchFloorPlanInformation(setFloorPlan, setCurrentFloorData, selectedFloor);
   }, [selectedFloor]);
 
   const fgCanvasRef = useRef(null);
@@ -26,11 +27,10 @@ export default function MapInput(props) {
   const [geoY, setGeoY] = useState(0);
 
   const [pins, setPins] = useState([]);
-  const [floors, setFloors] = useState([]);
 
   function scaleCanvasCoordsToGeoCoords(x, y) {
     // ASSUMTION: FLOOR = 8
-    const floor = floors[1];
+    const floor = currentFloorData;
     const geoWidth  = floor.geoLength;
     const geoHeight = floor.geoWidth;
 
@@ -191,11 +191,14 @@ export default function MapInput(props) {
     console.log("==============================");
     console.log("--------IMG Properties--------");
     console.log("==============================");
-    console.log("True Dimension:");
+    console.log("Src:");
     console.log(tempMap);
+    console.log("True Dimension:");
     console.log("Width: " + tempMap.width + " Height: " + tempMap.height);
     console.log("Rendered Dimension:");
     console.log("Width: " + imgWidth + " Height: " + imgHeight);
+    console.log("Geo Dimension:");
+    console.log("Width: " + currentFloorData.geoLength + " Height: " + currentFloorData.geoWidth);
     console.log("==============================");
 
     const canvas = fgCanvasRef.current;
@@ -207,12 +210,6 @@ export default function MapInput(props) {
 
   // useEffect with [] as param to execute only at mount time
   useEffect(() => {
-    fetch("http://marco.cooldev.win:8080/api/v1/floors")
-	.then(res => res.json())
-	.then(data => {
-	    console.log(data);
-	    setFloors(data);
-	});
     // Recommended usage:
     // Make Request to server here
     // Then store the pins in the "pins" useState array
