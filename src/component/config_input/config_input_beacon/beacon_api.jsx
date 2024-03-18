@@ -8,7 +8,7 @@ export default function BeaconAPI(props) {
   const [beaconList, setBeaconList] = useState([]);
   const [beaconName, setBeaconName] = useState([]);
 
-  const {rerender} = useContext(RerenderContext); 
+  const { rerenderValuePlaceholder } = useContext(RerenderContext);
 
   const fetchBeaconId = async () => {
     return await fetch(baseURL + `/floor-beacons/floorId/` + selectedFloor)
@@ -38,7 +38,7 @@ export default function BeaconAPI(props) {
 
   useEffect(() => {
     fetchBeaconId();
-  }, [selectedFloor, rerender]);
+  }, [selectedFloor, rerenderValuePlaceholder]);
 
   useEffect(() => {
     beaconIdList(data);

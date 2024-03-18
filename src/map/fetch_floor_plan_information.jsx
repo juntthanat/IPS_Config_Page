@@ -4,7 +4,7 @@ export default function FetchFloorPlanInformation(setFloorPlan, selectedFloor) {
   const fetchFloorPlan = async (floorPlanId) => {
     return await fetch(baseURL + `/files/` + floorPlanId)
       .then((res) => res.json())
-      .then((res) => setFloorPlan(res.viewUrl));
+      .then((res) => setFloorPlan(res));
   };
 
   const fetchInfo = async () => {

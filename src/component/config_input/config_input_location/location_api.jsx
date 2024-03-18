@@ -8,13 +8,13 @@ export default function LocationAPI(props) {
   const [locationList, setLocationList] = useState([]);
   const [locationName, setLocationName] = useState([]);
 
-  const {rerender} = useContext(RerenderContext)
+  const { rerenderValuePlaceholder } = useContext(RerenderContext);
 
   const fetchLocationId = async () => {
     return await fetch(baseURL + `/floor-locations/floorId/` + selectedFloor)
       .then((e) => e.json())
       .then((d) => JSON.parse(JSON.stringify(d)))
-      .then((f) => setData(f));
+      .then((f) => setData(f))
   };
 
   const locationIdList = (floorLocationJSON) => {
@@ -39,7 +39,9 @@ export default function LocationAPI(props) {
 
   useEffect(() => {
     fetchLocationId();
-  }, [selectedFloor]);
+
+    console.log("fethcing asdfa;ksdfja;kldjfkld");
+  }, [selectedFloor, rerenderValuePlaceholder]);
 
   useEffect(() => {
     locationIdList(data);
@@ -55,9 +57,9 @@ export default function LocationAPI(props) {
     }
   };
 
-  const locationNameList = locationName.map((index) => (
+  const locationNameList = locationName.map((index, idx) => (
     <div
-      key={index.locationId}
+      key={`${index.locationId}-${idx}`}
       onClick={() => {
         setSelectedLocation(index.locationId);
       }}

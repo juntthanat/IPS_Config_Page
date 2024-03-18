@@ -3,17 +3,27 @@ import ConfirmCancelButton from "../../confirm-cancel-button/confirm_cancel_butt
 import EditFloorInformation from "./edit_floor_information";
 import CreateFloorInformation from "./create_floor_information";
 import DeleteFloorInformation from "./delete_floor_information";
+import CreateFloorPlanInformation from "../../map/create_floor_plan_information";
 import { RerenderContext } from "../../App";
 
 export default function FetchFloorInformation(props) {
-  const { selectedFloor, buttonType, switchShowModal } = props ?? {};
+  const {
+    selectedFloor,
+    buttonType,
+    switchShowModal,
+    floorPlan,
+    setFloorPlan,
+  } = props ?? {};
   const { rerender } = useContext(RerenderContext);
   const baseURL = `http://marco.cooldev.win:8080/api/v1`;
+
+
 
   const [getFloorName, setGetFloorName] = useState("");
   const [getGeoLength, setGetGeoLength] = useState("");
   const [getGeoWidth, setGetGeoWidth] = useState("");
   const [getAzimuth, setGetAzimuth] = useState("");
+  const [uploadedFloorPlan, setUploadedFloorPlan] = useState(null);
 
   const [userConfirm, setUserConfirm] = useState(false);
 
@@ -41,6 +51,9 @@ export default function FetchFloorInformation(props) {
   const handleGetAzimuth = (event) => {
     setGetAzimuth(event.target.value);
   };
+  const handleFloorPlan = (event) => {
+    setFloorPlan(event.target.files[0]);
+  };
 
   const checkUserInput = () => {
     if (
@@ -65,6 +78,7 @@ export default function FetchFloorInformation(props) {
             rerender();
           }
         );
+        CreateFloorPlanInformation(selectedFloor, uploadedFloorPlan);
       } else if (buttonType === "edit") {
         EditFloorInformation(
           selectedFloor,
@@ -95,6 +109,10 @@ export default function FetchFloorInformation(props) {
       fetchInfo();
     }
   }, []);
+
+  useEffect(() => {
+    setUploadedFloorPlan(floorPlan);
+  }, [floorPlan]);
 
   return (
     <div>
@@ -163,6 +181,10 @@ export default function FetchFloorInformation(props) {
           placeholder={getAzimuth === "" ? "Please Enter Floor Azimuth" : ""}
           disabled={buttonType === "delete" ? true : false}
         ></input>
+      </div>
+      <div className="floor-input-configuration">
+        FLOOR PLAN
+        <input type="file" onChange={handleFloorPlan}></input>
       </div>
       <ConfirmCancelButton
         setUserConfirm={setUserConfirm}

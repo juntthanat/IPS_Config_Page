@@ -14,10 +14,11 @@ import ModalComponent from "./component/modal_component";
 
 export const RerenderContext = createContext({
   rerender: () => undefined,
+  rerenderValuePlaceholder: false,
 });
 
 function App() {
-  const [, setRendererContextValue] = useState(false);
+  const [rerenderContextValue, setRendererContextValue] = useState(false);
 
   const rerender = () => {
     setRendererContextValue((prev) => !prev);
@@ -31,6 +32,9 @@ function App() {
   const [selectedFloor, setSelectedFloor] = useState(null);
   const [selectedLocation, setSelectedLocation] = useState(null);
   const [selectedBeacon, setSelectedBeacon] = useState(null);
+
+  // Floor Plan
+  const [floorPlan, setFloorPlan] = useState(null);
 
   const switchShowModal = useCallback(
     (selectModalPage, selectButtonType) => {
@@ -48,10 +52,10 @@ function App() {
   return (
     <RerenderContext.Provider
       value={{
+        rerenderValuePlaceholder: rerenderContextValue,
         rerender,
       }}
     >
-      <button onClick={() => {rerender()}}>rere</button>
       <div id="main-config-page">
         <div id="main-config-page-input">
           <div id="main-config-page-input-container">
@@ -63,6 +67,8 @@ function App() {
               selectedLocation={selectedLocation}
               selectedBeacon={selectedBeacon}
               buttonType={buttonType}
+              floorPlan={floorPlan}
+              setFloorPlan={setFloorPlan}
             />
             <TitleHeader title={"Configuration"} />
             <ConfigInputFloor
@@ -91,7 +97,11 @@ function App() {
             <TitleHeader title={"Map"} />
           </div>
           <div id="main-config-page-map-input-container">
-            <MapInput selectedFloor={selectedFloor}/>
+            <MapInput
+              selectedFloor={selectedFloor}
+              floorPlan={floorPlan}
+              setFloorPlan={setFloorPlan}
+            />
           </div>
         </div>
       </div>

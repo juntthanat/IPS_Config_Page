@@ -5,12 +5,20 @@ import FetchFloorPlanInformation from "./fetch_floor_plan_information";
 import ConfirmCancelButton from "../confirm-cancel-button/confirm_cancel_button";
 
 export default function MapInput(props) {
-  const { selectedFloor } = props ?? {};
-  const [floorPlan, setFloorPlan] = useState(null);
+  const { selectedFloor, floorPlan, setFloorPlan } = props ?? {};
 
   useEffect(() => {
     FetchFloorPlanInformation(setFloorPlan, selectedFloor);
   }, [selectedFloor]);
+
+  useEffect(() => {
+    try {
+      setCurrentFloorPlan(floorPlan.viewUrl);
+    } catch {
+      setCurrentFloorPlan(null);
+    }
+    console.log(floorPlan);
+  }, [floorPlan]);
 
   const fgCanvasRef = useRef(null);
   const mapRef = useRef(null);
@@ -19,6 +27,8 @@ export default function MapInput(props) {
 
   const [pinUnifiedX, setPinUnifiedX] = useState(0);
   const [pinUnifiedY, setPinUnifiedY] = useState(0);
+
+  const [currentFloorPlan, setCurrentFloorPlan] = useState(null);
 
   const [pins, setPins] = useState([]);
 
@@ -149,7 +159,7 @@ export default function MapInput(props) {
       <div id="map-input-container">
         <img
           ref={mapRef}
-          src={floorPlan}
+          src={currentFloorPlan}
           onLoad={initMap}
           alt="Map"
           draggable="false"
