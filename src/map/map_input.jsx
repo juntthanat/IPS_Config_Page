@@ -5,7 +5,7 @@ import FetchFloorPlanInformation from "./fetch_floor_plan_information";
 import ConfirmCancelButton from "../confirm-cancel-button/confirm_cancel_button";
 
 export default function MapInput(props) {
-  const { selectedFloor } = props ?? {};
+  const { selectedFloor, selectedLocationData, locationData } = props ?? {};
   const [floorPlan, setFloorPlan] = useState(null);
   const [currentFloorData, setCurrentFloorData] = useState(null);
 
@@ -29,7 +29,6 @@ export default function MapInput(props) {
   const [pins, setPins] = useState([]);
 
   function scaleCanvasCoordsToGeoCoords(x, y) {
-    // ASSUMTION: FLOOR = 8
     const floor = currentFloorData;
     const geoWidth  = floor.geoLength;
     const geoHeight = floor.geoWidth;
@@ -44,6 +43,24 @@ export default function MapInput(props) {
     return {
       x: x / widthScale,
       y: y / heightScale
+    }
+  }
+
+  function scaleGeoCoordsToCanvasCoords(x, y) {
+    const floor = currentFloorData;
+    const geoWidth  = floor.geoLength;
+    const geoHeight = floor.geoWidth;
+
+    const canvas = fgCanvasRef.current;
+    const canvasWidth  = canvas.width;
+    const canvasHeight = canvas.height;
+
+    const widthScale  = canvasWidth / geoWidth;
+    const heightScale = canvasHeight / geoHeight;
+
+    return {
+      x: x * widthScale,
+      y: y * heightScale
     }
   }
 
@@ -102,6 +119,28 @@ export default function MapInput(props) {
 
     console.log("Center X: " + (x + 5) + " Y: " + (y + 5));
   }
+  
+  /// Draw pins onto the map
+  function drawLocations() {
+    const canvas = fgCanvasRef.current;
+    const context = canvas.getContext("2d");
+
+    locationData.forEach((location) => {
+      const canvasCoords = scaleGeoCoordsToCanvasCoords(location.geoX, location.geoY);
+      const pin = {
+        id: location.locationId,
+        name: location.name,
+        x: canvasCoords.x,
+        y: canvasCoords.y,
+      };
+
+      context.fillStyle = "red";
+      context.fillRect(pin.x - 5, pin.y - 5, 10, 10);  
+      console.log("Drew: " + pin.name + " at X: " + pin.x + " Y: " + pin.y);
+
+      setPins([...pins, pin]);
+    });
+  }
 
   /// Called when the pin changes location
   function relocatePin(x, y) {
@@ -120,6 +159,9 @@ export default function MapInput(props) {
     context.fillRect(x - 5, y - 5, 10, 10);
 
     console.log("x: " + x + " y: " + y);
+    
+    // Draw the locations
+    drawLocations();
 
     // Draws the center of the map
     // DEBUG ONLY
@@ -160,7 +202,7 @@ export default function MapInput(props) {
     // Checks if the user is clicking on a pin
     pins.forEach((pin) => {
       if (x >= pin.x && x <= pin.x + 10 && y >= pin.y && y <= pin.y + 10) {
-        alert("You clicked a pin!");
+        alert("You clicked: " + pin.name + "!\nX: " + pin.x + " Y: " + pin.y);
         return;
       }
     });
@@ -207,6 +249,17 @@ export default function MapInput(props) {
     canvas.width = imgWidth;
     canvas.height = imgHeight;
   }
+  
+  useEffect(() => {
+    if (selectedLocationData === null) {
+      return;
+    }
+    const canvasCoords = scaleGeoCoordsToCanvasCoords(selectedLocationData.geoX, selectedLocationData.geoY);
+  },[selectedLocationData]);
+  
+  useEffect(() => {
+    drawLocations();
+  }, [locationData]);
 
   // useEffect with [] as param to execute only at mount time
   useEffect(() => {
