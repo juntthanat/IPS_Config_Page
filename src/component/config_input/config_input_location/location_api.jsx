@@ -39,7 +39,7 @@ export default function LocationAPI(props) {
 
   useEffect(() => {
     fetchLocationId();
-  }, [selectedFloor, rerender]);
+  }, [selectedFloor]);
 
   useEffect(() => {
     locationIdList(data);
