@@ -11,8 +11,8 @@ export default function FetchFloorInformation(props) {
     selectedFloor,
     buttonType,
     switchShowModal,
-    uploadedFloorPlan,
-    setUploadedFloorPlan
+    // uploadedFloorPlan,
+    setUploadedFloorPlan,
   } = props ?? {};
   const { rerender } = useContext(RerenderContext);
   const baseURL = `http://marco.cooldev.win:8080/api/v1`;
@@ -21,9 +21,10 @@ export default function FetchFloorInformation(props) {
   const [getGeoLength, setGetGeoLength] = useState("");
   const [getGeoWidth, setGetGeoWidth] = useState("");
   const [getAzimuth, setGetAzimuth] = useState("");
-  // const [uploadedFloorPlan, setUploadedFloorPlan] = useState(null);
 
   const [userConfirm, setUserConfirm] = useState(false);
+
+  const [floorPlanFile, setFloorPlanFile] = useState();
 
   const fetchInfo = async () => {
     return await fetch(baseURL + `/floors` + "/" + selectedFloor)
@@ -51,6 +52,7 @@ export default function FetchFloorInformation(props) {
   };
   const handleFloorPlan = (event) => {
     setUploadedFloorPlan(URL.createObjectURL(event.target.files[0]));
+    setFloorPlanFile(event.target.files[0]);
   };
 
   const checkUserInput = () => {
@@ -68,12 +70,11 @@ export default function FetchFloorInformation(props) {
     if (userConfirm === true && checkUserInput() == true) {
       if (buttonType === "create") {
         CreateFloorInformation(
-          selectedFloor,
           getFloorName,
           getGeoLength,
           getGeoWidth,
           getAzimuth,
-          uploadedFloorPlan,
+          floorPlanFile,
           () => {
             rerender();
           }
@@ -111,7 +112,8 @@ export default function FetchFloorInformation(props) {
 
   const testFloorPlanValue = () => {
     console.log("hello");
-    console.log(uploadedFloorPlan);
+    console.log(floorPlanFile);
+    console.log(typeof floorPlanFile);
   };
 
   return (

@@ -11,6 +11,7 @@ import ConfigInputBeacon from "./component/config_input/config_input_beacon/conf
 
 // Test Modal
 import ModalComponent from "./component/modal_component";
+import { Fetch } from "./Fetch";
 
 export const RerenderContext = createContext({
   rerender: () => undefined,
@@ -50,9 +51,9 @@ function App() {
     [showModal]
   );
 
-  useEffect(()=> {
-    console.log(fetchFloorPlan)
-  }, [fetchFloorPlan])
+  useEffect(() => {
+    console.log(fetchFloorPlan);
+  }, [fetchFloorPlan]);
 
   return (
     <RerenderContext.Provider
@@ -113,6 +114,7 @@ function App() {
           </div>
         </div>
       </div>
+      {/* <Fetch /> */}
     </RerenderContext.Provider>
   );
 }
