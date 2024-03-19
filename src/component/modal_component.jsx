@@ -15,9 +15,10 @@ export default function ModalComponent(props) {
     selectedLocation,
     selectedBeacon,
     buttonType,
-    floorPlan,
-    setFloorPlan
-    // uploadFloorPlan
+    // floorPlan,
+    // setFloorPlan
+    uploadedFloorPlan,
+    setUploadedFloorPlan
   } = props ?? {};
   const [currentModalPage, setCurrentModalPage] = useState(null);
 
@@ -37,9 +38,10 @@ export default function ModalComponent(props) {
             selectedFloor={selectedFloor}
             buttonType={buttonType}
             switchShowModal={switchShowModal}
-            floorPlan={floorPlan}
-            setFloorPlan={setFloorPlan}
-            // uploadFloorPlan={uploadFloorPlan}
+            // floorPlan={floorPlan}
+            // setFloorPlan={setFloorPlan}
+            uploadedFloorPlan={uploadedFloorPlan}
+            setUploadedFloorPlan={setUploadedFloorPlan}
           />
         );
       }

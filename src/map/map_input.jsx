@@ -5,20 +5,23 @@ import FetchFloorPlanInformation from "./fetch_floor_plan_information";
 import ConfirmCancelButton from "../confirm-cancel-button/confirm_cancel_button";
 
 export default function MapInput(props) {
-  const { selectedFloor, floorPlan, setFloorPlan } = props ?? {};
+  const { selectedFloor, fetchFloorPlan, setFetchFloorPlan, uploadedFloorPlan } = props ?? {};
 
   useEffect(() => {
-    FetchFloorPlanInformation(setFloorPlan, selectedFloor);
+    FetchFloorPlanInformation(setFetchFloorPlan, selectedFloor);
   }, [selectedFloor]);
 
   useEffect(() => {
     try {
-      setCurrentFloorPlan(floorPlan.viewUrl);
+      setCurrentFloorPlan(fetchFloorPlan.viewUrl);
     } catch {
       setCurrentFloorPlan(null);
     }
-    console.log(floorPlan);
-  }, [floorPlan]);
+  }, [fetchFloorPlan]);
+
+  useEffect(() => {
+    setCurrentFloorPlan(uploadedFloorPlan)
+  }, [uploadedFloorPlan])
 
   const fgCanvasRef = useRef(null);
   const mapRef = useRef(null);

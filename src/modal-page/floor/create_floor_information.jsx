@@ -1,8 +1,11 @@
+import CreateFloorPlanInformation from "../../map/create_floor_plan_information";
 export default function CreateFloorInformation(
+  selectedFloor,
   getFloorName,
   getGeoLength,
   getGeoWidth,
   getAzimuth,
+  floorPlan,
   onComplete
 ) {
   const baseURL = `http://marco.cooldev.win:8080/api/v1`;
@@ -30,6 +33,7 @@ export default function CreateFloorInformation(
       .catch((error) => {
         console.log(error);
       });
+      CreateFloorPlanInformation(selectedFloor, floorPlan);
 
     onComplete?.();
     return result;

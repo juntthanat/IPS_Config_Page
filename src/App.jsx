@@ -1,5 +1,5 @@
 import "./App.css";
-import { useCallback, useState, createContext } from "react";
+import { useCallback, useState, createContext, useEffect } from "react";
 
 import TitleHeader from "./component/title_header";
 
@@ -34,7 +34,8 @@ function App() {
   const [selectedBeacon, setSelectedBeacon] = useState(null);
 
   // Floor Plan
-  const [floorPlan, setFloorPlan] = useState(null);
+  const [fetchFloorPlan, setFetchFloorPlan] = useState(null);
+  const [uploadedFloorPlan, setUploadedFloorPlan] = useState(null);
 
   const switchShowModal = useCallback(
     (selectModalPage, selectButtonType) => {
@@ -48,6 +49,10 @@ function App() {
     },
     [showModal]
   );
+
+  useEffect(()=> {
+    console.log(fetchFloorPlan)
+  }, [fetchFloorPlan])
 
   return (
     <RerenderContext.Provider
@@ -67,8 +72,10 @@ function App() {
               selectedLocation={selectedLocation}
               selectedBeacon={selectedBeacon}
               buttonType={buttonType}
-              floorPlan={floorPlan}
-              setFloorPlan={setFloorPlan}
+              // floorPlan={fetchFloorPlan}
+              // setFloorPlan={setFetchFloorPlan}
+              uploadedFloorPlan={uploadedFloorPlan}
+              setUploadedFloorPlan={setUploadedFloorPlan}
             />
             <TitleHeader title={"Configuration"} />
             <ConfigInputFloor
@@ -99,8 +106,9 @@ function App() {
           <div id="main-config-page-map-input-container">
             <MapInput
               selectedFloor={selectedFloor}
-              floorPlan={floorPlan}
-              setFloorPlan={setFloorPlan}
+              fetchFloorPlan={fetchFloorPlan}
+              setFetchFloorPlan={setFetchFloorPlan}
+              uploadedFloorPlan={uploadedFloorPlan}
             />
           </div>
         </div>

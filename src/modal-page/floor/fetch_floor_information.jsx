@@ -3,7 +3,7 @@ import ConfirmCancelButton from "../../confirm-cancel-button/confirm_cancel_butt
 import EditFloorInformation from "./edit_floor_information";
 import CreateFloorInformation from "./create_floor_information";
 import DeleteFloorInformation from "./delete_floor_information";
-import CreateFloorPlanInformation from "../../map/create_floor_plan_information";
+
 import { RerenderContext } from "../../App";
 
 export default function FetchFloorInformation(props) {
@@ -11,19 +11,17 @@ export default function FetchFloorInformation(props) {
     selectedFloor,
     buttonType,
     switchShowModal,
-    floorPlan,
-    setFloorPlan,
+    uploadedFloorPlan,
+    setUploadedFloorPlan
   } = props ?? {};
   const { rerender } = useContext(RerenderContext);
   const baseURL = `http://marco.cooldev.win:8080/api/v1`;
-
-
 
   const [getFloorName, setGetFloorName] = useState("");
   const [getGeoLength, setGetGeoLength] = useState("");
   const [getGeoWidth, setGetGeoWidth] = useState("");
   const [getAzimuth, setGetAzimuth] = useState("");
-  const [uploadedFloorPlan, setUploadedFloorPlan] = useState(null);
+  // const [uploadedFloorPlan, setUploadedFloorPlan] = useState(null);
 
   const [userConfirm, setUserConfirm] = useState(false);
 
@@ -52,7 +50,7 @@ export default function FetchFloorInformation(props) {
     setGetAzimuth(event.target.value);
   };
   const handleFloorPlan = (event) => {
-    setFloorPlan(event.target.files[0]);
+    setUploadedFloorPlan(URL.createObjectURL(event.target.files[0]));
   };
 
   const checkUserInput = () => {
@@ -70,15 +68,16 @@ export default function FetchFloorInformation(props) {
     if (userConfirm === true && checkUserInput() == true) {
       if (buttonType === "create") {
         CreateFloorInformation(
+          selectedFloor,
           getFloorName,
           getGeoLength,
           getGeoWidth,
           getAzimuth,
+          uploadedFloorPlan,
           () => {
             rerender();
           }
         );
-        CreateFloorPlanInformation(selectedFloor, uploadedFloorPlan);
       } else if (buttonType === "edit") {
         EditFloorInformation(
           selectedFloor,
@@ -110,9 +109,10 @@ export default function FetchFloorInformation(props) {
     }
   }, []);
 
-  useEffect(() => {
-    setUploadedFloorPlan(floorPlan);
-  }, [floorPlan]);
+  const testFloorPlanValue = () => {
+    console.log("hello");
+    console.log(uploadedFloorPlan);
+  };
 
   return (
     <div>
@@ -190,6 +190,7 @@ export default function FetchFloorInformation(props) {
         setUserConfirm={setUserConfirm}
         switchShowModal={switchShowModal}
       />
+      <button onClick={testFloorPlanValue}>Click me</button>
     </div>
   );
 }

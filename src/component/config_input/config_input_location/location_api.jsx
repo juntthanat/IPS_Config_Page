@@ -39,8 +39,6 @@ export default function LocationAPI(props) {
 
   useEffect(() => {
     fetchLocationId();
-
-    console.log("fethcing asdfa;ksdfja;kldjfkld");
   }, [selectedFloor, rerenderValuePlaceholder]);
 
   useEffect(() => {
