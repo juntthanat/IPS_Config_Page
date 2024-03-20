@@ -111,12 +111,6 @@ export default function FetchFloorInformation(props) {
     }
   }, []);
 
-  const testFloorPlanValue = () => {
-    console.log("hello");
-    console.log(floorPlanFile);
-    console.log(typeof floorPlanFile);
-  };
-
   return (
     <div>
       <div
@@ -193,7 +187,6 @@ export default function FetchFloorInformation(props) {
         setUserConfirm={setUserConfirm}
         switchShowModal={switchShowModal}
       />
-      <button onClick={testFloorPlanValue}>Click me</button>
     </div>
   );
 }

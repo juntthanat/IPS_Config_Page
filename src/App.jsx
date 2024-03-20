@@ -51,10 +51,6 @@ function App() {
     [showModal]
   );
 
-  useEffect(() => {
-    console.log(fetchFloorPlan);
-  }, [fetchFloorPlan]);
-
   return (
     <RerenderContext.Provider
       value={{

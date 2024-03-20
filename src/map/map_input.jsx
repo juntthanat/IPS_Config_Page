@@ -5,7 +5,12 @@ import FetchFloorPlanInformation from "./fetch_floor_plan_information";
 import ConfirmCancelButton from "../confirm-cancel-button/confirm_cancel_button";
 
 export default function MapInput(props) {
-  const { selectedFloor, fetchFloorPlan, setFetchFloorPlan, uploadedFloorPlan } = props ?? {};
+  const {
+    selectedFloor,
+    fetchFloorPlan,
+    setFetchFloorPlan,
+    uploadedFloorPlan,
+  } = props ?? {};
 
   useEffect(() => {
     FetchFloorPlanInformation(setFetchFloorPlan, selectedFloor);
@@ -20,8 +25,8 @@ export default function MapInput(props) {
   }, [fetchFloorPlan]);
 
   useEffect(() => {
-    setCurrentFloorPlan(uploadedFloorPlan)
-  }, [uploadedFloorPlan])
+    setCurrentFloorPlan(uploadedFloorPlan);
+  }, [uploadedFloorPlan]);
 
   const fgCanvasRef = useRef(null);
   const mapRef = useRef(null);
@@ -32,6 +37,10 @@ export default function MapInput(props) {
   const [pinUnifiedY, setPinUnifiedY] = useState(0);
 
   const [currentFloorPlan, setCurrentFloorPlan] = useState(null);
+
+  useEffect(() => {
+    console.log("currentFloorplan", currentFloorPlan);
+  }, [currentFloorPlan]);
 
   const [pins, setPins] = useState([]);
 
