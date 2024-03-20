@@ -18,7 +18,7 @@ export default function MapInput(props) {
 
   useEffect(() => {
     try {
-      setCurrentFloorPlan(fetchFloorPlan.viewUrl);
+      setCurrentFloorPlan(fetchFloorPlan.viewUrl + "?" + Date.now());
     } catch {
       setCurrentFloorPlan(null);
     }
