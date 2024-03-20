@@ -4,6 +4,7 @@ export default function EditFloorInformation(
   getGeoLength,
   getGeoWidth,
   getAzimuth,
+  floorPlanFile,
   onComplete
 ) {
   //   const { selectedFloor, getFloorName, getGeoLength, getGeoWidth, getAzimuth } =

@@ -54,9 +54,9 @@ export default function BeaconAPI(props) {
     }
   };
 
-  const beaconNameList = beaconName.map((index) => (
+  const beaconNameList = beaconName.map((index, idx) => (
     <div
-      key={index.beaconId}
+      key={`${index.beaconId}-${idx}`}
       onClick={() => {
         setSelectedBeacon(index.beaconId);
       }}

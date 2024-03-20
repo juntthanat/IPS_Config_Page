@@ -86,6 +86,7 @@ export default function FetchFloorInformation(props) {
           getGeoLength,
           getGeoWidth,
           getAzimuth,
+          floorPlanFile,
           () => {
             rerender();
           }
