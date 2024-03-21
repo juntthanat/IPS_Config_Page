@@ -115,8 +115,8 @@ function App() {
               fetchFloorPlan={fetchFloorPlan}
               setFetchFloorPlan={setFetchFloorPlan}
               uploadedFloorPlan={uploadedFloorPlan}
-	      selectedLocationData={selectedLocationData}
-	      locationData={locationData}
+              selectedLocationData={selectedLocationData}
+              locationData={locationData}
               setCoordinate={setCoordinate}
             />
           </div>

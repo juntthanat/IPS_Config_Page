@@ -2,7 +2,14 @@ import { useState, useEffect, useContext } from "react";
 import { RerenderContext } from "../../../App";
 
 export default function LocationAPI(props) {
-  const { selectedLocation, setSelectedLocation, setSelectedLocationData, locationData, setLocationData, selectedFloor } = props ?? {};
+  const {
+    selectedLocation,
+    setSelectedLocation,
+    setSelectedLocationData,
+    locationData,
+    setLocationData,
+    selectedFloor,
+  } = props ?? {};
   const baseURL = `http://marco.cooldev.win:8080/api/v1`;
   const [data, setData] = useState([]);
   const [locationList, setLocationList] = useState([]);

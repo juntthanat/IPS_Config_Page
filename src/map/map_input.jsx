@@ -236,6 +236,10 @@ export default function MapInput(props) {
     const geoCoords = scaleCanvasCoordsToGeoCoords(x, y);
     setGeoX(geoCoords.x);
     setGeoY(geoCoords.y);
+    setCoordinate({
+      x: geoCoords.x,
+      y: geoCoords.y
+    })
 
     relocatePin(x, y);
     const unifiedCoords = canvasCoordsToUnifiedCoords(x, y);
