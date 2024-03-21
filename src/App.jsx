@@ -31,7 +31,9 @@ function App() {
   // Selected Data From API
   const [selectedFloor, setSelectedFloor] = useState(null);
   const [selectedLocation, setSelectedLocation] = useState(null);
+  const [selectedLocationData, setSelectedLocationData] = useState(null);
   const [selectedBeacon, setSelectedBeacon] = useState(null);
+  const [locationData, setLocationData] = useState([]);
 
   // Floor Plan
   const [fetchFloorPlan, setFetchFloorPlan] = useState(null);
@@ -89,6 +91,9 @@ function App() {
                 switchShowModal={switchShowModal}
                 selectedLocation={selectedLocation}
                 setSelectedLocation={setSelectedLocation}
+                setSelectedLocationData={setSelectedLocationData}
+                locationData={locationData}
+                setLocationData={setLocationData}
                 selectedFloor={selectedFloor}
               />
               <ConfigInputBeacon
@@ -110,6 +115,8 @@ function App() {
               fetchFloorPlan={fetchFloorPlan}
               setFetchFloorPlan={setFetchFloorPlan}
               uploadedFloorPlan={uploadedFloorPlan}
+	      selectedLocationData={selectedLocationData}
+	      locationData={locationData}
               setCoordinate={setCoordinate}
             />
           </div>

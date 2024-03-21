@@ -1,7 +1,8 @@
 export default function FetchFloorPlanInformation(
-  setFloorPlan,
-  selectedFloor,
-  onComplete
+    setFloorPlan,
+    setCurrentFloorData,
+    selectedFloor,
+    onComplete
 ) {
   const baseURL = `http://marco.cooldev.win:8080/api/v1`;
 
@@ -27,7 +28,14 @@ export default function FetchFloorPlanInformation(
     return result;
   };
 
+  const fetchCurrentFloorInfo = async () => {
+    return await fetch(baseURL + `/floors/` + selectedFloor)
+      .then((res) => res.json())
+      .then((res) => setCurrentFloorData(res));
+  };
+
   fetchInfo();
+  fetchCurrentFloorInfo();
 
   return <div></div>;
 }
