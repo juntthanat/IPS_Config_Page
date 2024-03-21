@@ -26,25 +26,28 @@ export default function CreateBeaconInformation(
 
   const createInfo = async () => {
     const result = await fetch(baseURL + `/beacons`, requestOptions)
-        .then((res) => res.json())
-        .then((res) => JSON.parse(JSON.stringify(res)))
-        .then((res) => fetch(baseURL + `/floor-beacons`, {
-            method: "POST",
-            mode: "cors",
-            headers: {
-              "Content-Type": "application/json",
-              "Access-Control-Allow-Origin": "*",
-            },
-            body: JSON.stringify({
-              floorId: selectedFloor,
-              beaconId: res.beaconId,
-            }),
-          }))
-          .then((res) => res.json())
-          .catch((error) => console.log(error));
+      .then((res) => res.json())
+      .then((res) => JSON.parse(JSON.stringify(res)))
+      .then((res) =>
+        fetch(baseURL + `/floor-beacons`, {
+          method: "POST",
+          mode: "cors",
+          headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+          },
+          body: JSON.stringify({
+            floorId: selectedFloor,
+            beaconId: res.beaconId,
+          }),
+        })
+      )
+      .then((res) => res.json())
+      .catch((error) => console.log(error));
 
-          onComplete?.();
-          return result;
+
+    onComplete?.();
+    return result;
   };
 
   createInfo();

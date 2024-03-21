@@ -10,6 +10,7 @@ export default function MapInput(props) {
     fetchFloorPlan,
     setFetchFloorPlan,
     uploadedFloorPlan,
+    setCoordinate
   } = props ?? {};
 
   useEffect(() => {
@@ -137,6 +138,10 @@ export default function MapInput(props) {
     const unifiedCoords = canvasCoordsToUnifiedCoords(x, y);
     setPinUnifiedX(unifiedCoords.x);
     setPinUnifiedY(unifiedCoords.y);
+    setCoordinate({
+      x: unifiedCoords.x,
+      y: unifiedCoords.y
+    })
   }
 
   /// Gets called when the map image gets loaded

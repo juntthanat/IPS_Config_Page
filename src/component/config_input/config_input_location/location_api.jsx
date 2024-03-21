@@ -14,7 +14,7 @@ export default function LocationAPI(props) {
     return await fetch(baseURL + `/floor-locations/floorId/` + selectedFloor)
       .then((e) => e.json())
       .then((d) => JSON.parse(JSON.stringify(d)))
-      .then((f) => setData(f))
+      .then((f) => setData(f));
   };
 
   const locationIdList = (floorLocationJSON) => {

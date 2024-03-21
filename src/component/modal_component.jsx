@@ -15,10 +15,9 @@ export default function ModalComponent(props) {
     selectedLocation,
     selectedBeacon,
     buttonType,
-    // floorPlan,
-    // setFloorPlan
     uploadedFloorPlan,
-    setUploadedFloorPlan
+    setUploadedFloorPlan,
+    coordinate
   } = props ?? {};
   const [currentModalPage, setCurrentModalPage] = useState(null);
 
@@ -38,8 +37,6 @@ export default function ModalComponent(props) {
             selectedFloor={selectedFloor}
             buttonType={buttonType}
             switchShowModal={switchShowModal}
-            // floorPlan={floorPlan}
-            // setFloorPlan={setFloorPlan}
             uploadedFloorPlan={uploadedFloorPlan}
             setUploadedFloorPlan={setUploadedFloorPlan}
           />
@@ -50,7 +47,7 @@ export default function ModalComponent(props) {
         setCurrentModalPage(<div>Please Select Location to Edit</div>);
       } else if (buttonType === "delete" && selectedLocation === null) {
         setCurrentModalPage(<div>Please Select Location to Delete</div>);
-      }else {
+      } else {
         setCurrentModalPage(
           <ModalPageLocation
             selectedLocation={selectedLocation}
@@ -65,13 +62,14 @@ export default function ModalComponent(props) {
         setCurrentModalPage(<div>Please Select Beacon to Edit</div>);
       } else if (buttonType === "delete" && selectedBeacon === null) {
         setCurrentModalPage(<div>Please Select Beacon to Delete</div>);
-      }else {
+      } else {
         setCurrentModalPage(
           <ModalPageBeacon
             selectedBeacon={selectedBeacon}
             buttonType={buttonType}
             switchShowModal={switchShowModal}
             selectedFloor={selectedFloor}
+            coordinate={coordinate}
           />
         );
       }
@@ -82,7 +80,7 @@ export default function ModalComponent(props) {
 
   useEffect(() => {
     changeModalPage();
-  }, [selectedModalPage]);
+  }, [selectedModalPage, coordinate]);
 
   return (
     <div

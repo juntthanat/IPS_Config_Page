@@ -1,5 +1,5 @@
 import "./App.css";
-import { useCallback, useState, createContext, useEffect } from "react";
+import { useCallback, useState, createContext } from "react";
 
 import TitleHeader from "./component/title_header";
 
@@ -11,7 +11,6 @@ import ConfigInputBeacon from "./component/config_input/config_input_beacon/conf
 
 // Test Modal
 import ModalComponent from "./component/modal_component";
-import { Fetch } from "./Fetch";
 
 export const RerenderContext = createContext({
   rerender: () => undefined,
@@ -37,6 +36,12 @@ function App() {
   // Floor Plan
   const [fetchFloorPlan, setFetchFloorPlan] = useState(null);
   const [uploadedFloorPlan, setUploadedFloorPlan] = useState(null);
+
+  // Coordinate X and Y
+  const [coordinate, setCoordinate] = useState({
+    x: 0,
+    y: 0
+  })
 
   const switchShowModal = useCallback(
     (selectModalPage, selectButtonType) => {
@@ -69,10 +74,9 @@ function App() {
               selectedLocation={selectedLocation}
               selectedBeacon={selectedBeacon}
               buttonType={buttonType}
-              // floorPlan={fetchFloorPlan}
-              // setFloorPlan={setFetchFloorPlan}
               uploadedFloorPlan={uploadedFloorPlan}
               setUploadedFloorPlan={setUploadedFloorPlan}
+              coordinate={coordinate}
             />
             <TitleHeader title={"Configuration"} />
             <ConfigInputFloor
@@ -106,6 +110,7 @@ function App() {
               fetchFloorPlan={fetchFloorPlan}
               setFetchFloorPlan={setFetchFloorPlan}
               uploadedFloorPlan={uploadedFloorPlan}
+              setCoordinate={setCoordinate}
             />
           </div>
         </div>
