@@ -2,8 +2,6 @@ import { useEffect, useRef, useState } from "react";
 import "./map_input.css";
 import FetchFloorPlanInformation from "./fetch_floor_plan_information";
 
-import ConfirmCancelButton from "../confirm-cancel-button/confirm_cancel_button";
-
 export default function MapInput(props) {
   const {
     selectedFloor,
@@ -12,13 +10,17 @@ export default function MapInput(props) {
     uploadedFloorPlan,
     setCoordinate,
     selectedLocationData,
-    locationData
+    locationData,
   } = props ?? {};
 
   const [currentFloorData, setCurrentFloorData] = useState(null);
 
   useEffect(() => {
-    FetchFloorPlanInformation(setFetchFloorPlan, setCurrentFloorData, selectedFloor);
+    FetchFloorPlanInformation(
+      setFetchFloorPlan,
+      setCurrentFloorData,
+      selectedFloor
+    );
   }, [selectedFloor]);
 
   useEffect(() => {
@@ -56,59 +58,59 @@ export default function MapInput(props) {
 
   function scaleCanvasCoordsToGeoCoords(x, y) {
     const floor = currentFloorData;
-    const geoWidth  = floor.geoLength;
+    const geoWidth = floor.geoLength;
     const geoHeight = floor.geoWidth;
 
     const canvas = fgCanvasRef.current;
-    const canvasWidth  = canvas.width;
+    const canvasWidth = canvas.width;
     const canvasHeight = canvas.height;
 
-    const widthScale  = canvasWidth / geoWidth;
+    const widthScale = canvasWidth / geoWidth;
     const heightScale = canvasHeight / geoHeight;
 
     return {
       x: x / widthScale,
-      y: y / heightScale
-    }
+      y: y / heightScale,
+    };
   }
 
   function scaleGeoCoordsToCanvasCoords(x, y) {
     const floor = currentFloorData;
-    const geoWidth  = floor.geoLength;
+    const geoWidth = floor.geoLength;
     const geoHeight = floor.geoWidth;
 
     const canvas = fgCanvasRef.current;
-    const canvasWidth  = canvas.width;
+    const canvasWidth = canvas.width;
     const canvasHeight = canvas.height;
 
-    const widthScale  = canvasWidth / geoWidth;
+    const widthScale = canvasWidth / geoWidth;
     const heightScale = canvasHeight / geoHeight;
 
     return {
       x: x * widthScale,
-      y: y * heightScale
-    }
+      y: y * heightScale,
+    };
   }
 
   function scaleCoordsToTrueCoords(x, y) {
     const img = mapRef.current;
-    const renderedWidth  = img.clientWidth;
+    const renderedWidth = img.clientWidth;
     const renderedHeight = img.clientHeight;
 
     const trueMapImage = new Image();
     trueMapImage.src = currentFloorPlan;
 
-    const trueWidth  = trueMapImage.width;
+    const trueWidth = trueMapImage.width;
     const trueHeight = trueMapImage.height;
 
-    const widthScale  = trueWidth / renderedWidth;
+    const widthScale = trueWidth / renderedWidth;
     const heightScale = trueHeight / renderedHeight;
 
     return {
       x: x * widthScale,
       y: y * heightScale,
     };
-   }
+  }
 
   function canvasCoordsToUnifiedCoords(x, y) {
     const canvas = fgCanvasRef.current;
@@ -145,14 +147,17 @@ export default function MapInput(props) {
 
     console.log("Center X: " + (x + 5) + " Y: " + (y + 5));
   }
-  
+
   /// Draw pins onto the map
   function drawLocations() {
     const canvas = fgCanvasRef.current;
     const context = canvas.getContext("2d");
 
     locationData.forEach((location) => {
-      const canvasCoords = scaleGeoCoordsToCanvasCoords(location.geoX, location.geoY);
+      const canvasCoords = scaleGeoCoordsToCanvasCoords(
+        location.geoX,
+        location.geoY
+      );
       const pin = {
         id: location.locationId,
         name: location.name,
@@ -161,7 +166,7 @@ export default function MapInput(props) {
       };
 
       context.fillStyle = "red";
-      context.fillRect(pin.x - 5, pin.y - 5, 10, 10);  
+      context.fillRect(pin.x - 5, pin.y - 5, 10, 10);
       console.log("Drew: " + pin.name + " at X: " + pin.x + " Y: " + pin.y);
 
       setPins([...pins, pin]);
@@ -185,7 +190,7 @@ export default function MapInput(props) {
     context.fillRect(x - 5, y - 5, 10, 10);
 
     console.log("x: " + x + " y: " + y);
-    
+
     // Draw the locations
     drawLocations();
 
@@ -203,7 +208,7 @@ export default function MapInput(props) {
   function relocatePinFromUnifiedCoords(x, y) {
     setPinUnifiedX(x);
     setPinUnifiedY(y);
-    
+
     const scaledUnifiedCoords = scaleCoordsToTrueCoords(x, y);
     setScaledUnifiedX(scaledUnifiedCoords.x);
     setScaledUnifiedY(scaledUnifiedCoords.y);
@@ -211,7 +216,10 @@ export default function MapInput(props) {
     const canvasCoords = unifiedCoordsToCanvasCoords(x, y);
     relocatePin(canvasCoords.x, canvasCoords.y);
 
-    const geoCoords = scaleCanvasCoordsToGeoCoords(canvasCoords.x, canvasCoords.y);
+    const geoCoords = scaleCanvasCoordsToGeoCoords(
+      canvasCoords.x,
+      canvasCoords.y
+    );
     setGeoX(geoCoords.x);
     setGeoY(geoCoords.y);
   }
@@ -238,15 +246,18 @@ export default function MapInput(props) {
     setGeoY(geoCoords.y);
     setCoordinate({
       x: geoCoords.x,
-      y: geoCoords.y
-    })
+      y: geoCoords.y,
+    });
 
     relocatePin(x, y);
     const unifiedCoords = canvasCoordsToUnifiedCoords(x, y);
     setPinUnifiedX(unifiedCoords.x);
     setPinUnifiedY(unifiedCoords.y);
 
-    const scaledUnifiedCoords = scaleCoordsToTrueCoords(unifiedCoords.x, unifiedCoords.y);
+    const scaledUnifiedCoords = scaleCoordsToTrueCoords(
+      unifiedCoords.x,
+      unifiedCoords.y
+    );
     setScaledUnifiedX(scaledUnifiedCoords.x);
     setScaledUnifiedY(scaledUnifiedCoords.y);
   }
@@ -270,7 +281,12 @@ export default function MapInput(props) {
     console.log("Rendered Dimension:");
     console.log("Width: " + imgWidth + " Height: " + imgHeight);
     console.log("Geo Dimension:");
-    console.log("Width: " + currentFloorData.geoLength + " Height: " + currentFloorData.geoWidth);
+    console.log(
+      "Width: " +
+        currentFloorData.geoLength +
+        " Height: " +
+        currentFloorData.geoWidth
+    );
     console.log("==============================");
 
     const canvas = fgCanvasRef.current;
@@ -279,14 +295,17 @@ export default function MapInput(props) {
     canvas.width = imgWidth;
     canvas.height = imgHeight;
   }
-  
+
   useEffect(() => {
     if (selectedLocationData === null) {
       return;
     }
-    const canvasCoords = scaleGeoCoordsToCanvasCoords(selectedLocationData.geoX, selectedLocationData.geoY);
-  },[selectedLocationData]);
-  
+    const canvasCoords = scaleGeoCoordsToCanvasCoords(
+      selectedLocationData.geoX,
+      selectedLocationData.geoY
+    );
+  }, [selectedLocationData]);
+
   useEffect(() => {
     drawLocations();
   }, [locationData]);
@@ -318,7 +337,7 @@ export default function MapInput(props) {
           style={{ position: "absolute", zIndex: 1 }}
         ></canvas>
       </div>
-      <label>
+      {/* <label>
         X:{" "}
         <input
           value={pinUnifiedX}
@@ -340,8 +359,7 @@ export default function MapInput(props) {
       </label>
       <p>Canvas X: {mapX} Y: {mapY}</p>
       <p>Scaled Unified X: {scaledUnifiedX} Y: {scaledUnifiedY}</p>
-      <p>Geo X: {geoX} Y: {geoY}</p>
-      {ConfirmCancelButton()}
+      <p>Geo X: {geoX} Y: {geoY}</p> */}
     </div>
   );
 }
