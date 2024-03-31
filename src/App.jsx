@@ -14,10 +14,11 @@ import ModalComponent from "./component/modal_component";
 
 export const RerenderContext = createContext({
   rerender: () => undefined,
+  rerenderValuePlaceholder: false,
 });
 
 function App() {
-  const [, setRendererContextValue] = useState(false);
+  const [rerenderContextValue, setRendererContextValue] = useState(false);
 
   const rerender = () => {
     setRendererContextValue((prev) => !prev);
@@ -30,7 +31,19 @@ function App() {
   // Selected Data From API
   const [selectedFloor, setSelectedFloor] = useState(null);
   const [selectedLocation, setSelectedLocation] = useState(null);
+  const [selectedLocationData, setSelectedLocationData] = useState(null);
   const [selectedBeacon, setSelectedBeacon] = useState(null);
+  const [locationData, setLocationData] = useState([]);
+
+  // Floor Plan
+  const [fetchFloorPlan, setFetchFloorPlan] = useState(null);
+  const [uploadedFloorPlan, setUploadedFloorPlan] = useState(null);
+
+  // Coordinate X and Y
+  const [coordinate, setCoordinate] = useState({
+    x: 0,
+    y: 0
+  })
 
   const switchShowModal = useCallback(
     (selectModalPage, selectButtonType) => {
@@ -48,10 +61,10 @@ function App() {
   return (
     <RerenderContext.Provider
       value={{
+        rerenderValuePlaceholder: rerenderContextValue,
         rerender,
       }}
     >
-      <button onClick={() => {rerender()}}>rere</button>
       <div id="main-config-page">
         <div id="main-config-page-input">
           <div id="main-config-page-input-container">
@@ -63,6 +76,9 @@ function App() {
               selectedLocation={selectedLocation}
               selectedBeacon={selectedBeacon}
               buttonType={buttonType}
+              uploadedFloorPlan={uploadedFloorPlan}
+              setUploadedFloorPlan={setUploadedFloorPlan}
+              coordinate={coordinate}
             />
             <TitleHeader title={"Configuration"} />
             <ConfigInputFloor
@@ -75,6 +91,9 @@ function App() {
                 switchShowModal={switchShowModal}
                 selectedLocation={selectedLocation}
                 setSelectedLocation={setSelectedLocation}
+                setSelectedLocationData={setSelectedLocationData}
+                locationData={locationData}
+                setLocationData={setLocationData}
                 selectedFloor={selectedFloor}
               />
               <ConfigInputBeacon
@@ -91,10 +110,19 @@ function App() {
             <TitleHeader title={"Map"} />
           </div>
           <div id="main-config-page-map-input-container">
-            <MapInput />
+            <MapInput
+              selectedFloor={selectedFloor}
+              fetchFloorPlan={fetchFloorPlan}
+              setFetchFloorPlan={setFetchFloorPlan}
+              uploadedFloorPlan={uploadedFloorPlan}
+              selectedLocationData={selectedLocationData}
+              locationData={locationData}
+              setCoordinate={setCoordinate}
+            />
           </div>
         </div>
       </div>
+      {/* <Fetch /> */}
     </RerenderContext.Provider>
   );
 }

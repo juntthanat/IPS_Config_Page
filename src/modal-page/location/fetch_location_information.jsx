@@ -90,6 +90,7 @@ export default function FetchLocationInformation(props) {
       fetchInfo();
     }
   }, []);
+  
 
   return (
     <div>

@@ -3,10 +3,17 @@ import ConfirmCancelButton from "../../confirm-cancel-button/confirm_cancel_butt
 import EditFloorInformation from "./edit_floor_information";
 import CreateFloorInformation from "./create_floor_information";
 import DeleteFloorInformation from "./delete_floor_information";
+
 import { RerenderContext } from "../../App";
 
 export default function FetchFloorInformation(props) {
-  const { selectedFloor, buttonType, switchShowModal } = props ?? {};
+  const {
+    selectedFloor,
+    buttonType,
+    switchShowModal,
+    // uploadedFloorPlan,
+    setUploadedFloorPlan,
+  } = props ?? {};
   const { rerender } = useContext(RerenderContext);
   const baseURL = `http://marco.cooldev.win:8080/api/v1`;
 
@@ -16,6 +23,8 @@ export default function FetchFloorInformation(props) {
   const [getAzimuth, setGetAzimuth] = useState("");
 
   const [userConfirm, setUserConfirm] = useState(false);
+
+  const [floorPlanFile, setFloorPlanFile] = useState();
 
   const fetchInfo = async () => {
     return await fetch(baseURL + `/floors` + "/" + selectedFloor)
@@ -41,6 +50,10 @@ export default function FetchFloorInformation(props) {
   const handleGetAzimuth = (event) => {
     setGetAzimuth(event.target.value);
   };
+  const handleFloorPlan = (event) => {
+    setUploadedFloorPlan(URL.createObjectURL(event.target.files[0]));
+    setFloorPlanFile(event.target.files[0]);
+  };
 
   const checkUserInput = () => {
     if (
@@ -61,6 +74,7 @@ export default function FetchFloorInformation(props) {
           getGeoLength,
           getGeoWidth,
           getAzimuth,
+          floorPlanFile,
           () => {
             rerender();
           }
@@ -72,6 +86,7 @@ export default function FetchFloorInformation(props) {
           getGeoLength,
           getGeoWidth,
           getAzimuth,
+          floorPlanFile,
           () => {
             rerender();
           }
@@ -163,6 +178,10 @@ export default function FetchFloorInformation(props) {
           placeholder={getAzimuth === "" ? "Please Enter Floor Azimuth" : ""}
           disabled={buttonType === "delete" ? true : false}
         ></input>
+      </div>
+      <div className="floor-input-configuration">
+        FLOOR PLAN
+        <input type="file" onChange={handleFloorPlan}></input>
       </div>
       <ConfirmCancelButton
         setUserConfirm={setUserConfirm}

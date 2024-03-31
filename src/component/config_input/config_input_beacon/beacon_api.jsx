@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, useRef } from "react";
 import { RerenderContext } from "../../../App";
 
 export default function BeaconAPI(props) {
@@ -7,8 +7,9 @@ export default function BeaconAPI(props) {
   const [data, setData] = useState([]);
   const [beaconList, setBeaconList] = useState([]);
   const [beaconName, setBeaconName] = useState([]);
+  const isFetching = useRef(false);
 
-  const {rerender} = useContext(RerenderContext); 
+  const { rerenderValuePlaceholder } = useContext(RerenderContext);
 
   const fetchBeaconId = async () => {
     return await fetch(baseURL + `/floor-beacons/floorId/` + selectedFloor)
@@ -27,18 +28,22 @@ export default function BeaconAPI(props) {
   };
 
   const fetchBeaconName = async (idList) => {
-    setBeaconName([]);
-    for (let i = 0; i < idList.length; i++) {
-      await fetch(baseURL + `/beacons/` + idList[i])
-        .then((e) => e.json())
-        .then((d) => JSON.parse(JSON.stringify(d)))
-        .then((f) => setBeaconName((beaconName) => [...beaconName, f]));
+    if (isFetching.current == false) {
+      isFetching.current = true;
+      setBeaconName([]);
+      for (let i = 0; i < idList.length; i++) {
+        await fetch(baseURL + `/beacons/` + idList[i])
+          .then((e) => e.json())
+          .then((d) => JSON.parse(JSON.stringify(d)))
+          .then((f) => setBeaconName((beaconName) => [...beaconName, f]));
+      }
     }
+    isFetching.current = false;
   };
 
   useEffect(() => {
     fetchBeaconId();
-  }, [selectedFloor, rerender]);
+  }, [selectedFloor, rerenderValuePlaceholder]);
 
   useEffect(() => {
     beaconIdList(data);
@@ -54,9 +59,9 @@ export default function BeaconAPI(props) {
     }
   };
 
-  const beaconNameList = beaconName.map((index) => (
+  const beaconNameList = beaconName.map((index, idx) => (
     <div
-      key={index.beaconId}
+      key={`${index.beaconId}-${idx}`}
       onClick={() => {
         setSelectedBeacon(index.beaconId);
       }}

@@ -5,6 +5,8 @@ import CreateEditButton from "../../../create-edit-button/create_edit_button";
 export default function ConfigInputBeacon(props) {
   const { switchShowModal, selectedBeacon, setSelectedBeacon, selectedFloor } =
     props ?? {};
+
+
   return (
     <div className="beacon-configuration-container">
       <div className="location-configuration-header">Beacon</div>
