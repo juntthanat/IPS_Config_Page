@@ -1,0 +1,24 @@
+#topic-header-background{
+    height: 30%;
+    width: 100%;
+}
+#topic-header-container{
+    height: 20%;
+    width: 40%;
+    color: white;
+
+    background-color: #242424;
+    border: 1px solid #242424;
+    border-radius: 10px;
+    margin: 0.5em;
+    padding: 0.2em;
+    
+
+    position: relative;
+    left: 1%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5em;
+}

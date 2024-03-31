@@ -1,0 +1,34 @@
+#modal-page-beacon-main{
+    height: 100%;
+    width: 100%;
+    border-bottom-left-radius: 20px;
+    padding-top: 20px;
+}
+.modal-page-container{
+    height: 80%;
+    width: 88%;
+
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+.beacon-id-header{
+    font-weight: bold;
+    padding-bottom: 0.5em;
+}
+.beacon-input-configuration{
+    width: 100%;
+    height: 2em;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+#modal-page-beacon-component{
+    height: 20%;
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+}

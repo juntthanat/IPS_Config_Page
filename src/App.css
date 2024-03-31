@@ -1,42 +1,55 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+#main-config-page{
+  height: 95%;
+  width: 95%;
+  background-color: #242424;
+
+  position: absolute;
+  display: flex;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+#main-config-page-input{
+  height: 100%;
+  width: 50%;
+
+  display: flex;
+  background-color: #242424;
+  box-sizing: border-box;
+  border-right: 4px solid #242424;
+}
+#main-config-page-input-navigation{
+  height: 100%;
+  width: 4%;
+
+  background-color: #242424;
+}
+#main-config-page-input-container{
+  height: 100%;
+  width: 96%;
+
+  background-color: white;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+#main-config-page-map-input{
+  height: 100%;
+  width: 50%;
+  box-sizing: border-box;
+  border-left: 4px solid #242424;
+  background-color: white;
+  overflow: hidden;
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+#main-config-page-map-input-title{
+  height: 14%;
+  width: 100%;
 }
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+#main-config-page-map-input-container{
+  height: 90%;
+  width: 100%;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
+.location-beacon-configuration-container{
+  height: 44%;
+  width: 100%;
+ display: flex;
 }

@@ -1,0 +1,27 @@
+#map-input-background{
+    height: 100%;
+    width: 100%;
+
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    flex-direction: column;
+}
+#map-input-container{
+    height: 84%;
+    width: 94%;
+    
+    border: 1px black solid;
+    border-radius: 5px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    /* background-color: aquamarine; */
+    background-color: lightgray;
+}
+img{
+    max-width: 100%;
+    max-height: 100%;
+}

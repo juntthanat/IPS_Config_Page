@@ -1,0 +1,23 @@
+#title-header-background{
+    height: 6em;
+    width: 100%;
+}
+#title-header-container{
+    height: 60%;
+    width: 95%;
+    color: white;
+
+    background-color: #242424;
+    border: 1px solid #242424;
+    border-radius: 10px;
+
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2em;
+}

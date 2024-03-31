@@ -1,0 +1,47 @@
+.beacon-configuration-container{
+  height: 100%;
+  width: 100%;
+  background-color: white;
+  box-sizing: border-box;
+  border-left: solid 1px #242424;
+}
+  .beacon-configuration-header{
+    height: 12%;
+    width: 100%;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: xx-large;
+  
+    background: #242424;
+    color: white;
+  }
+  .beacon-configuration-listbox-container{
+    height: 64%;
+    width: 100%;
+    padding-top: 3%;
+  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+  }
+  .beacon-configuration-listbox{
+    height: 100%;
+    width: 90%;
+  
+    border: solid 1px #242424;
+    overflow-y: scroll;
+  }
+  .beacon-configuration-button-container{
+    height: 20%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .beacon-configuration-button-container-padding{
+    height: 100%;
+    width: 80%;
+  }
