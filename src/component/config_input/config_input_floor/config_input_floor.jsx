@@ -8,7 +8,6 @@ export default function ConfigInputFloor(props) {
   return (
     <div className="floor-configuration-container">
       <div className="floor-configuration-header">Floor Configuration</div>
-      <input placeholder="Enter Floor ID"></input>
       <div className="floor-configuration-listbox-container">
         <div className="floor-configuration-listbox">
           Floor List

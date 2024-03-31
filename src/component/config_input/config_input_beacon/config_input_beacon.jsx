@@ -7,10 +7,9 @@ export default function ConfigInputBeacon(props) {
     props ?? {};
   return (
     <div className="beacon-configuration-container">
-      <div className="location-configuration-header">Beacon</div>
-      <input placeholder="Enter Beacon ID"></input>
-      <div className="location-configuration-listbox-container">
-        <div className="location-configuration-listbox">
+      <div className="beacon-configuration-header">Beacon</div>
+      <div className="beacon-configuration-listbox-container">
+        <div className="beacon-configuration-listbox">
           beacon list
           <BeaconAPI
             selectedBeacon={selectedBeacon}
@@ -19,10 +18,14 @@ export default function ConfigInputBeacon(props) {
           />
         </div>
       </div>
-      <CreateEditButton
-        switchShowModal={switchShowModal}
-        selectModalPage={"Beacon"}
-      />
+      <div className="beacon-configuration-button-container">
+        <div className="beacon-configuration-button-container-padding">
+          <CreateEditButton
+            switchShowModal={switchShowModal}
+            selectModalPage={"Beacon"}
+          />
+        </div>
+      </div>
     </div>
   );
 }

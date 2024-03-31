@@ -6,7 +6,7 @@ import TitleHeader from "./component/title_header";
 import MapInput from "./map/map_input";
 
 import ConfigInputFloor from "./component/config_input/config_input_floor/config_input_floor";
-import ConfigInputLocation from "./component/config_input/config_input_location/config_input_location";
+// import ConfigInputLocation from "./component/config_input/config_input_location/config_input_location";
 import ConfigInputBeacon from "./component/config_input/config_input_beacon/config_input_beacon";
 
 // Test Modal
@@ -22,6 +22,7 @@ function App() {
   const rerender = () => {
     setRendererContextValue((prev) => !prev);
   };
+
   // Modal
   const [showModal, setShowModal] = useState(false);
   const [buttonType, setButtonType] = useState();
@@ -51,7 +52,6 @@ function App() {
         rerender,
       }}
     >
-      <button onClick={() => {rerender()}}>rere</button>
       <div id="main-config-page">
         <div id="main-config-page-input">
           <div id="main-config-page-input-container">
@@ -71,12 +71,12 @@ function App() {
               setSelectedFloor={setSelectedFloor}
             />
             <div className="location-beacon-configuration-container">
-              <ConfigInputLocation
+              {/* <ConfigInputLocation
                 switchShowModal={switchShowModal}
                 selectedLocation={selectedLocation}
                 setSelectedLocation={setSelectedLocation}
                 selectedFloor={selectedFloor}
-              />
+              /> */}
               <ConfigInputBeacon
                 switchShowModal={switchShowModal}
                 selectedBeacon={selectedBeacon}

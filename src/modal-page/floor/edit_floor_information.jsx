@@ -6,8 +6,6 @@ export default function EditFloorInformation(
   getAzimuth,
   onComplete
 ) {
-  //   const { selectedFloor, getFloorName, getGeoLength, getGeoWidth, getAzimuth } =
-  //     props ?? {};
   const baseURL = `http://marco.cooldev.win:8080/api/v1`;
 
   const data = {
@@ -42,5 +40,3 @@ export default function EditFloorInformation(
 
   return <div></div>;
 }
-
-// selectedFloor, getFloorName, getGeoLength, getGeoWidth, getAzimuth

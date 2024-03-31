@@ -16,9 +16,6 @@ export default function modalPageBeacon(props) {
         />
       </div>
       <div id="modal-page-beacon-component">
-        {/* <ModalPageBeaconFloor /> */}
-        {/* <div id="modal-page-beacon-beacon"></div>
-        <div id="modal-page-beacon-file"></div> */}
       </div>
     </div>
   );
