@@ -3,7 +3,7 @@ import { X } from "react-feather";
 import { useEffect, useState } from "react";
 
 import ModalPageFloor from "../modal-page/modal_page_floor";
-import ModalPageLocation from "../modal-page/modal_page_location";
+// import ModalPageLocation from "../modal-page/modal_page_location";
 import ModalPageBeacon from "../modal-page/modal_page_beacon";
 
 export default function ModalComponent(props) {
@@ -12,7 +12,7 @@ export default function ModalComponent(props) {
     switchShowModal,
     selectedModalPage,
     selectedFloor,
-    selectedLocation,
+    // selectedLocation,
     selectedBeacon,
     buttonType,
     uploadedFloorPlan,
@@ -42,21 +42,21 @@ export default function ModalComponent(props) {
           />
         );
       }
-    } else if (selectedModalPage === "Location") {
-      if (buttonType === "edit" && selectedLocation === null) {
-        setCurrentModalPage(<div>Please Select Location to Edit</div>);
-      } else if (buttonType === "delete" && selectedLocation === null) {
-        setCurrentModalPage(<div>Please Select Location to Delete</div>);
-      } else {
-        setCurrentModalPage(
-          <ModalPageLocation
-            selectedLocation={selectedLocation}
-            buttonType={buttonType}
-            switchShowModal={switchShowModal}
-            selectedFloor={selectedFloor}
-          />
-        );
-      }
+    // } else if (selectedModalPage === "Location") {
+    //   if (buttonType === "edit" && selectedLocation === null) {
+    //     setCurrentModalPage(<div>Please Select Location to Edit</div>);
+    //   } else if (buttonType === "delete" && selectedLocation === null) {
+    //     setCurrentModalPage(<div>Please Select Location to Delete</div>);
+    //   } else {
+    //     setCurrentModalPage(
+    //       <ModalPageLocation
+    //         selectedLocation={selectedLocation}
+    //         buttonType={buttonType}
+    //         switchShowModal={switchShowModal}
+    //         selectedFloor={selectedFloor}
+    //       />
+    //     );
+    //   }
     } else if (selectedModalPage === "Beacon") {
       if (buttonType === "edit" && selectedBeacon === null) {
         setCurrentModalPage(<div>Please Select Beacon to Edit</div>);

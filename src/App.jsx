@@ -31,7 +31,7 @@ function App() {
 
   // Selected Data From API
   const [selectedFloor, setSelectedFloor] = useState(null);
-  const [selectedLocation, setSelectedLocation] = useState(null);
+  // const [selectedLocation, setSelectedLocation] = useState(null);
   const [selectedLocationData, setSelectedLocationData] = useState(null);
   const [selectedBeacon, setSelectedBeacon] = useState(null);
   const [locationData, setLocationData] = useState([]);
@@ -74,7 +74,7 @@ function App() {
               switchShowModal={switchShowModal}
               selectedModalPage={selectedModalPage}
               selectedFloor={selectedFloor}
-              selectedLocation={selectedLocation}
+              // selectedLocation={selectedLocation}
               selectedBeacon={selectedBeacon}
               buttonType={buttonType}
               uploadedFloorPlan={uploadedFloorPlan}

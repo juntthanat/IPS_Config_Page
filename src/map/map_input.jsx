@@ -357,9 +357,15 @@ export default function MapInput(props) {
           }
         />
       </label>
-      <p>Canvas X: {mapX} Y: {mapY}</p>
-      <p>Scaled Unified X: {scaledUnifiedX} Y: {scaledUnifiedY}</p>
-      <p>Geo X: {geoX} Y: {geoY}</p> */}
+      <p>
+        Canvas X: {mapX} Y: {mapY}
+      </p>
+      <p>
+        Scaled Unified X: {scaledUnifiedX} Y: {scaledUnifiedY}
+      </p>
+      <p>
+        Geo X: {geoX} Y: {geoY}
+      </p> */}
     </div>
   );
 }
