@@ -1,9 +1,14 @@
+import { RerenderContext } from "../App";
 import "./confirm_cancel_button.css";
-
+import { useContext } from "react";
 export default function ConfirmCancelButton(props) {
-  const {setUserConfirm, switchShowModal} = props ?? {}
+  const { setUserConfirm, switchShowModal } = props ?? {};
+
+  const { rerender } = useContext(RerenderContext);
+
   const confirmClickHandler = () => {
-    setUserConfirm(true)
+    setUserConfirm(true);
+    rerender();
     console.log("Confirm Was Clicked");
   };
 

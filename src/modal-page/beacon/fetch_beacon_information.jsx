@@ -6,8 +6,13 @@ import DeleteBeaconInformation from "./delete_beacon_information";
 import { RerenderContext } from "../../App";
 
 export default function FetchBeaconInformation(props) {
-  const { selectedBeacon, buttonType, switchShowModal, selectedFloor } =
-    props ?? {};
+  const {
+    selectedBeacon,
+    buttonType,
+    switchShowModal,
+    selectedFloor,
+    coordinate,
+  } = props ?? {};
   const { rerender } = useContext(RerenderContext);
   const baseURL = `http://marco.cooldev.win:8080/api/v1`;
 
@@ -92,8 +97,17 @@ export default function FetchBeaconInformation(props) {
   useEffect(() => {
     if (buttonType === "edit") {
       fetchInfo();
+    } else if (buttonType === "create") {
+      console.log("Create Section");
+    } else {
+      fetchInfo();
     }
   }, []);
+
+  useEffect(() => {
+    setGetBeaconGeoX(coordinate.x);
+    setGetBeaconGeoY(coordinate.y);
+  }, [coordinate]);
 
   return (
     <div>
@@ -122,17 +136,11 @@ export default function FetchBeaconInformation(props) {
       </div>
       <div className="beacon-input-configuration">
         GEO X
-        <input
-          defaultValue={buttonType === "create" ? null : getBeaconGeoX}
-          onChange={handleGeoXChange}
-        ></input>
+        <input defaultValue={getBeaconGeoX} onChange={handleGeoXChange}></input>
       </div>
       <div className="beacon-input-configuration">
         GEO Y
-        <input
-          defaultValue={buttonType === "create" ? null : getBeaconGeoY}
-          onChange={handleGeoYChange}
-        ></input>
+        <input defaultValue={getBeaconGeoY} onChange={handleGeoYChange}></input>
       </div>
       <div className="beacon-input-configuration">
         BEACON MAC-ADDRESS

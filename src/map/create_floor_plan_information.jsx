@@ -1,35 +1,23 @@
-export default function CreateBeaconInformation(
-  getBeaconName,
-  getBeaconGeoX,
-  getBeaconGeoY,
-  getMacAddress,
+export default function CreateFloorPlanInformation(
   selectedFloor,
-  onComplete
+  floorPlanFile
 ) {
   const baseURL = `http://marco.cooldev.win:8080/api/v1`;
 
-  const data = {
-    name: getBeaconName,
-    geoX: getBeaconGeoX,
-    geoY: getBeaconGeoY,
-    macAddress: getMacAddress,
-  };
+  const formData = new FormData();
+  formData.append("file", floorPlanFile);
+
   const requestOptions = {
     method: "POST",
-    mode: "cors",
-    headers: {
-      "Content-Type": "application/json",
-      "Access-Control-Allow-Origin": "*",
-    },
-    body: JSON.stringify(data),
+    body: formData,
   };
 
   const createInfo = async () => {
-    const result = await fetch(baseURL + `/beacons`, requestOptions)
+    const result = await fetch(baseURL + `/files`, requestOptions)
       .then((res) => res.json())
       .then((res) => JSON.parse(JSON.stringify(res)))
       .then((res) =>
-        fetch(baseURL + `/floor-beacons`, {
+        fetch(baseURL + `/floor-files`, {
           method: "POST",
           mode: "cors",
           headers: {
@@ -38,15 +26,13 @@ export default function CreateBeaconInformation(
           },
           body: JSON.stringify({
             floorId: selectedFloor,
-            beaconId: res.beaconId,
+            fileId: res.fileId,
           }),
         })
       )
       .then((res) => res.json())
       .catch((error) => console.log(error));
 
-
-    onComplete?.();
     return result;
   };
 
