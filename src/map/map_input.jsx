@@ -310,6 +310,19 @@ export default function MapInput(props) {
     drawLocations();
   }, [locationData]);
 
+  useEffect(() => {
+    if (selectedFloor === null) {
+	return;
+    }
+
+    const canvasCoords = scaleGeoCoordsToCanvasCoords(
+	geoX,
+	geoY
+    );
+
+    relocatePin(canvasCoords.x, canvasCoords.y);
+  }, [geoX, geoY]);
+
   // useEffect with [] as param to execute only at mount time
   useEffect(() => {
     // Recommended usage:
@@ -336,7 +349,7 @@ export default function MapInput(props) {
           onClick={canvasCallback}
           style={{ position: "absolute", zIndex: 1 }}
         ></canvas>
-      </div>
+    </div>
       {/* <label>
         X:{" "}
         <input
