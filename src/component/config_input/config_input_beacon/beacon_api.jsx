@@ -2,7 +2,7 @@ import { useState, useEffect, useContext, useRef } from "react";
 import { RerenderContext } from "../../../App";
 
 export default function BeaconAPI(props) {
-  const { selectedBeacon, setSelectedBeacon, selectedFloor } = props ?? {};
+  const { selectedBeacon, setSelectedBeacon, setBeaconData, selectedFloor } = props ?? {};
   const baseURL = `http://marco.cooldev.win:8080/api/v1`;
   const [data, setData] = useState([]);
   const [beaconList, setBeaconList] = useState([]);
@@ -64,6 +64,7 @@ export default function BeaconAPI(props) {
       key={`${index.beaconId}-${idx}`}
       onClick={() => {
         setSelectedBeacon(index.beaconId);
+        setBeaconData(index);
       }}
       style={{
         backgroundColor: checkSelectedBeacon(selectedBeacon === index.beaconId),
