@@ -24,7 +24,7 @@ export default function FetchFloorInformation(props) {
 
   const [userConfirm, setUserConfirm] = useState(false);
 
-  const [floorPlanFile, setFloorPlanFile] = useState();
+  const [floorPlanFile, setFloorPlanFile] = useState(null);
 
   const fetchInfo = async () => {
     return await fetch(baseURL + `/floors` + "/" + selectedFloor)
@@ -60,7 +60,8 @@ export default function FetchFloorInformation(props) {
       getFloorName != "" &&
       getGeoLength != "" &&
       getGeoWidth != "" &&
-      getAzimuth != ""
+      getAzimuth != "" &&
+      floorPlanFile != null
     ) {
       return true;
     }
@@ -181,7 +182,9 @@ export default function FetchFloorInformation(props) {
       </div>
       <div className="floor-input-configuration">
         FLOOR PLAN
-        <input type="file" onChange={handleFloorPlan}></input>
+        <input type="file" onChange={handleFloorPlan} style={{
+            border: floorPlanFile === null ? "solid red 2px" : "solid black 2px",
+          }}></input>
       </div>
       <ConfirmCancelButton
         setUserConfirm={setUserConfirm}
