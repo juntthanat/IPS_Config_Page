@@ -36,7 +36,7 @@ export default function FetchFloorInformation(props) {
         setGetGeoLength(f.geoLength);
         setGetGeoWidth(f.geoWidth);
         setGetAzimuth(f.azimuth);
-        setGetLevel(f.getLevel);
+        setGetLevel(f.level);
       });
   };
 
