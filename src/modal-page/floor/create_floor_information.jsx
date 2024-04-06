@@ -4,6 +4,7 @@ export default function CreateFloorInformation(
   getGeoLength,
   getGeoWidth,
   getAzimuth,
+  getLevel,
   floorPlanFile,
   onComplete
 ) {
@@ -14,6 +15,7 @@ export default function CreateFloorInformation(
     geoLength: getGeoLength,
     geoWidth: getGeoWidth,
     azimuth: getAzimuth,
+    level: getLevel
   };
 
   const requestOptions = {

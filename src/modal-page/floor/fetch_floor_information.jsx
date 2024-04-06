@@ -21,6 +21,7 @@ export default function FetchFloorInformation(props) {
   const [getGeoLength, setGetGeoLength] = useState("");
   const [getGeoWidth, setGetGeoWidth] = useState("");
   const [getAzimuth, setGetAzimuth] = useState("");
+  const [getLevel, setGetLevel] = useState("");
 
   const [userConfirm, setUserConfirm] = useState(false);
 
@@ -35,6 +36,7 @@ export default function FetchFloorInformation(props) {
         setGetGeoLength(f.geoLength);
         setGetGeoWidth(f.geoWidth);
         setGetAzimuth(f.azimuth);
+        setGetLevel(f.getLevel);
       });
   };
 
@@ -50,6 +52,9 @@ export default function FetchFloorInformation(props) {
   const handleGetAzimuth = (event) => {
     setGetAzimuth(event.target.value);
   };
+  const handleGetLevel = (event) => {
+    setGetLevel(event.target.value);
+  }
   const handleFloorPlan = (event) => {
     setUploadedFloorPlan(URL.createObjectURL(event.target.files[0]));
     setFloorPlanFile(event.target.files[0]);
@@ -60,7 +65,8 @@ export default function FetchFloorInformation(props) {
       getFloorName != "" &&
       getGeoLength != "" &&
       getGeoWidth != "" &&
-      getAzimuth != ""
+      getAzimuth != "" &&
+      getLevel != ""
     ) {
       return true;
     }
@@ -74,6 +80,7 @@ export default function FetchFloorInformation(props) {
           getGeoLength,
           getGeoWidth,
           getAzimuth,
+          getLevel,
           floorPlanFile,
           () => {
             rerender();
@@ -86,6 +93,7 @@ export default function FetchFloorInformation(props) {
           getGeoLength,
           getGeoWidth,
           getAzimuth,
+          getLevel,
           floorPlanFile,
           () => {
             rerender();
@@ -176,6 +184,18 @@ export default function FetchFloorInformation(props) {
             border: getAzimuth === "" ? "solid red 2px" : "solid black 2px",
           }}
           placeholder={getAzimuth === "" ? "Please Enter Floor Azimuth" : ""}
+          disabled={buttonType === "delete" ? true : false}
+        ></input>
+      </div>
+      <div className="floor-input-configuration">
+        LEVEL{" "}
+        <input
+          defaultValue={buttonType === "create" ? null : getLevel}
+          onChange={handleGetLevel}
+          style={{
+            border: getLevel === "" ? "solid red 2px" : "solid black 2px",
+          }}
+          placeholder={getLevel === "" ? "Please Enter Floor Level" : ""}
           disabled={buttonType === "delete" ? true : false}
         ></input>
       </div>

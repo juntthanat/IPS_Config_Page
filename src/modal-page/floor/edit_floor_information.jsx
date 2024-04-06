@@ -6,6 +6,7 @@ export default function EditFloorInformation(
   getGeoLength,
   getGeoWidth,
   getAzimuth,
+  getLevel,
   floorPlanFile,
   onComplete
 ) {
@@ -16,6 +17,7 @@ export default function EditFloorInformation(
     geoLength: getGeoLength,
     geoWidth: getGeoWidth,
     azimuth: getAzimuth,
+    level: getLevel,
   };
 
   const requestOptions = {
