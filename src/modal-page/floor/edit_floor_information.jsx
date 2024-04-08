@@ -32,7 +32,7 @@ export default function EditFloorInformation(
 
   const editInfo = async () => {
     const result =  await fetch(baseURL + `/floors/` + selectedFloor, requestOptions)
-      .then((res) => res.json())
+      .then((res) => res.json());
 
     if(result.message != undefined){
       alert(result.message)

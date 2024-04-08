@@ -15,9 +15,14 @@ export default function DeleteFloorInformation(selectedFloor, onComplete) {
   //     .then((res) => JSON.parse(JSON.stringify(res)));
   // };
   const deleteBeacon = async (index) => {
-    return await fetch(baseURL + `/beacons/` + index, requestOptions)
-      .then((res) => res.json())
-      .then((res) => JSON.parse(JSON.stringify(res)));
+    return await fetch(baseURL + `/beacons/` + index, requestOptions).then(
+      (res) => res.json()
+    );
+  };
+  const deleteFloorPlan = async (index) => {
+    return await fetch(baseURL + `/files/` + index, requestOptions).then(
+      (res) => res.json()
+    );
   };
   const deleteFloor = async (index) => {
     return await fetch(baseURL + `/floors/` + index, requestOptions)
@@ -28,38 +33,23 @@ export default function DeleteFloorInformation(selectedFloor, onComplete) {
   const deleteInfo = async () => {
     const result = await fetch(
       baseURL + `/floor-beacons/floorId/` + selectedFloor
-    )
-      .then((res) => res.json())
-      .then((res) => {
-        for (let beaconIndex = 0; beaconIndex < res.length; beaconIndex++) {
-          deleteBeacon(res[beaconIndex].beaconId);
-        }
-      })
-      .then(deleteFloor(selectedFloor));
+    ).then((res) => res.json());
 
-    // const result = await fetch(
-    //   baseURL + `/floor-locations/floorId/` + selectedFloor
-    // )
-    //   .then((res) => res.json())
-    //   .then((res) => {
-    //     for (
-    //       let locationIndex = 0;
-    //       locationIndex < res.length;
-    //       locationIndex++
-    //     ) {
-    //       deleteLocation(res[locationIndex].locationId);
-    //     }
-    //   })
-    //   .then(() =>
-    //     fetch(baseURL + `/floor-beacons/floorId/` + selectedFloor)
-    //       .then((res) => res.json())
-    //       .then((res) => {
-    //         for (let beaconIndex = 0; beaconIndex < res.length; beaconIndex++) {
-    //           deleteBeacon(res[beaconIndex].beaconId);
-    //         }
-    //       })
-    //   )
-    //   .then(deleteFloor(selectedFloor));
+    if (result[0].beaconId != undefined) {
+      for (let beaconIndex = 0; beaconIndex < result.length; beaconIndex++) {
+        deleteBeacon(result[beaconIndex].beaconId);
+      }
+      deleteFloor(selectedFloor);
+    }
+
+    const getFileId = await fetch(
+      baseURL + `/floor-files/floorId/` + selectedFloor
+    ).then((res) => res.json());
+
+    if (getFileId.fileId != undefined) {
+      deleteFloorPlan(getFileId.fileId);
+      deleteFloor(selectedFloor);
+    }
 
     onComplete?.();
     return result;
