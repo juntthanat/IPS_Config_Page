@@ -28,7 +28,8 @@ export default function CreateBeaconInformation(
     const result = await fetch(baseURL + `/beacons`, requestOptions)
       .then((res) => res.json())
       .then((res) => JSON.parse(JSON.stringify(res)))
-      .then((res) =>
+
+      if(result.beaconId != undefined){
         fetch(baseURL + `/floor-beacons`, {
           method: "POST",
           mode: "cors",
@@ -38,13 +39,12 @@ export default function CreateBeaconInformation(
           },
           body: JSON.stringify({
             floorId: selectedFloor,
-            beaconId: res.beaconId,
+            beaconId: result.beaconId,
           }),
         })
-      )
-      .catch((error) => {
-        error.json()
-      }).then((res) => {if(res.message != undefined){alert(res.message)}})
+      } else if (result.message != undefined){
+        alert(result.message);
+      }
 
 
 

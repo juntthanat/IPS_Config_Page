@@ -33,10 +33,12 @@ export default function EditFloorInformation(
   const editInfo = async () => {
     const result =  await fetch(baseURL + `/floors/` + selectedFloor, requestOptions)
       .then((res) => res.json())
-      .then(EditFloorPlanInformation(selectedFloor, floorPlanFile, onComplete))
-      .catch((error) => {
-        error.json()
-      }).then((res) => {if(res.message != undefined){alert(res.message)}})
+
+    if(result.message != undefined){
+      alert(result.message)
+    } else {
+      EditFloorPlanInformation(selectedFloor, floorPlanFile, onComplete)
+    }
 
       onComplete?.();
       return result;
