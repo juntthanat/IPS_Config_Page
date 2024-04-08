@@ -32,10 +32,10 @@ export default function CreateFloorInformation(
     const result = await fetch(baseURL + `/floors`, requestOptions)
       .then((res) => res.json())
       .then((res) => JSON.parse(JSON.stringify(res)))
-      .then((res) => CreateFloorPlanInformation(res.floorId, floorPlanFile))
+      .then((res) => {if(res.floorId != undefined){CreateFloorPlanInformation(res.floorId, floorPlanFile)}})
       .catch((error) => {
-        console.log(error);
-      });
+        error.json()
+      }).then((res) => {if(res.message != undefined){alert(res.message)}})
 
     onComplete?.();
     return result;

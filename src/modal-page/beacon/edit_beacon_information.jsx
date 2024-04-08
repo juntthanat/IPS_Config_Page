@@ -31,8 +31,8 @@ export default function EditBeaconInformation(
     )
       .then((res) => res.json())
       .catch((error) => {
-        console.log(error);
-      });
+        error.json()
+      }).then((res) => {if(res.message != undefined){alert(res.message)}})
 
     onComplete?.();
     return result;

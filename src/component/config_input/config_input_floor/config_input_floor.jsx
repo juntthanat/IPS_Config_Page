@@ -10,7 +10,6 @@ export default function ConfigInputFloor(props) {
       <div className="floor-configuration-header">Floor Configuration</div>
       <div className="floor-configuration-listbox-container">
         <div className="floor-configuration-listbox">
-          Floor List
           <FloorAPI selectedFloor={selectedFloor} setSelectedFloor={setSelectedFloor}/>
         </div>
       </div>

@@ -35,8 +35,8 @@ export default function EditFloorInformation(
       .then((res) => res.json())
       .then(EditFloorPlanInformation(selectedFloor, floorPlanFile, onComplete))
       .catch((error) => {
-        console.log(error);
-      });
+        error.json()
+      }).then((res) => {if(res.message != undefined){alert(res.message)}})
 
       onComplete?.();
       return result;

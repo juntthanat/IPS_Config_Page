@@ -42,8 +42,10 @@ export default function CreateBeaconInformation(
           }),
         })
       )
-      .then((res) => res.json())
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        error.json()
+      }).then((res) => {if(res.message != undefined){alert(res.message)}})
+
 
 
     onComplete?.();

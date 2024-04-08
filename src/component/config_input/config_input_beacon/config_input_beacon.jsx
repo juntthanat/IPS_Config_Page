@@ -12,7 +12,6 @@ export default function ConfigInputBeacon(props) {
       <div className="beacon-configuration-header">Beacon</div>
       <div className="beacon-configuration-listbox-container">
         <div className="beacon-configuration-listbox">
-          beacon list
           <BeaconAPI
             selectedBeacon={selectedBeacon}
             setSelectedBeacon={setSelectedBeacon}
