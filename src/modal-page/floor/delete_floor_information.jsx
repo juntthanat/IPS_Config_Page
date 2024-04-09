@@ -45,15 +45,19 @@ export default function DeleteFloorInformation(selectedFloor, onComplete) {
       baseURL + `/floor-files/floorId/` + selectedFloor
     ).then((res) => res.json());
 
-    if (getFileId.fileId != undefined) {
-      deleteFloorPlan(getFileId.fileId);
-      deleteFloor(selectedFloor);
-    }
+    console.log(getFileId)
+
+    setTimeout(() => {
+      if (getFileId.fileId != undefined) {
+        deleteFloorPlan(getFileId.fileId);
+        deleteFloor(selectedFloor);
+      }
+    }, 1000);
     
     setTimeout(() => {
       console.log("Hello, World!");
       onComplete?.();
-    }, 1000);
+    }, 5000);
     return result;
   };
 
