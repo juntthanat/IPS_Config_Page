@@ -34,7 +34,7 @@ function App() {
   // const [selectedLocation, setSelectedLocation] = useState(null);
   const [selectedLocationData, setSelectedLocationData] = useState(null);
   const [selectedBeacon, setSelectedBeacon] = useState(null);
-  const [locationData, setLocationData] = useState([]);
+  const [beaconData, setBeaconData] = useState(null);
 
   // Floor Plan
   const [fetchFloorPlan, setFetchFloorPlan] = useState(null);
@@ -101,6 +101,7 @@ function App() {
                 switchShowModal={switchShowModal}
                 selectedBeacon={selectedBeacon}
                 setSelectedBeacon={setSelectedBeacon}
+                setBeaconData={setBeaconData}
                 selectedFloor={selectedFloor}
               />
             </div>
@@ -117,7 +118,7 @@ function App() {
               setFetchFloorPlan={setFetchFloorPlan}
               uploadedFloorPlan={uploadedFloorPlan}
               selectedLocationData={selectedLocationData}
-              locationData={locationData}
+              beaconData={beaconData}
               setCoordinate={setCoordinate}
             />
           </div>

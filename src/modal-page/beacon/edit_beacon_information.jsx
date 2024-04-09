@@ -28,17 +28,15 @@ export default function EditBeaconInformation(
     const result = await fetch(
       baseURL + `/beacons/` + selectedBeacon,
       requestOptions
-    )
-      .then((res) => res.json())
-      .catch((error) => {
-        console.log(error);
-      });
+    ).then((res) => res.json());
+
+    if (result.message != undefined) {
+      alert(result.message);
+    }
 
     onComplete?.();
     return result;
   };
 
-    editInfo();
-
-  return <div></div>;
+  editInfo();
 }

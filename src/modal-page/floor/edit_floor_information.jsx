@@ -6,6 +6,7 @@ export default function EditFloorInformation(
   getGeoLength,
   getGeoWidth,
   getAzimuth,
+  getLevel,
   floorPlanFile,
   onComplete
 ) {
@@ -16,6 +17,7 @@ export default function EditFloorInformation(
     geoLength: getGeoLength,
     geoWidth: getGeoWidth,
     azimuth: getAzimuth,
+    level: getLevel,
   };
 
   const requestOptions = {
@@ -30,17 +32,17 @@ export default function EditFloorInformation(
 
   const editInfo = async () => {
     const result =  await fetch(baseURL + `/floors/` + selectedFloor, requestOptions)
-      .then((res) => res.json())
-      .then(EditFloorPlanInformation(selectedFloor, floorPlanFile, onComplete))
-      .catch((error) => {
-        console.log(error);
-      });
+      .then((res) => res.json());
+
+    if(result.message != undefined){
+      alert(result.message)
+    } else {
+      EditFloorPlanInformation(selectedFloor, floorPlanFile, onComplete)
+    }
 
       onComplete?.();
       return result;
   };
 
   editInfo();
-
-  return <div></div>;
 }

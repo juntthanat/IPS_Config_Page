@@ -25,32 +25,53 @@ export default function CreateBeaconInformation(
   };
 
   const createInfo = async () => {
-    const result = await fetch(baseURL + `/beacons`, requestOptions)
-      .then((res) => res.json())
-      .then((res) => JSON.parse(JSON.stringify(res)))
-      .then((res) =>
-        fetch(baseURL + `/floor-beacons`, {
-          method: "POST",
-          mode: "cors",
-          headers: {
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "*",
-          },
-          body: JSON.stringify({
-            floorId: selectedFloor,
-            beaconId: res.beaconId,
-          }),
-        })
-      )
-      .then((res) => res.json())
-      .catch((error) => console.log(error));
+    const result = await fetch(baseURL + `/beacons`, requestOptions).then(
+      (res) => res.json()
+    );
+    // .then((res) => JSON.parse(JSON.stringify(res)))
 
+    if (result.beaconId != undefined) {
+      // fetch(baseURL + `/floor-beacons`, {
+      //   method: "POST",
+      //   mode: "cors",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //     "Access-Control-Allow-Origin": "*",
+      //   },
+      //   body: JSON.stringify({
+      //     floorId: selectedFloor,
+      //     beaconId: result.beaconId,
+      //   }),
+      // }).then((res) => res.json());
+       await createBeacon(result);
+    } else if (result.message != undefined) {
+      alert(result.message);
+    }
 
-    onComplete?.();
+    // onComplete?.();
     return result;
   };
 
-  createInfo();
+  const createBeacon = async (beaconInfo) => {
+    const result = await fetch(baseURL + `/floor-beacons`, {
+      method: "POST",
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+      },
+      body: JSON.stringify({
+        floorId: selectedFloor,
+        beaconId: beaconInfo.beaconId,
+      }),
+    }).then((res) => res.json());
 
-  return <div></div>;
+    setTimeout(() => {
+      console.log("Hello, World!");
+      onComplete?.();
+    }, 1000);
+    return result;
+  }
+
+  createInfo();
 }
