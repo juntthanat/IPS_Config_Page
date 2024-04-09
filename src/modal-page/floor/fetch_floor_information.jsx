@@ -213,7 +213,7 @@ export default function FetchFloorInformation(props) {
           type="file"
           onChange={handleFloorPlan}
           style={{
-            border: floorPlanFile === undefined ? "solid red 2px" : "solid black 2px",
+            border: floorPlanFile === null ? "solid red 2px" : "solid black 2px",
           }}
         ></input>
       </div>
