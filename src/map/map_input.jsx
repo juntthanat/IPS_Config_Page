@@ -9,8 +9,7 @@ export default function MapInput(props) {
     setFetchFloorPlan,
     uploadedFloorPlan,
     setCoordinate,
-    selectedLocationData,
-    locationData,
+    beaconData,
   } = props ?? {};
 
   const [currentFloorData, setCurrentFloorData] = useState(null);
@@ -149,28 +148,34 @@ export default function MapInput(props) {
   }
 
   /// Draw pins onto the map
-  function drawLocations() {
+  function drawSelectedBeacon(reset) {
+    if (beaconData === null) {
+      return;
+    }
+
     const canvas = fgCanvasRef.current;
     const context = canvas.getContext("2d");
+    
+    if (reset) {
+      context.reset();
+    }
 
-    locationData.forEach((location) => {
-      const canvasCoords = scaleGeoCoordsToCanvasCoords(
-        location.geoX,
-        location.geoY
-      );
-      const pin = {
-        id: location.locationId,
-        name: location.name,
-        x: canvasCoords.x,
-        y: canvasCoords.y,
-      };
+    const canvasCoords = scaleGeoCoordsToCanvasCoords(
+      beaconData.geoX,
+      beaconData.geoY
+    );
+    const pin = {
+      id: beaconData.beaconId,
+      name: beaconData.name,
+      x: canvasCoords.x,
+      y: canvasCoords.y,
+    };
 
-      context.fillStyle = "red";
-      context.fillRect(pin.x - 5, pin.y - 5, 10, 10);
-      console.log("Drew: " + pin.name + " at X: " + pin.x + " Y: " + pin.y);
-
-      setPins([...pins, pin]);
-    });
+    context.fillStyle = "red";
+    context.fillRect(pin.x - 5, pin.y - 5, 10, 10);
+    console.log("Drew: " + pin.name + " at X: " + pin.x + " Y: " + pin.y);
+    
+    setPins([pin]);
   }
 
   /// Called when the pin changes location
@@ -192,7 +197,7 @@ export default function MapInput(props) {
     console.log("x: " + x + " y: " + y);
 
     // Draw the locations
-    drawLocations();
+    drawSelectedBeacon(false);
 
     // Draws the center of the map
     // DEBUG ONLY
@@ -297,18 +302,8 @@ export default function MapInput(props) {
   }
 
   useEffect(() => {
-    if (selectedLocationData === null) {
-      return;
-    }
-    const canvasCoords = scaleGeoCoordsToCanvasCoords(
-      selectedLocationData.geoX,
-      selectedLocationData.geoY
-    );
-  }, [selectedLocationData]);
-
-  useEffect(() => {
-    drawLocations();
-  }, [locationData]);
+    drawSelectedBeacon(true);
+  }, [beaconData]);
 
   useEffect(() => {
     if (selectedFloor === null) {

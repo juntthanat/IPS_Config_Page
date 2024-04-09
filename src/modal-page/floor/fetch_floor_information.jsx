@@ -25,7 +25,7 @@ export default function FetchFloorInformation(props) {
 
   const [userConfirm, setUserConfirm] = useState(false);
 
-  const [floorPlanFile, setFloorPlanFile] = useState();
+  const [floorPlanFile, setFloorPlanFile] = useState(null);
 
   const fetchInfo = async () => {
     return await fetch(baseURL + `/floors` + "/" + selectedFloor)

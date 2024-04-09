@@ -3,7 +3,7 @@ import BeaconAPI from "./beacon_api";
 import CreateEditButton from "../../../create-edit-button/create_edit_button";
 
 export default function ConfigInputBeacon(props) {
-  const { switchShowModal, selectedBeacon, setSelectedBeacon, selectedFloor } =
+  const { switchShowModal, selectedBeacon, setSelectedBeacon, setBeaconData, selectedFloor } =
     props ?? {};
 
 
@@ -15,6 +15,7 @@ export default function ConfigInputBeacon(props) {
           <BeaconAPI
             selectedBeacon={selectedBeacon}
             setSelectedBeacon={setSelectedBeacon}
+            setBeaconData={setBeaconData}
             selectedFloor={selectedFloor}
           />
         </div>
