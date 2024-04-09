@@ -54,7 +54,7 @@ export default function FetchFloorInformation(props) {
   };
   const handleGetLevel = (event) => {
     setGetLevel(event.target.value);
-  }
+  };
   const handleFloorPlan = (event) => {
     setUploadedFloorPlan(URL.createObjectURL(event.target.files[0]));
     setFloorPlanFile(event.target.files[0]);
@@ -66,9 +66,13 @@ export default function FetchFloorInformation(props) {
       getGeoLength != "" &&
       getGeoWidth != "" &&
       getAzimuth != "" &&
-      getLevel != ""
+      getLevel != "" 
     ) {
-      return true;
+      if(buttonType === "create" && floorPlanFile != undefined){
+        return true;
+      } else if (buttonType === "edit" || buttonType === "delete"){
+        return true;
+      }
     }
     return false;
   };
@@ -201,7 +205,13 @@ export default function FetchFloorInformation(props) {
       </div>
       <div className="floor-input-configuration">
         FLOOR PLAN
-        <input type="file" onChange={handleFloorPlan}></input>
+        <input
+          type="file"
+          onChange={handleFloorPlan}
+          style={{
+            border: floorPlanFile === undefined ? "solid red 2px" : "solid black 2px",
+          }}
+        ></input>
       </div>
       <ConfirmCancelButton
         setUserConfirm={setUserConfirm}

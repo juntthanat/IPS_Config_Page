@@ -39,6 +39,4 @@ export default function EditBeaconInformation(
   };
 
   editInfo();
-
-  return <div></div>;
 }

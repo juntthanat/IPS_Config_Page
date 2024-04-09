@@ -21,6 +21,4 @@ export default function DeleteBeaconInformation(selectedBeacon, onComplete) {
   };
 
   deleteInfo();
-
-  return <div></div>
 }

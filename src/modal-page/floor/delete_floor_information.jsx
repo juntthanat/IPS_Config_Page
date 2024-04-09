@@ -35,7 +35,7 @@ export default function DeleteFloorInformation(selectedFloor, onComplete) {
       baseURL + `/floor-beacons/floorId/` + selectedFloor
     ).then((res) => res.json());
 
-    if (result[0].beaconId != undefined) {
+    if (result.length > 0) {
       for (let beaconIndex = 0; beaconIndex < result.length; beaconIndex++) {
         deleteBeacon(result[beaconIndex].beaconId);
       }
@@ -56,6 +56,4 @@ export default function DeleteFloorInformation(selectedFloor, onComplete) {
   };
 
   deleteInfo();
-
-  return <div></div>;
 }

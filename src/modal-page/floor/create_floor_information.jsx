@@ -44,6 +44,4 @@ export default function CreateFloorInformation(
   };
 
   createInfo();
-
-  return <div></div>;
 }

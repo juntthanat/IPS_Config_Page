@@ -45,6 +45,4 @@ export default function EditFloorInformation(
   };
 
   editInfo();
-
-  return <div></div>;
 }
