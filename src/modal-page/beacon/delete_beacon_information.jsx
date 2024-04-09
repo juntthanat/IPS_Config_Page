@@ -12,14 +12,13 @@ export default function DeleteBeaconInformation(selectedBeacon, onComplete) {
   const deleteInfo = async () => {
     const result = await fetch(baseURL + `/beacons/` + selectedBeacon, requestOptions)
         .then((res) => res.json())
-        .then((res) => JSON.parse(JSON.stringify(res)))
-        .catch((error) => console.log(error))
-
-        onComplete?.();
-        return result;
+    if(result.message != undefined){
+      alert(result.message);
+    }
+      
+      onComplete?.();
+      return result;
   };
 
   deleteInfo();
-
-  return <div></div>
 }

@@ -4,6 +4,7 @@ export default function CreateFloorInformation(
   getGeoLength,
   getGeoWidth,
   getAzimuth,
+  getLevel,
   floorPlanFile,
   onComplete
 ) {
@@ -14,6 +15,7 @@ export default function CreateFloorInformation(
     geoLength: getGeoLength,
     geoWidth: getGeoWidth,
     azimuth: getAzimuth,
+    level: getLevel
   };
 
   const requestOptions = {
@@ -30,16 +32,16 @@ export default function CreateFloorInformation(
     const result = await fetch(baseURL + `/floors`, requestOptions)
       .then((res) => res.json())
       .then((res) => JSON.parse(JSON.stringify(res)))
-      .then((res) => CreateFloorPlanInformation(res.floorId, floorPlanFile))
-      .catch((error) => {
-        console.log(error);
-      });
+
+      if(result.floorId != undefined){
+        CreateFloorPlanInformation(result.floorId, floorPlanFile)
+      } else if (result.message != undefined) {
+        alert(result.message)
+      }
 
     onComplete?.();
     return result;
   };
 
   createInfo();
-
-  return <div></div>;
 }

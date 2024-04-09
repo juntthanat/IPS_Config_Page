@@ -21,6 +21,7 @@ export default function FetchFloorInformation(props) {
   const [getGeoLength, setGetGeoLength] = useState("");
   const [getGeoWidth, setGetGeoWidth] = useState("");
   const [getAzimuth, setGetAzimuth] = useState("");
+  const [getLevel, setGetLevel] = useState("");
 
   const [userConfirm, setUserConfirm] = useState(false);
 
@@ -35,6 +36,7 @@ export default function FetchFloorInformation(props) {
         setGetGeoLength(f.geoLength);
         setGetGeoWidth(f.geoWidth);
         setGetAzimuth(f.azimuth);
+        setGetLevel(f.level);
       });
   };
 
@@ -50,6 +52,9 @@ export default function FetchFloorInformation(props) {
   const handleGetAzimuth = (event) => {
     setGetAzimuth(event.target.value);
   };
+  const handleGetLevel = (event) => {
+    setGetLevel(event.target.value);
+  };
   const handleFloorPlan = (event) => {
     setUploadedFloorPlan(URL.createObjectURL(event.target.files[0]));
     setFloorPlanFile(event.target.files[0]);
@@ -61,9 +66,13 @@ export default function FetchFloorInformation(props) {
       getGeoLength != "" &&
       getGeoWidth != "" &&
       getAzimuth != "" &&
-      floorPlanFile != null
+      getLevel != "" 
     ) {
-      return true;
+      if(buttonType === "create" && floorPlanFile != undefined){
+        return true;
+      } else if (buttonType === "edit" || buttonType === "delete"){
+        return true;
+      }
     }
     return false;
   };
@@ -75,6 +84,7 @@ export default function FetchFloorInformation(props) {
           getGeoLength,
           getGeoWidth,
           getAzimuth,
+          getLevel,
           floorPlanFile,
           () => {
             rerender();
@@ -87,6 +97,7 @@ export default function FetchFloorInformation(props) {
           getGeoLength,
           getGeoWidth,
           getAzimuth,
+          getLevel,
           floorPlanFile,
           () => {
             rerender();
@@ -154,6 +165,7 @@ export default function FetchFloorInformation(props) {
             getGeoLength === "" ? "Please Enter Floor Geo Length" : ""
           }
           disabled={buttonType === "delete" ? true : false}
+          type="number"
         ></input>
       </div>
       <div className="floor-input-configuration">
@@ -166,6 +178,7 @@ export default function FetchFloorInformation(props) {
           }}
           placeholder={getGeoWidth === "" ? "Please Enter Floor Geo Width" : ""}
           disabled={buttonType === "delete" ? true : false}
+          type="number"
         ></input>
       </div>
       <div className="floor-input-configuration">
@@ -178,13 +191,31 @@ export default function FetchFloorInformation(props) {
           }}
           placeholder={getAzimuth === "" ? "Please Enter Floor Azimuth" : ""}
           disabled={buttonType === "delete" ? true : false}
+          type="number"
+        ></input>
+      </div>
+      <div className="floor-input-configuration">
+        LEVEL{" "}
+        <input
+          defaultValue={buttonType === "create" ? null : getLevel}
+          onChange={handleGetLevel}
+          style={{
+            border: getLevel === "" ? "solid red 2px" : "solid black 2px",
+          }}
+          type="number"
+          placeholder={getLevel === "" ? "Please Enter Floor Level" : ""}
+          disabled={buttonType === "delete" ? true : false}
         ></input>
       </div>
       <div className="floor-input-configuration">
         FLOOR PLAN
-        <input type="file" onChange={handleFloorPlan} style={{
-            border: floorPlanFile === null ? "solid red 2px" : "solid black 2px",
-          }}></input>
+        <input
+          type="file"
+          onChange={handleFloorPlan}
+          style={{
+            border: floorPlanFile === undefined ? "solid red 2px" : "solid black 2px",
+          }}
+        ></input>
       </div>
       <ConfirmCancelButton
         setUserConfirm={setUserConfirm}
