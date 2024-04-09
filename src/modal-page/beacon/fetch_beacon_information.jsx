@@ -147,7 +147,7 @@ export default function FetchBeaconInformation(props) {
         <input
           defaultValue={buttonType === "create" ? null : getMacAddress}
           onChange={handleMacAddressChange}
-          type="number"
+          // type="number"
         ></input>
       </div>
       <ConfirmCancelButton
