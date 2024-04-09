@@ -15,9 +15,9 @@ export default function DeleteBeaconInformation(selectedBeacon, onComplete) {
     if(result.message != undefined){
       alert(result.message);
     }
-
-        onComplete?.();
-        return result;
+      
+      onComplete?.();
+      return result;
   };
 
   deleteInfo();

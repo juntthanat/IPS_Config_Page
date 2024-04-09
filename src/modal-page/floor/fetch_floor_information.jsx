@@ -165,6 +165,7 @@ export default function FetchFloorInformation(props) {
             getGeoLength === "" ? "Please Enter Floor Geo Length" : ""
           }
           disabled={buttonType === "delete" ? true : false}
+          type="number"
         ></input>
       </div>
       <div className="floor-input-configuration">
@@ -177,6 +178,7 @@ export default function FetchFloorInformation(props) {
           }}
           placeholder={getGeoWidth === "" ? "Please Enter Floor Geo Width" : ""}
           disabled={buttonType === "delete" ? true : false}
+          type="number"
         ></input>
       </div>
       <div className="floor-input-configuration">
@@ -189,6 +191,7 @@ export default function FetchFloorInformation(props) {
           }}
           placeholder={getAzimuth === "" ? "Please Enter Floor Azimuth" : ""}
           disabled={buttonType === "delete" ? true : false}
+          type="number"
         ></input>
       </div>
       <div className="floor-input-configuration">
@@ -199,6 +202,7 @@ export default function FetchFloorInformation(props) {
           style={{
             border: getLevel === "" ? "solid red 2px" : "solid black 2px",
           }}
+          type="number"
           placeholder={getLevel === "" ? "Please Enter Floor Level" : ""}
           disabled={buttonType === "delete" ? true : false}
         ></input>

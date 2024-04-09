@@ -136,17 +136,18 @@ export default function FetchBeaconInformation(props) {
       </div>
       <div className="beacon-input-configuration">
         GEO X
-        <input defaultValue={getBeaconGeoX} onChange={handleGeoXChange}></input>
+        <input defaultValue={getBeaconGeoX} onChange={handleGeoXChange} type="number"></input>
       </div>
       <div className="beacon-input-configuration">
         GEO Y
-        <input defaultValue={getBeaconGeoY} onChange={handleGeoYChange}></input>
+        <input defaultValue={getBeaconGeoY} onChange={handleGeoYChange} type="number"></input>
       </div>
       <div className="beacon-input-configuration">
         BEACON MAC-ADDRESS
         <input
           defaultValue={buttonType === "create" ? null : getMacAddress}
           onChange={handleMacAddressChange}
+          type="number"
         ></input>
       </div>
       <ConfirmCancelButton

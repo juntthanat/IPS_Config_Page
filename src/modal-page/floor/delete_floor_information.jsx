@@ -39,7 +39,6 @@ export default function DeleteFloorInformation(selectedFloor, onComplete) {
       for (let beaconIndex = 0; beaconIndex < result.length; beaconIndex++) {
         deleteBeacon(result[beaconIndex].beaconId);
       }
-      deleteFloor(selectedFloor);
     }
 
     const getFileId = await fetch(
@@ -50,8 +49,11 @@ export default function DeleteFloorInformation(selectedFloor, onComplete) {
       deleteFloorPlan(getFileId.fileId);
       deleteFloor(selectedFloor);
     }
-
-    onComplete?.();
+    
+    setTimeout(() => {
+      console.log("Hello, World!");
+      onComplete?.();
+    }, 1000);
     return result;
   };
 
